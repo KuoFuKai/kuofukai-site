@@ -16,6 +16,15 @@ export default {
         accent: '#3b82f6', // Blue 500
         muted: '#64748b', // Slate 500
         neon: '#84cc16', // Lime 500
+      },
+      animation: {
+        marquee: 'marquee 120s linear infinite',
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        }
       }
     },
   },

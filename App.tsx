@@ -26,29 +26,34 @@ import { NavSection, TimelineItem } from './types';
 
 // 0. Image Marquee Component
 const ImageMarquee = () => {
-  // Create a duplicated list for seamless looping
+  // Create a duplicated list for seamless looping (x2)
+  // We remove the hardcoded ?grayscale from URL to use CSS filter instead for better control
   const images = [...TIMELINE, ...TIMELINE].map((item, index) => ({
-    src: `https://picsum.photos/seed/${item.year}/800/600?grayscale`,
+    src: `https://picsum.photos/seed/${item.year}/800/600`, 
     alt: item.title,
     key: `${item.year}-${index}`
   }));
 
   return (
-    <div className="w-full h-full overflow-hidden relative bg-slate-950">
-      <div className="absolute inset-0 z-10 bg-gradient-to-r from-slate-900/80 via-transparent to-slate-900/80 pointer-events-none" />
-      <div className="flex h-full animate-marquee hover:[animation-play-state:paused]">
+    <div className="absolute inset-0 z-0 overflow-hidden bg-black select-none pointer-events-none">
+      {/* Gradient Overlay: Darker on left for text readability, fading to lighter on right */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-r from-slate-950 via-slate-950/80 to-slate-950/40" />
+      
+      {/* Marquee Container: w-max ensures it takes the width of all images */}
+      <div className="flex h-full animate-marquee w-max">
         {images.map((img) => (
-          <div key={img.key} className="flex-shrink-0 w-[400px] h-full relative border-r border-slate-900/50">
+          <div key={img.key} className="flex-shrink-0 h-full relative border-r border-white/5">
+            {/* 
+               1. h-full w-auto: Forces images to match container height while maintaining aspect ratio
+               2. max-w-none: Prevents images from shrinking
+               3. grayscale: Black & White effect
+               4. opacity-50: Requested transparency
+            */}
             <img 
               src={img.src} 
               alt={img.alt} 
-              className="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity duration-500"
+              className="h-full w-auto max-w-none object-cover grayscale opacity-50"
             />
-            <div className="absolute bottom-4 left-4 z-20">
-               <span className="bg-black/50 backdrop-blur px-2 py-1 rounded text-white text-xs font-mono border border-white/10">
-                 {img.alt}
-               </span>
-            </div>
           </div>
         ))}
       </div>
@@ -141,36 +146,60 @@ const ResponsiveTimeline = () => {
           viewState === 'grid' ? 'translate-y-0 opacity-100' : '-translate-y-1/2 opacity-50 pointer-events-none'
         }`}
       >
-         {/* Background Grid Effect */}
-        <div className="absolute inset-0 z-0 opacity-10 pointer-events-none" 
-             style={{ backgroundImage: 'linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
-        </div>
+        {/* 1. Background Layer: Full Width Marquee */}
+        <ImageMarquee />
 
-        {/* TOP SECTION: Bio & Marquee */}
-        <div className="flex-1 flex flex-col lg:flex-row min-h-0 relative z-10">
-            {/* Left: Personal Intro */}
-            <div className="lg:w-1/2 p-6 md:p-12 flex flex-col justify-center bg-slate-900/90 border-b lg:border-b-0 lg:border-r border-slate-800">
-                <div className="max-w-xl mx-auto w-full flex flex-col h-full justify-center">
-                    <h2 className="text-4xl md:text-6xl font-serif font-bold text-neon mb-4 tracking-tight">MY JOURNEY</h2>
-                    <h3 className="text-xl md:text-2xl text-white font-bold mb-6 leading-tight">
+        {/* 2. Content Layer: Sits on top of the background */}
+        <div className="flex-1 min-h-0 relative z-20 flex items-center justify-center p-6 md:p-12">
+            <div className="max-w-7xl w-full flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-24">
+                
+                {/* Left: Personal Intro */}
+                <div className="lg:w-1/2 flex flex-col justify-center">
+                    <h2 className="text-4xl md:text-6xl font-serif font-bold text-neon mb-4 tracking-tight drop-shadow-lg">
+                      MY JOURNEY
+                    </h2>
+                    <h3 className="text-xl md:text-2xl text-white font-bold mb-6 leading-tight drop-shadow-md">
                       {PERSONAL_INFO.tagline}
                     </h3>
-                    <div className="prose prose-invert prose-lg text-slate-400 overflow-y-auto pr-2 custom-scrollbar max-h-[40vh] lg:max-h-[50vh]">
+                    <div className="prose prose-invert prose-lg text-slate-200 overflow-y-auto pr-2 custom-scrollbar max-h-[40vh] lg:max-h-[50vh] drop-shadow-md">
                         {PERSONAL_INFO.about.split('\n\n').map((para, i) => (
                           <p key={i} className="mb-4 text-base md:text-lg leading-relaxed">{para}</p>
                         ))}
                     </div>
                 </div>
-            </div>
 
-            {/* Right: Carousel / Marquee */}
-            <div className="hidden lg:block lg:w-1/2 relative bg-black">
-                <ImageMarquee />
+                {/* Right: Profile Picture */}
+                <div className="hidden lg:flex lg:w-1/2 justify-center items-center">
+                    <div className="relative w-80 h-96 md:w-96 md:h-[500px] rounded-lg overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.6)] border border-slate-700 group">
+                        {/* 
+                           REPLACE SRC BELOW WITH YOUR HEADSHOT URL 
+                           The class 'object-cover' ensures it fills the box nicely.
+                        */}
+                        <img 
+                          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=800&q=80" 
+                          alt="Kevin Profile" 
+                          className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out scale-100 group-hover:scale-105"
+                        />
+                        
+                        {/* Overlay frame effect */}
+                        <div className="absolute inset-0 ring-1 ring-white/10 pointer-events-none" />
+                        
+                        {/* Optional Name Tag on Image (Visible on Hover) */}
+                        <div className="absolute bottom-6 left-6 right-6">
+                           <div className="bg-slate-900/80 backdrop-blur-sm border border-slate-700 p-4 rounded-lg transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                              <p className="font-serif font-bold text-white text-lg">Kevin Kuo</p>
+                              <p className="text-neon text-xs font-mono uppercase tracking-widest">Senior Engineer</p>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
         {/* MIDDLE: Horizontal Timeline Strip (Moved down visually by layout order) */}
-        <div className="flex-shrink-0 bg-slate-900/80 backdrop-blur-sm border-t border-slate-800 z-20">
+        {/* Removed background color and borders to make it transparent */}
+        <div className="flex-shrink-0 z-20">
              <div 
                 ref={timelineStripRef}
                 className="flex items-end gap-6 px-4 md:px-12 py-8 overflow-x-auto no-scrollbar scroll-smooth"
