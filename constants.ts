@@ -167,7 +167,7 @@ export const EDUCATION: EducationItem[] = [
     degree: "High School Diploma",
     period: "Sep 2008 – Jun 2011",
     location: "Taipei, Taiwan",
-    image: "/images/High School Award.JPG",
+    image: "images/high-school-award.jpg",
     details: [
       "Ranked 1st in class (2010, 2011)",
       "Mayor’s Award to Outstanding Graduates",
