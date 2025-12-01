@@ -17,11 +17,44 @@ import {
   TIMELINE, 
   EXPERIENCE, 
   EDUCATION, 
-  SKILLS
+  SKILLS,
+  PERSONAL_INFO
 } from './constants';
 import { NavSection, TimelineItem } from './types';
 
 // --- Components ---
+
+// 0. Image Marquee Component
+const ImageMarquee = () => {
+  // Create a duplicated list for seamless looping
+  const images = [...TIMELINE, ...TIMELINE].map((item, index) => ({
+    src: `https://picsum.photos/seed/${item.year}/800/600?grayscale`,
+    alt: item.title,
+    key: `${item.year}-${index}`
+  }));
+
+  return (
+    <div className="w-full h-full overflow-hidden relative bg-slate-950">
+      <div className="absolute inset-0 z-10 bg-gradient-to-r from-slate-900/80 via-transparent to-slate-900/80 pointer-events-none" />
+      <div className="flex h-full animate-marquee hover:[animation-play-state:paused]">
+        {images.map((img) => (
+          <div key={img.key} className="flex-shrink-0 w-[400px] h-full relative border-r border-slate-900/50">
+            <img 
+              src={img.src} 
+              alt={img.alt} 
+              className="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity duration-500"
+            />
+            <div className="absolute bottom-4 left-4 z-20">
+               <span className="bg-black/50 backdrop-blur px-2 py-1 rounded text-white text-xs font-mono border border-white/10">
+                 {img.alt}
+               </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 // 1. Responsive Timeline with Scene Transitions
 const ResponsiveTimeline = () => {
@@ -32,34 +65,25 @@ const ResponsiveTimeline = () => {
   const detailContainerRef = useRef<HTMLDivElement>(null);
   // Ref for the internal scrollable content (for scroll logic)
   const detailScrollRef = useRef<HTMLDivElement>(null);
-  const gridContainerRef = useRef<HTMLDivElement>(null);
+  const timelineStripRef = useRef<HTMLDivElement>(null);
   
   // Touch handling
   const [touchStart, setTouchStart] = useState(0);
 
   const handleEraClick = (item: TimelineItem) => {
     setSelectedItem(item);
+    // Optional: Auto scroll timeline strip to keep selected item in view
   };
 
   const backToGrid = () => {
     setViewState('grid');
   };
 
-  // Grid View: Scroll Down to Enter Detail
-  const handleGridWheel = (e: React.WheelEvent) => {
-    if (viewState === 'grid' && gridContainerRef.current) {
-      const { scrollTop, scrollHeight, clientHeight } = gridContainerRef.current;
-      const isAtBottom = Math.abs(scrollHeight - scrollTop - clientHeight) < 20;
-      const isNotScrollable = scrollHeight <= clientHeight;
-
-      if ((isAtBottom || isNotScrollable) && e.deltaY > 30) {
-        setViewState('detail');
-      }
-    }
+  const enterDetailView = () => {
+    setViewState('detail');
   };
 
   // Detail View: Scroll Up to Go Back
-  // NOTE: Now we check detailScrollRef for the scrollTop position
   const handleDetailWheel = (e: React.WheelEvent) => {
     if (viewState === 'detail' && detailScrollRef.current) {
       if (detailScrollRef.current.scrollTop <= 0 && e.deltaY < -40) {
@@ -68,32 +92,27 @@ const ResponsiveTimeline = () => {
     }
   };
 
-  // Touch Handlers for Grid (Swipe Up to Detail)
-  const handleGridTouchStart = (e: React.TouchEvent) => {
+  // Grid View: Scroll Down to Enter Detail
+  const handleGridWheel = (e: React.WheelEvent) => {
+    if (viewState === 'grid' && e.deltaY > 40) {
+      enterDetailView();
+    }
+  };
+
+  // Touch Handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStart(e.touches[0].clientY);
   };
   
-  const handleGridTouchEnd = (e: React.TouchEvent) => {
+  const handleTouchEnd = (e: React.TouchEvent) => {
     const endY = e.changedTouches[0].clientY;
-    const { scrollTop, scrollHeight, clientHeight } = gridContainerRef.current!;
-    const isAtBottom = Math.abs(scrollHeight - scrollTop - clientHeight) < 20;
+    // Swipe Up on footer area in grid view
+    if (viewState === 'grid' && touchStart - endY > 70) {
+       enterDetailView();
+    }
     
-    // Swipe Up (drag finger up, content moves down conceptually, but y decreases)
-    if ((isAtBottom || scrollHeight <= clientHeight) && touchStart - endY > 70) {
-      setViewState('detail');
-    }
-  };
-
-  // Touch Handlers for Detail (Swipe Down to Grid)
-  const handleDetailTouchStart = (e: React.TouchEvent) => {
-    if (detailScrollRef.current?.scrollTop === 0) {
-      setTouchStart(e.touches[0].clientY);
-    }
-  };
-
-  const handleDetailTouchEnd = (e: React.TouchEvent) => {
-    const endY = e.changedTouches[0].clientY;
-    if (detailScrollRef.current?.scrollTop === 0 && endY - touchStart > 70) {
+    // Swipe Down in detail view
+    if (viewState === 'detail' && detailScrollRef.current?.scrollTop === 0 && endY - touchStart > 70) {
       backToGrid();
     }
   };
@@ -105,17 +124,19 @@ const ResponsiveTimeline = () => {
 
   const handleNavigate = (item: TimelineItem) => {
     setSelectedItem(item);
-    // Smooth scroll to top of detail view
     if (detailScrollRef.current) {
       detailScrollRef.current.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   return (
-    <div className="relative h-full w-full bg-slate-900 text-white overflow-hidden">
+    <div className="relative h-full w-full bg-slate-900 text-white overflow-hidden font-sans">
       
-      {/* SCENE 1: GRID VIEW */}
+      {/* SCENE 1: OVERVIEW (Split Layout) */}
       <div 
+        onWheel={handleGridWheel}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         className={`absolute inset-0 z-10 flex flex-col transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${
           viewState === 'grid' ? 'translate-y-0 opacity-100' : '-translate-y-1/2 opacity-50 pointer-events-none'
         }`}
@@ -125,73 +146,86 @@ const ResponsiveTimeline = () => {
              style={{ backgroundImage: 'linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
         </div>
 
-        <div className="flex-shrink-0 pt-8 px-4 md:px-12 mb-4 relative z-10">
-          <h2 className="text-4xl md:text-6xl font-serif font-bold text-neon mb-3 tracking-tight">MY JOURNEY</h2>
-          <p className="text-slate-400 text-lg flex items-center gap-2">
-            <span className="w-8 h-[1px] bg-slate-500"></span>
-            Select an era to explore
-          </p>
-        </div>
-
-        {/* Scrollable Grid Area */}
-        <div 
-          ref={gridContainerRef}
-          onWheel={handleGridWheel}
-          onTouchStart={handleGridTouchStart}
-          onTouchEnd={handleGridTouchEnd}
-          className="flex-1 overflow-y-auto no-scrollbar pb-64 relative z-10 px-4 md:px-12"
-        >
-           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-              {TIMELINE.map((item, index) => {
-                const isActive = selectedItem.year === item.year;
-                return (
-                  <div 
-                    key={index} 
-                    className={`
-                      relative p-6 rounded-2xl transition-all duration-300 cursor-pointer flex flex-col items-center justify-center text-center group min-h-[220px]
-                      ${isActive
-                        ? 'bg-slate-800 border-4 border-white shadow-[0_0_25px_rgba(255,255,255,0.15)] scale-105 z-10' 
-                        : 'bg-slate-800/40 border border-slate-700/50 hover:bg-slate-800 hover:border-slate-500 hover:-translate-y-1'
-                      }
-                    `}
-                    onClick={() => handleEraClick(item)}
-                  >
-                    <div className={`text-2xl font-mono font-bold mb-4 ${isActive ? 'text-neon' : 'text-slate-500 group-hover:text-slate-300'}`}>
-                      {item.year}
-                    </div>
-                    
-                    <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-6 transition-colors shadow-inner ${isActive ? 'bg-neon text-black' : 'bg-slate-700/50 text-slate-400'}`}>
-                       <div className={`w-3 h-3 rounded-full ${isActive ? 'bg-black' : 'bg-slate-500'}`} />
-                    </div>
-
-                    <h3 className={`font-bold text-lg leading-snug ${isActive ? 'text-white' : 'text-slate-400 group-hover:text-white'}`}>
-                      {item.title}
+        {/* TOP SECTION: Bio & Marquee */}
+        <div className="flex-1 flex flex-col lg:flex-row min-h-0 relative z-10">
+            {/* Left: Personal Intro */}
+            <div className="lg:w-1/2 p-6 md:p-12 flex flex-col justify-center bg-slate-900/90 border-b lg:border-b-0 lg:border-r border-slate-800">
+                <div className="max-w-xl mx-auto w-full flex flex-col h-full justify-center">
+                    <h2 className="text-4xl md:text-6xl font-serif font-bold text-neon mb-4 tracking-tight">MY JOURNEY</h2>
+                    <h3 className="text-xl md:text-2xl text-white font-bold mb-6 leading-tight">
+                      {PERSONAL_INFO.tagline}
                     </h3>
-                  </div>
-                );
-              })}
-           </div>
+                    <div className="prose prose-invert prose-lg text-slate-400 overflow-y-auto pr-2 custom-scrollbar max-h-[40vh] lg:max-h-[50vh]">
+                        {PERSONAL_INFO.about.split('\n\n').map((para, i) => (
+                          <p key={i} className="mb-4 text-base md:text-lg leading-relaxed">{para}</p>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Right: Carousel / Marquee */}
+            <div className="hidden lg:block lg:w-1/2 relative bg-black">
+                <ImageMarquee />
+            </div>
         </div>
 
-        {/* Bottom Preview Panel */}
-        <div className="absolute bottom-0 left-0 right-0 h-48 bg-slate-900/95 backdrop-blur-lg border-t border-slate-700 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] z-20 flex flex-col justify-center px-4 md:px-12 transition-transform duration-300">
+        {/* MIDDLE: Horizontal Timeline Strip (Moved down visually by layout order) */}
+        <div className="flex-shrink-0 bg-slate-900/80 backdrop-blur-sm border-t border-slate-800 z-20">
+             <div 
+                ref={timelineStripRef}
+                className="flex items-end gap-6 px-4 md:px-12 py-8 overflow-x-auto no-scrollbar scroll-smooth"
+             >
+                {TIMELINE.map((item, index) => {
+                  const isActive = selectedItem.year === item.year;
+                  return (
+                    <button 
+                      key={index}
+                      onClick={() => handleEraClick(item)}
+                      className={`
+                        flex-shrink-0 relative rounded-xl transition-all duration-300 flex flex-col items-center justify-between p-4 border group/item
+                        ${isActive 
+                          ? 'w-60 h-80 bg-slate-800 border-neon shadow-[0_0_20px_rgba(132,204,22,0.4)] -translate-y-6' 
+                          : 'w-44 h-60 bg-slate-800/40 border-slate-700 hover:bg-slate-700 hover:border-slate-500'
+                        }
+                      `}
+                    >
+                       <div className={`text-xl font-mono font-bold ${isActive ? 'text-neon' : 'text-slate-500 group-hover/item:text-slate-300'}`}>
+                         {item.year}
+                       </div>
+                       
+                       <div className={`w-3 h-3 rounded-full transition-all duration-300 ${isActive ? 'bg-neon scale-125' : 'bg-slate-600'}`} />
+
+                       <div className={`text-base font-bold text-center line-clamp-2 w-full px-2 ${isActive ? 'text-white' : 'text-slate-400 group-hover/item:text-slate-200'}`}>
+                         {item.title}
+                       </div>
+                    </button>
+                  );
+                })}
+             </div>
+        </div>
+
+        {/* BOTTOM: Info Panel */}
+        <div 
+          onClick={enterDetailView}
+          className="flex-shrink-0 h-48 bg-slate-950 border-t border-slate-700 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] z-20 flex flex-col justify-center px-4 md:px-12 cursor-pointer hover:bg-slate-900 transition-colors group"
+        >
            <div className="max-w-6xl mx-auto w-full flex flex-col md:flex-row items-center justify-between gap-8">
               <div className="flex-1">
                  <div className="flex items-center gap-4 mb-2">
                     <span className="px-3 py-1 bg-neon/10 text-neon rounded font-mono text-sm font-bold border border-neon/20">
                       {selectedItem.year}
                     </span>
-                    <h3 className="text-2xl font-bold text-white">{selectedItem.title}</h3>
+                    <h3 className="text-2xl font-bold text-white group-hover:text-neon transition-colors">{selectedItem.title}</h3>
                  </div>
-                 <p className="text-slate-400 text-lg leading-relaxed line-clamp-2 md:line-clamp-2">
+                 <p className="text-slate-400 text-lg leading-relaxed line-clamp-2 md:line-clamp-2 group-hover:text-slate-300">
                    {selectedItem.description}
                  </p>
               </div>
               
-              {/* Scroll Prompt */}
-              <div className="flex-shrink-0 flex flex-col items-center justify-center gap-2 text-slate-400 animate-pulse">
-                <span className="text-sm font-bold uppercase tracking-widest text-neon">Scroll Down</span>
-                <ChevronDown size={32} className="text-white" />
+              {/* Scroll Prompt - SCROLL DOWN text style */}
+              <div className="flex-shrink-0 flex flex-col items-center justify-center gap-1 group-hover:scale-105 transition-transform duration-300">
+                  <span className="text-sm font-bold uppercase tracking-widest text-neon">Scroll Down</span>
+                  <ChevronDown size={32} className="text-white animate-bounce" strokeWidth={2} />
               </div>
            </div>
         </div>
@@ -258,14 +292,14 @@ const ResponsiveTimeline = () => {
           <div 
             ref={detailScrollRef}
             onWheel={handleDetailWheel}
-            onTouchStart={handleDetailTouchStart}
-            onTouchEnd={handleDetailTouchEnd}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
             className="absolute inset-0 overflow-y-auto"
           >
             <div className="min-h-full flex flex-col lg:flex-row">
               {/* Left: Text Content */}
               <div className="flex-1 p-8 lg:p-16 flex flex-col justify-center">
-                <div className="max-w-xl mx-auto w-full px-8 md:px-12"> {/* Added padding for side nav clearance */}
+                <div className="max-w-xl mx-auto w-full px-8 md:px-12">
                   <div className="inline-block px-3 py-1 bg-neon/10 text-neon rounded-full text-sm font-mono font-bold mb-6">
                     {selectedItem.year}
                   </div>
