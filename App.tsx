@@ -13,7 +13,6 @@ import {
   ChevronLeft,
   ChevronDown,
   Award,
-  FileText,
   GraduationCap
 } from 'lucide-react';
 import { 
