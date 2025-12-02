@@ -24,7 +24,7 @@ export const TIMELINE: TimelineItem[] = [
     title: "The Turning Point",
     description: "Ranked last until 11th grade. Scored full marks in English, then became 1st in all subjects. Graduated top of the class.",
     icon: "TrendingUp",
-    details: "A single success in an English exam sparked a chain reaction of confidence. I realized that with focused effort, I could master any subject, eventually graduating at the top of my class."
+    details: "A single success in an English exam sparked a chain reaction of confidence. I realized that with focused effort, I could master any subject, eventually graduating at the top of the class."
   },
   {
     year: "2015",
@@ -87,19 +87,53 @@ export const TIMELINE: TimelineItem[] = [
 export const SKILLS: SkillItem[] = [
   {
     category: "Languages & Core",
-    items: ["Java", "Python", "SQL", "C/C++", "JavaScript/TypeScript"]
+    items: [
+      { name: "Java", proficiency: "Expert", startYear: "2012" },
+      { name: "SQL (MySQL/Oracle)", proficiency: "Expert", startYear: "2015" },
+      { name: "JavaScript/TypeScript", proficiency: "Expert", startYear: "2017" },
+      { name: "Python", proficiency: "Intermediate", startYear: "2022" },
+      { name: "C/C++", proficiency: "Intermediate", startYear: "2022" }
+    ]
   },
   {
     category: "Frameworks & Tools",
-    items: ["Spring Boot", "React", "Docker", "Kubernetes", "Android SDK", "Git"]
+    items: [
+      { name: "Spring Boot", proficiency: "Expert", startYear: "2017" },
+      { name: "Android SDK", proficiency: "Expert", startYear: "2015" },
+      { name: "Git / CI/CD", proficiency: "Expert", startYear: "2017" },
+      { name: "React", proficiency: "Intermediate", startYear: "2020" },
+      { name: "Docker / Kubernetes", proficiency: "Intermediate", startYear: "2021" }
+    ]
   },
   {
-    category: "AI & Data",
-    items: ["PyTorch", "YOLO", "RAG (Retrieval Augmented Generation)", "LLM Integration", "NVIDIA Jetson", "OpenCV"]
+    category: "AI & Edge Computing",
+    items: [
+      { name: "LLM Integration (RAG)", proficiency: "Intermediate", startYear: "2023" },
+      { name: "NVIDIA Jetson", proficiency: "Intermediate", startYear: "2023" },
+      { name: "YOLO (Computer Vision)", proficiency: "Intermediate", startYear: "2023" },
+      { name: "PyTorch", proficiency: "Intermediate", startYear: "2022" },
+      { name: "OpenCV", proficiency: "Intermediate", startYear: "2022" }
+    ]
+  },
+  {
+    category: "Design & Multimedia",
+    items: [
+      { name: "Adobe Photoshop", proficiency: "Expert", startYear: "2011" },
+      { name: "Adobe Illustrator", proficiency: "Expert", startYear: "2011" },
+      { name: "Adobe Premiere", proficiency: "Intermediate", startYear: "2012" },
+      { name: "Autodesk Maya", proficiency: "Intermediate", startYear: "2013" },
+      { name: "3ds Max", proficiency: "Intermediate", startYear: "2012" }
+    ]
   },
   {
     category: "Industry Knowledge",
-    items: ["Smart Manufacturing", "IPC-CFX", "EDI/API Integration", "Agile/Scrum", "System Architecture"]
+    items: [
+      { name: "EDI/API Integration", proficiency: "Expert", startYear: "2017" },
+      { name: "Smart Manufacturing", proficiency: "Expert", startYear: "2022" },
+      { name: "IPC-CFX Standard", proficiency: "Expert", startYear: "2023" },
+      { name: "System Architecture", proficiency: "Intermediate", startYear: "2019" },
+      { name: "Agile/Scrum", proficiency: "Expert", startYear: "2018" }
+    ]
   }
 ];
 
@@ -145,8 +179,12 @@ export const EDUCATION: EducationItem[] = [
         label: "Introduction",
         title: "Master's Journey",
         content: "My Master's journey was defined by efficiency and innovation. Despite working full-time, I maintained top grades. My research focused on running modern Generative AI on edge devices (NVIDIA Jetson), proving that powerful AI doesn't always need a cloud connection.",
-        image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1000&auto=format&fit=crop",
-        tags: ["Edge AI", "NVIDIA Jetson", "Resilience"]
+        tags: ["Edge AI", "NVIDIA Jetson", "Resilience"],
+        honors: [
+          "Highest Score in Oral Defense among all candidates.",
+          "Honorable Mention by IET Taipei Local Network (2024).",
+          "Oral Presentation at ISASD 2024 in Tokyo, Japan."
+        ]
       },
       {
         type: "grades",
@@ -159,7 +197,6 @@ export const EDUCATION: EducationItem[] = [
           "Heterogeneous Multicore Systems: 94 (A+)",
           "Computer Vision: 88 (A)"
         ],
-        image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1000&auto=format&fit=crop",
         tags: ["GPA 3.97", "Top of Class"]
       },
       {
@@ -167,20 +204,25 @@ export const EDUCATION: EducationItem[] = [
         label: "Thesis",
         title: "Generative AI on Edge",
         content: "Thesis: Developing a Mobile Learning and Tour-Guiding System Based on Generative AI Approach. I proposed a low-energy Multimodal Large Language Model (MLLM) architecture integrated with RAG and YOLO, capable of running offline on NVIDIA Jetson hardware.",
-        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop",
         tags: ["LLM", "RAG", "YOLO", "Python"]
+      }
+    ],
+    gallery: [
+      {
+        image: "https://images.unsplash.com/photo-1567427018141-0584cfcbf1b8?q=80&w=1000&auto=format&fit=crop",
+        description: "Received Honorable Mention by IET Taipei Local Network (2024) in Taipei, Taiwan"
       },
       {
-        type: "achievements",
-        label: "Honors",
-        title: "Awards & Recognition",
-        content: [
-          "Highest Score in Oral Defense among all candidates.",
-          "Honorable Mention by IET Taipei Local Network (2024).",
-          "Oral Presentation at ISASD 2024 in Tokyo, Japan."
-        ],
-        image: "https://images.unsplash.com/photo-1567427018141-0584cfcbf1b8?q=80&w=1000&auto=format&fit=crop",
-        tags: ["IET Award", "ISASD Tokyo"]
+        image: "https://images.unsplash.com/photo-1551818255-e6e10975bc17?q=80&w=1000&auto=format&fit=crop",
+        description: "Presented Thesis on ISASD in Tokyo, Japan (2024)"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1000&auto=format&fit=crop",
+        description: "Working late nights at Delta Electronics Lab"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop",
+        description: "Testing Generative AI models on NVIDIA Jetson Edge devices"
       }
     ],
     details: [], // Fallback
@@ -199,8 +241,11 @@ export const EDUCATION: EducationItem[] = [
         label: "Introduction",
         title: "The Self-Taught Developer",
         content: "Although my degree was in Info & Comms, I steered my education towards computer science. My capstone project was a testament to self-learning: I built a complete Android app using Google Maps API by studying books in the library.",
-        image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1000&auto=format&fit=crop",
-        tags: ["Self-Taught", "Android", "Java"]
+        tags: ["Self-Taught", "Android", "Java"],
+        honors: [
+          "Best System Design Award (2015) - Dept. of Info & Comms",
+          "Academic Excellence Award (Graduation)"
+        ]
       },
       {
         type: "grades",
@@ -212,7 +257,6 @@ export const EDUCATION: EducationItem[] = [
           "Computer Animation II: 95 (A)",
           "Intro to Info & Comm: 94 (A)"
         ],
-        image: "https://images.unsplash.com/photo-1517842645767-c639042777db?q=80&w=1000&auto=format&fit=crop",
         tags: ["GPA 3.8", "Computer Science"]
       },
       {
@@ -220,20 +264,25 @@ export const EDUCATION: EducationItem[] = [
         label: "Capstone",
         title: "Android Travel Planner",
         content: "Independently developed an Android application integrating Google Maps API to assist independent travelers. Built entirely through self-study of Java and Android frameworks, doing the work of a full team solo.",
-        image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=1000&auto=format&fit=crop",
         tags: ["Best System Design", "Google Maps API"]
+      }
+    ],
+    gallery: [
+      {
+        image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=1000&auto=format&fit=crop",
+        description: "Awarded Best System Design for Android Travel Planner Capstone (2015)"
       },
       {
-        type: "achievements",
-        label: "Awards",
-        title: "Undergraduate Honors",
-        content: [
-          "Best System Design Award (2015) - Dept. of Info & Comms",
-          "Mayor’s Award (2011)",
-          "Model Student Award (2011)"
-        ],
-        image: "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?q=80&w=1000&auto=format&fit=crop",
-        tags: ["Top Honors", "Leadership"]
+        image: "https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=1000&auto=format&fit=crop",
+        description: "Graduated with Academic Excellence Award"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=1000&auto=format&fit=crop",
+        description: "Self-studying Android Development in the library"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1517842645767-c639042777db?q=80&w=1000&auto=format&fit=crop",
+        description: "Developing early prototypes for mobile applications"
       }
     ],
     details: [],
@@ -251,20 +300,22 @@ export const EDUCATION: EducationItem[] = [
         label: "Introduction",
         title: "The Turning Point",
         content: "This was my turning point. Coming from the bottom of the rankings, I discovered the joy of academic achievement through sheer hard work. Overcoming my father's tragic passing right before exams, I still managed to graduate at the top of my class.",
-        image: "https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=1000&auto=format&fit=crop",
-        tags: ["Resilience", "Top Rank"]
-      },
-      {
-        type: "achievements",
-        label: "Achievements",
-        title: "Graduating Top of Class",
-        content: [
+        tags: ["Resilience", "Top Rank"],
+        honors: [
           "Ranked 1st in class (2010, 2011)",
           "Mayor’s Award to Outstanding Graduates",
           "Transformation: From last place to Valedictorian level performance."
-        ],
+        ]
+      }
+    ],
+    gallery: [
+       {
         image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=1000&auto=format&fit=crop",
-        tags: ["#1 Rank", "Mayor's Award"]
+        description: "Receiving the Mayor's Award for Academic Excellence (2011)"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=1000&auto=format&fit=crop",
+        description: "High School Graduation Ceremony - Top of Class"
       }
     ],
     details: [],

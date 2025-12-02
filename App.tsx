@@ -23,7 +23,7 @@ import {
   SKILLS,
   PERSONAL_INFO
 } from './constants';
-import { NavSection, TimelineItem, AcademicModule } from './types';
+import { NavSection, TimelineItem, AcademicModule, AcademicGalleryItem } from './types';
 
 // --- Components ---
 
@@ -413,35 +413,59 @@ const ResponsiveTimeline = () => {
   );
 };
 
-// 2. Academic Layout with Vertical Marquee
-const AcademicLayout = ({ 
+// 2. Academic Layout with Horizontal Tabs & Gallery Marquee
+interface AcademicLayoutProps {
+  title: string;
+  subtitle: string;
+  modules: AcademicModule[];
+  gallery?: AcademicGalleryItem[];
+  location: string;
+}
+
+const AcademicLayout: React.FC<AcademicLayoutProps> = ({ 
   title, 
   subtitle, 
   modules,
+  gallery,
   location
-}: { 
-  title: string, 
-  subtitle: string, 
-  modules: AcademicModule[],
-  location: string
 }) => {
   const [activeModule, setActiveModule] = useState<AcademicModule>(modules[0]);
   const [isHoveringMarquee, setIsHoveringMarquee] = useState(false);
 
-  // Handle module activation (hover on marquee item)
-  const handleModuleHover = (module: AcademicModule) => {
-    setActiveModule(module);
-    setIsHoveringMarquee(true);
-  };
-
-  const handleMarqueeLeave = () => {
-    setIsHoveringMarquee(false);
-  };
+  // Marquee pause handlers
+  const handleMarqueeEnter = () => setIsHoveringMarquee(true);
+  const handleMarqueeLeave = () => setIsHoveringMarquee(false);
 
   // Render content based on module type
   const renderModuleContent = () => {
-    const { type, content } = activeModule;
+    const { type, content, honors } = activeModule;
     
+    // Default prose content wrapper
+    const renderProse = () => (
+      <div className="prose prose-lg dark:prose-invert text-slate-600 dark:text-slate-300 leading-relaxed">
+         <p className="border-l-4 border-slate-300 dark:border-slate-700 pl-4">{content}</p>
+      </div>
+    );
+
+    // Honors List Component (Reusable)
+    const renderHonors = (items: string[]) => (
+      <div className="space-y-4 mt-8 pt-8 border-t border-slate-200 dark:border-slate-800 animate-fadeIn">
+         <h4 className="text-lg font-bold text-emerald-600 dark:text-neon flex items-center gap-2">
+           <Award size={20} />
+           Honors & Awards
+         </h4>
+         <ul className="space-y-3">
+           {items.map((item, idx) => (
+             <li key={idx} className="p-4 bg-emerald-50 dark:bg-emerald-900/10 rounded-lg border border-emerald-100 dark:border-emerald-500/20 text-slate-700 dark:text-slate-200 relative overflow-hidden">
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-emerald-500 dark:bg-neon" />
+                {item}
+             </li>
+           ))}
+         </ul>
+      </div>
+    );
+
+    // Specific Module Types
     if (type === 'grades' && Array.isArray(content)) {
        return (
          <div className="space-y-4 animate-fadeIn">
@@ -460,39 +484,27 @@ const AcademicLayout = ({
          </div>
        );
     }
-
-    if (type === 'achievements' && Array.isArray(content)) {
-       return (
-         <div className="space-y-4 animate-fadeIn">
-            <h4 className="text-lg font-bold text-emerald-600 dark:text-neon flex items-center gap-2">
-              <Award size={20} />
-              Honors & Awards
-            </h4>
-            <ul className="space-y-3">
-              {content.map((item, idx) => (
-                <li key={idx} className="p-4 bg-emerald-50 dark:bg-emerald-900/10 rounded-lg border border-emerald-100 dark:border-emerald-500/20 text-slate-700 dark:text-slate-200 relative overflow-hidden">
-                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-emerald-500 dark:bg-neon" />
-                   {item}
-                </li>
-              ))}
-            </ul>
-         </div>
-       );
-    }
     
-    // Default text content
+    // Default + Optional Honors (Merged)
     return (
-      <div className="prose prose-lg dark:prose-invert text-slate-600 dark:text-slate-300 leading-relaxed animate-fadeIn">
-        <p className="border-l-4 border-slate-300 dark:border-slate-700 pl-4">{content}</p>
+      <div className="animate-fadeIn">
+        {renderProse()}
+        {honors && honors.length > 0 && renderHonors(honors)}
       </div>
     );
   };
 
   // Prepare items for marquee (duplicate for seamless loop)
   // Ensure we have at least 4 items for a smooth look, duplicate if necessary
-  let marqueeItems = [...modules];
+  // Default to mapped images if no gallery provided
+  const baseGalleryItems: AcademicGalleryItem[] = gallery || modules.map(m => ({ 
+      image: `https://picsum.photos/seed/${m.label}/800/600`, 
+      description: m.label 
+  }));
+  
+  let marqueeItems = [...baseGalleryItems];
   if (marqueeItems.length < 4) {
-    marqueeItems = [...marqueeItems, ...marqueeItems]; // Duplicate to fill space
+    marqueeItems = [...marqueeItems, ...marqueeItems, ...marqueeItems]; // Duplicate multiple times to fill space
   }
   // Double the whole list for infinite scroll seamless join
   const scrollItems = [...marqueeItems, ...marqueeItems];
@@ -501,39 +513,63 @@ const AcademicLayout = ({
     <div className="h-full w-full overflow-hidden bg-white dark:bg-slate-900 text-slate-900 dark:text-white transition-colors duration-300 flex flex-col lg:flex-row">
         
         {/* LEFT COLUMN: Dynamic Content */}
-        <div className="flex-1 p-8 lg:p-16 flex flex-col justify-center relative z-10">
-          <div className="max-w-xl mx-auto w-full">
-            {/* Header */}
-            <div className="mb-8">
+        <div className="flex-1 p-8 lg:p-16 flex flex-col relative z-10 overflow-y-auto">
+          <div className="max-w-xl mx-auto w-full min-h-full flex flex-col">
+            
+            {/* Header with Horizontal Tabs */}
+            <div className="mb-8 flex-shrink-0">
                <span className="text-xs font-bold tracking-widest text-slate-400 uppercase mb-2 block">{location}</span>
                <h1 className="text-4xl lg:text-5xl font-serif font-bold mb-2 text-slate-900 dark:text-white">{title}</h1>
-               <div className="text-xl text-emerald-600 dark:text-neon font-medium">{subtitle}</div>
+               <div className="text-xl text-emerald-600 dark:text-neon font-medium mb-8">{subtitle}</div>
+               
+               {/* Horizontal Tabs Navigation */}
+               <div className="flex flex-wrap gap-2 border-b border-slate-200 dark:border-slate-700 pb-1">
+                 {modules.map((mod, idx) => {
+                   const isActive = activeModule.label === mod.label;
+                   return (
+                     <button
+                       key={idx}
+                       onClick={() => setActiveModule(mod)}
+                       className={`
+                         px-4 py-2 text-sm font-bold uppercase tracking-wider rounded-t-lg transition-all duration-300
+                         ${isActive 
+                           ? 'bg-slate-100 dark:bg-slate-800 text-emerald-600 dark:text-neon border-b-2 border-emerald-500 dark:border-neon' 
+                           : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50'
+                         }
+                       `}
+                     >
+                       {mod.label}
+                     </button>
+                   );
+                 })}
+               </div>
             </div>
 
             {/* Dynamic Body */}
-            <div className="min-h-[300px]">
+            <div className="flex-1">
                <h2 className="text-2xl font-bold mb-6 text-slate-800 dark:text-slate-100 transition-all duration-300">
                  {activeModule.title}
                </h2>
                {renderModuleContent()}
-            </div>
 
-            {/* Tags */}
-            {activeModule.tags && (
-              <div className="flex flex-wrap gap-2 mt-8 pt-8 border-t border-slate-200 dark:border-slate-800">
-                {activeModule.tags.map((tag, i) => (
-                  <span key={i} className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-full text-xs font-medium border border-slate-200 dark:border-slate-700">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            )}
+                {/* Tags */}
+                {activeModule.tags && (
+                  <div className="flex flex-wrap gap-2 mt-8 pt-8 border-t border-slate-200 dark:border-slate-800">
+                    {activeModule.tags.map((tag, i) => (
+                      <span key={i} className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-full text-xs font-medium border border-slate-200 dark:border-slate-700">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+            </div>
           </div>
         </div>
 
-        {/* RIGHT COLUMN: Vertical Marquee */}
+        {/* RIGHT COLUMN: Vertical Marquee (Gallery) */}
         <div 
           className="flex-1 bg-slate-100 dark:bg-black/20 relative overflow-hidden"
+          onMouseEnter={handleMarqueeEnter}
           onMouseLeave={handleMarqueeLeave}
         >
            {/* Masking Gradients - Made Subtle */}
@@ -543,24 +579,19 @@ const AcademicLayout = ({
            {/* Marquee Track - Full Width, No Padding */}
            <div className="absolute inset-0 w-full h-full group">
               <div className="animate-marquee-vertical flex flex-col w-full group-hover:[animation-play-state:paused]">
-                 {scrollItems.map((mod, idx) => (
+                 {scrollItems.map((item, idx) => (
                    <div 
-                     key={`${mod.type}-${idx}`}
-                     onMouseEnter={() => handleModuleHover(mod)}
+                     key={`gallery-${idx}`}
                      className={`
-                       relative w-full aspect-[16/10] overflow-hidden transition-all duration-300 cursor-pointer flex-shrink-0
-                       ${activeModule.label === mod.label && isHoveringMarquee 
-                         ? 'brightness-110 z-10 border-y-4 border-emerald-500 dark:border-neon' 
-                         : 'brightness-50 hover:brightness-100 border-y border-transparent'
-                       }
+                       relative w-full aspect-[16/10] overflow-hidden transition-all duration-300 flex-shrink-0 group/item border-y border-transparent hover:border-emerald-500 dark:hover:border-neon
                      `}
                    >
-                      <img src={mod.image} alt={mod.label} className="w-full h-full object-cover" />
+                      <img src={item.image} alt="Gallery Item" className="w-full h-full object-cover transform transition-transform duration-700 group-hover/item:scale-105" />
                       
-                      {/* Overlay Label */}
-                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 hover:bg-black/20">
-                         <div className="bg-black/60 backdrop-blur-md px-6 py-2 rounded-full border border-white/20 transform transition-transform duration-300">
-                           <span className="text-white font-bold tracking-widest uppercase text-sm">{mod.label}</span>
+                      {/* Description Overlay */}
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-6 pt-12 flex flex-col justify-end opacity-100 transition-opacity duration-300">
+                         <div className="text-white font-medium text-sm md:text-base leading-snug drop-shadow-md border-l-4 border-emerald-500 dark:border-neon pl-3">
+                           {item.description}
                          </div>
                       </div>
                    </div>
@@ -569,7 +600,7 @@ const AcademicLayout = ({
            </div>
            
            {/* Hint */}
-           <div className="absolute bottom-8 right-8 z-30 pointer-events-none opacity-50 bg-black/50 px-3 py-1 rounded text-white text-xs font-bold tracking-wider">
+           <div className={`absolute bottom-8 right-8 z-30 pointer-events-none transition-opacity duration-300 bg-black/50 px-3 py-1 rounded text-white text-xs font-bold tracking-wider ${isHoveringMarquee ? 'opacity-0' : 'opacity-50'}`}>
               HOVER TO PAUSE
            </div>
         </div>
@@ -639,10 +670,39 @@ const SplitContentLayout = ({
 
 // 4. Skills Grid Layout
 const SkillsLayout = () => {
+  
+  const getProficiencyStyle = (level: string) => {
+    switch(level) {
+      case 'Expert': 
+        return 'bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-500/20 dark:text-emerald-300 dark:border-emerald-500/30';
+      case 'Intermediate':
+        return 'bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-500/20 dark:text-blue-300 dark:border-blue-500/30';
+      case 'Beginner':
+        return 'bg-slate-100 text-slate-700 border-slate-200 dark:bg-slate-700 dark:text-slate-300 dark:border-slate-600';
+      default:
+        return 'bg-slate-100 text-slate-700';
+    }
+  };
+
   return (
     <div className="h-full w-full overflow-y-auto bg-white dark:bg-slate-900 text-slate-900 dark:text-white p-8 lg:p-16 transition-colors duration-300">
-      <div className="max-w-5xl mx-auto">
-        <h1 className="text-4xl font-serif font-bold mb-12 border-b border-slate-200 dark:border-slate-800 pb-6">Professional Skills</h1>
+      <div className="max-w-6xl mx-auto">
+        
+        {/* Header & Legend */}
+        <div className="mb-12 border-b border-slate-200 dark:border-slate-800 pb-8">
+           <h1 className="text-4xl font-serif font-bold mb-4">Professional Skills</h1>
+           
+           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 text-sm text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg border border-slate-100 dark:border-slate-800">
+              <span className="font-bold uppercase tracking-wider text-slate-900 dark:text-slate-200 mr-2">Format:</span>
+              <div className="flex items-center gap-2">
+                 <span className="font-bold text-slate-700 dark:text-slate-300">Skill Name</span>
+                 <span className="text-slate-300 dark:text-slate-600">|</span>
+                 <span className="px-2 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300">Proficiency</span>
+                 <span className="text-slate-300 dark:text-slate-600">|</span>
+                 <span className="font-mono text-slate-600 dark:text-slate-400">Since Year</span>
+              </div>
+           </div>
+        </div>
         
         <div className="grid md:grid-cols-2 gap-8">
           {SKILLS.map((skillGroup, idx) => (
@@ -651,10 +711,28 @@ const SkillsLayout = () => {
                 <Code2 size={24} />
                 {skillGroup.category}
               </h3>
-              <div className="flex flex-wrap gap-3">
+              
+              <div className="space-y-3">
                 {skillGroup.items.map((skill, sIdx) => (
-                  <div key={sIdx} className="px-4 py-2 bg-white dark:bg-slate-700 rounded-lg shadow-sm text-sm font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600">
-                    {skill}
+                  <div key={sIdx} className="flex items-center justify-between p-3 bg-white dark:bg-slate-700/50 rounded-lg border border-slate-100 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-500 transition-colors">
+                    
+                    {/* Name */}
+                    <div className="font-bold text-slate-700 dark:text-slate-200">
+                      {skill.name}
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                       {/* Proficiency Badge */}
+                       <span className={`px-2 py-1 rounded text-xs font-bold border ${getProficiencyStyle(skill.proficiency)}`}>
+                         {skill.proficiency}
+                       </span>
+                       
+                       {/* Year */}
+                       <span className="font-mono text-xs font-medium text-slate-400 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">
+                         {skill.startYear}
+                       </span>
+                    </div>
+
                   </div>
                 ))}
               </div>
@@ -690,10 +768,14 @@ const NAV_SECTIONS: NavSection[] = [
     label: 'Profession', 
     icon: Briefcase,
     subItems: [
-      { id: 'skills', label: "Skills" },
       { id: 'delta', label: "Delta Electronics" },
       { id: 'synnex', label: "Synnex Technology" },
     ]
+  },
+  {
+    id: 'skills',
+    label: 'Skills',
+    icon: Code2
   }
 ];
 
@@ -730,7 +812,7 @@ const App = () => {
       return <ResponsiveTimeline />;
     }
 
-    if (activeTab === 'profession' && activeSubTab === 'skills') {
+    if (activeTab === 'skills') {
       return <SkillsLayout />;
     }
 
@@ -744,9 +826,11 @@ const App = () => {
       if (dataItem && dataItem.modules) {
         return (
           <AcademicLayout 
+            key={dataItem.id} // Added key to force remount on school change
             title={dataItem.school}
             subtitle={dataItem.degree}
             modules={dataItem.modules}
+            gallery={dataItem.gallery}
             location={dataItem.location}
           />
         );

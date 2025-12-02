@@ -19,11 +19,16 @@ export interface ExperienceItem {
 
 export interface AcademicModule {
   type: 'intro' | 'grades' | 'thesis' | 'project' | 'achievements';
-  label: string; // The text shown on the image (e.g., "Thesis")
-  title: string; // The title shown in the content area
-  content: string | string[]; // The main text content
-  image: string;
+  label: string; // Tab Label
+  title: string; // Content Title
+  content: string | string[]; 
   tags?: string[];
+  honors?: string[]; // Field to embed honors/awards list inside a module (e.g. Intro)
+}
+
+export interface AcademicGalleryItem {
+  image: string;
+  description: string;
 }
 
 export interface EducationItem {
@@ -33,10 +38,11 @@ export interface EducationItem {
   period: string;
   location: string;
   gpa?: string;
-  details: string[]; // Keep for backward compatibility or simple view
-  description?: string; // Keep for backward compatibility
+  details: string[]; 
+  description?: string; 
   image?: string;
-  modules?: AcademicModule[]; // New field for the interactive layout
+  modules?: AcademicModule[]; 
+  gallery?: AcademicGalleryItem[]; // New field for the independent photo marquee
 }
 
 export interface Recommendation {
@@ -62,9 +68,15 @@ export interface ProjectItem {
   achievements: string[];
 }
 
+export interface SkillDetail {
+  name: string;
+  proficiency: 'Beginner' | 'Intermediate' | 'Expert';
+  startYear: string;
+}
+
 export interface SkillItem {
   category: string;
-  items: string[];
+  items: SkillDetail[];
 }
 
 export interface NavSection {
