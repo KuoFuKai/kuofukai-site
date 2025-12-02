@@ -17,6 +17,15 @@ export interface ExperienceItem {
   image?: string;
 }
 
+export interface AcademicModule {
+  type: 'intro' | 'grades' | 'thesis' | 'project' | 'achievements';
+  label: string; // The text shown on the image (e.g., "Thesis")
+  title: string; // The title shown in the content area
+  content: string | string[]; // The main text content
+  image: string;
+  tags?: string[];
+}
+
 export interface EducationItem {
   id: string;
   school: string;
@@ -24,9 +33,10 @@ export interface EducationItem {
   period: string;
   location: string;
   gpa?: string;
-  details: string[];
-  description?: string;
+  details: string[]; // Keep for backward compatibility or simple view
+  description?: string; // Keep for backward compatibility
   image?: string;
+  modules?: AcademicModule[]; // New field for the interactive layout
 }
 
 export interface Recommendation {

@@ -139,27 +139,105 @@ export const EDUCATION: EducationItem[] = [
     period: "Sep 2022 – Jun 2024",
     location: "Tainan, Taiwan",
     gpa: "3.97/4.3 (Avg: 91.3)",
-    details: [
-      "Thesis: Developing a Mobile Learning and Tour-Guiding System Based on Generative AI Approach",
-      "Awards: Honorable Mention by IET Taipei Local Network (2024)",
-      "Conferences: ISASD Tokyo, Japan (Oral Presentation)",
-      "Tech Stack: Python, NVIDIA Jetson, Local LLM, Native RAG, YOLO"
+    modules: [
+      {
+        type: "intro",
+        label: "Introduction",
+        title: "Master's Journey",
+        content: "My Master's journey was defined by efficiency and innovation. Despite working full-time, I maintained top grades. My research focused on running modern Generative AI on edge devices (NVIDIA Jetson), proving that powerful AI doesn't always need a cloud connection.",
+        image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1000&auto=format&fit=crop",
+        tags: ["Edge AI", "NVIDIA Jetson", "Resilience"]
+      },
+      {
+        type: "grades",
+        label: "Transcript",
+        title: "Academic Excellence",
+        content: [
+          "GPA: 3.97/4.3 (Average: 91.3)",
+          "Artificial Intelligence: 95 (A+)",
+          "Digital Integrated Circuit Design: 95 (A+)",
+          "Heterogeneous Multicore Systems: 94 (A+)",
+          "Computer Vision: 88 (A)"
+        ],
+        image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1000&auto=format&fit=crop",
+        tags: ["GPA 3.97", "Top of Class"]
+      },
+      {
+        type: "thesis",
+        label: "Thesis",
+        title: "Generative AI on Edge",
+        content: "Thesis: Developing a Mobile Learning and Tour-Guiding System Based on Generative AI Approach. I proposed a low-energy Multimodal Large Language Model (MLLM) architecture integrated with RAG and YOLO, capable of running offline on NVIDIA Jetson hardware.",
+        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop",
+        tags: ["LLM", "RAG", "YOLO", "Python"]
+      },
+      {
+        type: "achievements",
+        label: "Honors",
+        title: "Awards & Recognition",
+        content: [
+          "Highest Score in Oral Defense among all candidates.",
+          "Honorable Mention by IET Taipei Local Network (2024).",
+          "Oral Presentation at ISASD 2024 in Tokyo, Japan."
+        ],
+        image: "https://images.unsplash.com/photo-1567427018141-0584cfcbf1b8?q=80&w=1000&auto=format&fit=crop",
+        tags: ["IET Award", "ISASD Tokyo"]
+      }
     ],
-    description: "My Master's journey was defined by efficiency and innovation. Despite working full-time, I maintained top grades. My research focused on running modern Generative AI on edge devices (NVIDIA Jetson), proving that powerful AI doesn't always need a cloud connection. I validated this system in a real-world cultural heritage site."
+    details: [], // Fallback
+    description: "" // Fallback
   },
   {
     id: "university",
     school: "Shih Hsin University",
-    degree: "Bachelor of Arts in Information and Communications",
+    degree: "Bachelor of Arts in Info. & Comms.",
     period: "Sep 2011 – Jun 2015",
     location: "Taipei, Taiwan",
     gpa: "3.8/4.0 (Avg: 84.1)",
-    details: [
-      "Capstone: An Android-Based Self-Guided Travel Planning Application",
-      "Award: Best System Design (2015)",
-      "Honors: Mayor’s Award (2011), Model Student Award (2011)"
+    modules: [
+      {
+        type: "intro",
+        label: "Introduction",
+        title: "The Self-Taught Developer",
+        content: "Although my degree was in Info & Comms, I steered my education towards computer science. My capstone project was a testament to self-learning: I built a complete Android app using Google Maps API by studying books in the library.",
+        image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1000&auto=format&fit=crop",
+        tags: ["Self-Taught", "Android", "Java"]
+      },
+      {
+        type: "grades",
+        label: "Transcript",
+        title: "Core CS Coursework",
+        content: [
+          "Computer & Information Tech: 99 (A)",
+          "Image Digitizing: 95 (A)",
+          "Computer Animation II: 95 (A)",
+          "Intro to Info & Comm: 94 (A)"
+        ],
+        image: "https://images.unsplash.com/photo-1517842645767-c639042777db?q=80&w=1000&auto=format&fit=crop",
+        tags: ["GPA 3.8", "Computer Science"]
+      },
+      {
+        type: "project",
+        label: "Capstone",
+        title: "Android Travel Planner",
+        content: "Independently developed an Android application integrating Google Maps API to assist independent travelers. Built entirely through self-study of Java and Android frameworks, doing the work of a full team solo.",
+        image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=1000&auto=format&fit=crop",
+        tags: ["Best System Design", "Google Maps API"]
+      },
+      {
+        type: "achievements",
+        label: "Awards",
+        title: "Undergraduate Honors",
+        content: [
+          "Best System Design Award (2015) - Dept. of Info & Comms",
+          "Mayor’s Award (2011)",
+          "Model Student Award (2011)"
+        ],
+        image: "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?q=80&w=1000&auto=format&fit=crop",
+        tags: ["Top Honors", "Leadership"]
+      }
     ],
-    description: "Although my degree was in Info & Comms, I steered my education towards computer science. My capstone project was a testament to self-learning: I built a complete Android app using Google Maps API by studying books in the library, eventually winning the top department award."
+    details: [],
+    description: ""
   },
   {
     id: "highschool",
@@ -167,13 +245,30 @@ export const EDUCATION: EducationItem[] = [
     degree: "High School Diploma",
     period: "Sep 2008 – Jun 2011",
     location: "Taipei, Taiwan",
-    image: "/images/High School Award.JPG",
-    details: [
-      "Ranked 1st in class (2010, 2011)",
-      "Mayor’s Award to Outstanding Graduates",
-      "Information Technology Club Member"
+    modules: [
+      {
+        type: "intro",
+        label: "Introduction",
+        title: "The Turning Point",
+        content: "This was my turning point. Coming from the bottom of the rankings, I discovered the joy of academic achievement through sheer hard work. Overcoming my father's tragic passing right before exams, I still managed to graduate at the top of my class.",
+        image: "https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=1000&auto=format&fit=crop",
+        tags: ["Resilience", "Top Rank"]
+      },
+      {
+        type: "achievements",
+        label: "Achievements",
+        title: "Graduating Top of Class",
+        content: [
+          "Ranked 1st in class (2010, 2011)",
+          "Mayor’s Award to Outstanding Graduates",
+          "Transformation: From last place to Valedictorian level performance."
+        ],
+        image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=1000&auto=format&fit=crop",
+        tags: ["#1 Rank", "Mayor's Award"]
+      }
     ],
-    description: "This was my turning point. Coming from the bottom of the rankings, I discovered the joy of academic achievement through sheer hard work. Overcoming my father's tragic passing right before exams, I still managed to graduate at the top of my class, proving to myself that resilience conquers adversity."
+    details: [],
+    description: ""
   }
 ];
 

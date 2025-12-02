@@ -11,7 +11,10 @@ import {
   Upload,
   ArrowUp,
   ChevronLeft,
-  ChevronDown
+  ChevronDown,
+  Award,
+  FileText,
+  GraduationCap
 } from 'lucide-react';
 import { 
   TIMELINE, 
@@ -20,14 +23,13 @@ import {
   SKILLS,
   PERSONAL_INFO
 } from './constants';
-import { NavSection, TimelineItem } from './types';
+import { NavSection, TimelineItem, AcademicModule } from './types';
 
 // --- Components ---
 
 // 0. Image Marquee Component
 const ImageMarquee = () => {
   // Create a duplicated list for seamless looping (x2)
-  // We remove the hardcoded ?grayscale from URL to use CSS filter instead for better control
   const images = [...TIMELINE, ...TIMELINE].map((item, index) => ({
     src: `https://picsum.photos/seed/${item.year}/800/600`, 
     alt: item.title,
@@ -35,24 +37,21 @@ const ImageMarquee = () => {
   }));
 
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden bg-black select-none pointer-events-none">
-      {/* Gradient Overlay: Darker on left for text readability, fading to lighter on right */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-r from-slate-950 via-slate-950/80 to-slate-950/40" />
+    <div className="absolute inset-0 z-0 overflow-hidden bg-slate-50 dark:bg-black select-none pointer-events-none transition-colors duration-500">
+      {/* Gradient Overlay: 
+          Light Mode: Fade to white (slate-50) from left.
+          Dark Mode: Fade to black (slate-950) from left.
+      */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-r from-slate-50 via-slate-50/80 to-slate-50/40 dark:from-slate-950 dark:via-slate-950/80 dark:to-slate-950/40 transition-colors duration-500" />
       
-      {/* Marquee Container: w-max ensures it takes the width of all images */}
+      {/* Marquee Container */}
       <div className="flex h-full animate-marquee w-max">
         {images.map((img) => (
-          <div key={img.key} className="flex-shrink-0 h-full relative border-r border-white/5">
-            {/* 
-               1. h-full w-auto: Forces images to match container height while maintaining aspect ratio
-               2. max-w-none: Prevents images from shrinking
-               3. grayscale: Black & White effect
-               4. opacity-50: Requested transparency
-            */}
+          <div key={img.key} className="flex-shrink-0 h-full relative border-r border-slate-200 dark:border-white/5">
             <img 
               src={img.src} 
               alt={img.alt} 
-              className="h-full w-auto max-w-none object-cover grayscale opacity-50"
+              className="h-full w-auto max-w-none object-cover grayscale opacity-50 transition-opacity"
             />
           </div>
         ))}
@@ -66,18 +65,62 @@ const ResponsiveTimeline = () => {
   const [selectedItem, setSelectedItem] = useState<TimelineItem>(TIMELINE[TIMELINE.length - 1]);
   const [viewState, setViewState] = useState<'grid' | 'detail'>('grid');
   
-  // Ref for the sliding container (for animation)
+  // Ref for the sliding container
   const detailContainerRef = useRef<HTMLDivElement>(null);
-  // Ref for the internal scrollable content (for scroll logic)
+  // Ref for the internal scrollable content
   const detailScrollRef = useRef<HTMLDivElement>(null);
   const timelineStripRef = useRef<HTMLDivElement>(null);
+  
+  // Drag Scroll Logic Refs
+  const isDown = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+  const isDragging = useRef(false);
   
   // Touch handling
   const [touchStart, setTouchStart] = useState(0);
 
   const handleEraClick = (item: TimelineItem) => {
+    // If user was dragging, do not select the item
+    if (isDragging.current) return;
     setSelectedItem(item);
-    // Optional: Auto scroll timeline strip to keep selected item in view
+  };
+
+  // Mouse Handlers for Drag Scrolling
+  const onMouseDown = (e: React.MouseEvent) => {
+    isDown.current = true;
+    isDragging.current = false;
+    if (timelineStripRef.current) {
+      startX.current = e.pageX - timelineStripRef.current.offsetLeft;
+      scrollLeft.current = timelineStripRef.current.scrollLeft;
+    }
+  };
+
+  const onMouseLeave = () => {
+    isDown.current = false;
+  };
+
+  const onMouseUp = () => {
+    isDown.current = false;
+    // We intentionally don't reset isDragging here immediately so the onClick handler 
+    // (which fires after mouseUp) can check it.
+    // It will be reset on the next MouseDown.
+  };
+
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!isDown.current) return;
+    e.preventDefault();
+    if (timelineStripRef.current) {
+      const x = e.pageX - timelineStripRef.current.offsetLeft;
+      const walk = (x - startX.current) * 2; // Scroll speed multiplier
+      
+      // Determine if it's a drag or just a sloppy click
+      if (Math.abs(walk) > 5) {
+        isDragging.current = true;
+      }
+      
+      timelineStripRef.current.scrollLeft = scrollLeft.current - walk;
+    }
   };
 
   const backToGrid = () => {
@@ -88,7 +131,6 @@ const ResponsiveTimeline = () => {
     setViewState('detail');
   };
 
-  // Detail View: Scroll Up to Go Back
   const handleDetailWheel = (e: React.WheelEvent) => {
     if (viewState === 'detail' && detailScrollRef.current) {
       if (detailScrollRef.current.scrollTop <= 0 && e.deltaY < -40) {
@@ -97,26 +139,21 @@ const ResponsiveTimeline = () => {
     }
   };
 
-  // Grid View: Scroll Down to Enter Detail
   const handleGridWheel = (e: React.WheelEvent) => {
     if (viewState === 'grid' && e.deltaY > 40) {
       enterDetailView();
     }
   };
 
-  // Touch Handlers
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStart(e.touches[0].clientY);
   };
   
   const handleTouchEnd = (e: React.TouchEvent) => {
     const endY = e.changedTouches[0].clientY;
-    // Swipe Up on footer area in grid view
     if (viewState === 'grid' && touchStart - endY > 70) {
        enterDetailView();
     }
-    
-    // Swipe Down in detail view
     if (viewState === 'detail' && detailScrollRef.current?.scrollTop === 0 && endY - touchStart > 70) {
       backToGrid();
     }
@@ -135,7 +172,7 @@ const ResponsiveTimeline = () => {
   };
 
   return (
-    <div className="relative h-full w-full bg-slate-900 text-white overflow-hidden font-sans">
+    <div className="relative h-full w-full bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white overflow-hidden font-sans transition-colors duration-500">
       
       {/* SCENE 1: OVERVIEW (Split Layout) */}
       <div 
@@ -146,22 +183,22 @@ const ResponsiveTimeline = () => {
           viewState === 'grid' ? 'translate-y-0 opacity-100' : '-translate-y-1/2 opacity-50 pointer-events-none'
         }`}
       >
-        {/* 1. Background Layer: Full Width Marquee */}
+        {/* 1. Background Layer */}
         <ImageMarquee />
 
-        {/* 2. Content Layer: Sits on top of the background */}
+        {/* 2. Content Layer */}
         <div className="flex-1 min-h-0 relative z-20 flex items-center justify-center p-6 md:p-12">
             <div className="max-w-7xl w-full flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-24">
                 
                 {/* Left: Personal Intro */}
                 <div className="lg:w-1/2 flex flex-col justify-center">
-                    <h2 className="text-4xl md:text-6xl font-serif font-bold text-neon mb-4 tracking-tight drop-shadow-lg">
+                    <h2 className="text-4xl md:text-6xl font-serif font-bold text-emerald-600 dark:text-neon mb-4 tracking-tight drop-shadow-sm transition-colors duration-300">
                       MY JOURNEY
                     </h2>
-                    <h3 className="text-xl md:text-2xl text-white font-bold mb-6 leading-tight drop-shadow-md">
+                    <h3 className="text-xl md:text-2xl text-slate-900 dark:text-white font-bold mb-6 leading-tight drop-shadow-sm transition-colors duration-300">
                       {PERSONAL_INFO.tagline}
                     </h3>
-                    <div className="prose prose-invert prose-lg text-slate-200 overflow-y-auto pr-2 custom-scrollbar max-h-[40vh] lg:max-h-[50vh] drop-shadow-md">
+                    <div className="prose prose-lg text-slate-700 dark:text-slate-200 overflow-y-auto pr-2 custom-scrollbar max-h-[40vh] lg:max-h-[50vh] transition-colors duration-300">
                         {PERSONAL_INFO.about.split('\n\n').map((para, i) => (
                           <p key={i} className="mb-4 text-base md:text-lg leading-relaxed">{para}</p>
                         ))}
@@ -170,11 +207,7 @@ const ResponsiveTimeline = () => {
 
                 {/* Right: Profile Picture */}
                 <div className="hidden lg:flex lg:w-1/2 justify-center items-center">
-                    <div className="relative w-80 h-96 md:w-96 md:h-[500px] rounded-lg overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.6)] border border-slate-700 group">
-                        {/* 
-                           REPLACE SRC BELOW WITH YOUR HEADSHOT URL 
-                           The class 'object-cover' ensures it fills the box nicely.
-                        */}
+                    <div className="relative w-80 h-96 md:w-96 md:h-[500px] rounded-lg overflow-hidden shadow-2xl dark:shadow-[0_0_40px_rgba(0,0,0,0.6)] border border-slate-200 dark:border-slate-700 group transition-all duration-300">
                         <img 
                           src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=800&q=80" 
                           alt="Kevin Profile" 
@@ -182,13 +215,13 @@ const ResponsiveTimeline = () => {
                         />
                         
                         {/* Overlay frame effect */}
-                        <div className="absolute inset-0 ring-1 ring-white/10 pointer-events-none" />
+                        <div className="absolute inset-0 ring-1 ring-black/5 dark:ring-white/10 pointer-events-none" />
                         
-                        {/* Optional Name Tag on Image (Visible on Hover) */}
+                        {/* Name Tag */}
                         <div className="absolute bottom-6 left-6 right-6">
-                           <div className="bg-slate-900/80 backdrop-blur-sm border border-slate-700 p-4 rounded-lg transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                              <p className="font-serif font-bold text-white text-lg">Kevin Kuo</p>
-                              <p className="text-neon text-xs font-mono uppercase tracking-widest">Senior Engineer</p>
+                           <div className="bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 p-4 rounded-lg transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 shadow-lg">
+                              <p className="font-serif font-bold text-slate-900 dark:text-white text-lg">Kevin Kuo</p>
+                              <p className="text-emerald-600 dark:text-neon text-xs font-mono uppercase tracking-widest">Senior Engineer</p>
                            </div>
                         </div>
                     </div>
@@ -197,12 +230,15 @@ const ResponsiveTimeline = () => {
             </div>
         </div>
 
-        {/* MIDDLE: Horizontal Timeline Strip (Moved down visually by layout order) */}
-        {/* Removed background color and borders to make it transparent */}
+        {/* MIDDLE: Horizontal Timeline Strip */}
         <div className="flex-shrink-0 z-20">
              <div 
                 ref={timelineStripRef}
-                className="flex items-end gap-6 px-4 md:px-12 py-8 overflow-x-auto no-scrollbar scroll-smooth"
+                onMouseDown={onMouseDown}
+                onMouseLeave={onMouseLeave}
+                onMouseUp={onMouseUp}
+                onMouseMove={onMouseMove}
+                className="flex items-end gap-6 px-4 md:px-12 py-8 overflow-x-auto no-scrollbar cursor-grab active:cursor-grabbing select-none"
              >
                 {TIMELINE.map((item, index) => {
                   const isActive = selectedItem.year === item.year;
@@ -211,20 +247,20 @@ const ResponsiveTimeline = () => {
                       key={index}
                       onClick={() => handleEraClick(item)}
                       className={`
-                        flex-shrink-0 relative rounded-xl transition-all duration-300 flex flex-col items-center justify-between p-4 border group/item
+                        flex-shrink-0 relative rounded-xl transition-all duration-300 flex flex-col items-center justify-between p-4 border group/item shadow-lg
                         ${isActive 
-                          ? 'w-60 h-80 bg-slate-800 border-neon shadow-[0_0_20px_rgba(132,204,22,0.4)] -translate-y-6' 
-                          : 'w-44 h-60 bg-slate-800/40 border-slate-700 hover:bg-slate-700 hover:border-slate-500'
+                          ? 'w-60 h-80 bg-white dark:bg-slate-800 border-emerald-500 dark:border-neon shadow-emerald-500/20 dark:shadow-[0_0_20px_rgba(132,204,22,0.4)] -translate-y-6' 
+                          : 'w-44 h-60 bg-white/60 dark:bg-slate-800/40 border-slate-200 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-700 hover:border-slate-400 dark:hover:border-slate-500'
                         }
                       `}
                     >
-                       <div className={`text-xl font-mono font-bold ${isActive ? 'text-neon' : 'text-slate-500 group-hover/item:text-slate-300'}`}>
+                       <div className={`text-xl font-mono font-bold transition-colors ${isActive ? 'text-emerald-600 dark:text-neon' : 'text-slate-500 dark:text-slate-500 group-hover/item:text-slate-700 dark:group-hover/item:text-slate-300'}`}>
                          {item.year}
                        </div>
                        
-                       <div className={`w-3 h-3 rounded-full transition-all duration-300 ${isActive ? 'bg-neon scale-125' : 'bg-slate-600'}`} />
+                       <div className={`w-3 h-3 rounded-full transition-all duration-300 ${isActive ? 'bg-emerald-500 dark:bg-neon scale-125' : 'bg-slate-300 dark:bg-slate-600'}`} />
 
-                       <div className={`text-base font-bold text-center line-clamp-2 w-full px-2 ${isActive ? 'text-white' : 'text-slate-400 group-hover/item:text-slate-200'}`}>
+                       <div className={`text-base font-bold text-center line-clamp-2 w-full px-2 transition-colors ${isActive ? 'text-slate-900 dark:text-white' : 'text-slate-600 dark:text-slate-400 group-hover/item:text-slate-900 dark:group-hover/item:text-slate-200'}`}>
                          {item.title}
                        </div>
                     </button>
@@ -236,25 +272,25 @@ const ResponsiveTimeline = () => {
         {/* BOTTOM: Info Panel */}
         <div 
           onClick={enterDetailView}
-          className="flex-shrink-0 h-48 bg-slate-950 border-t border-slate-700 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] z-20 flex flex-col justify-center px-4 md:px-12 cursor-pointer hover:bg-slate-900 transition-colors group"
+          className="flex-shrink-0 h-48 bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-700 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] dark:shadow-[0_-10px_40px_rgba(0,0,0,0.5)] z-20 flex flex-col justify-center px-4 md:px-12 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors group duration-300"
         >
            <div className="max-w-6xl mx-auto w-full flex flex-col md:flex-row items-center justify-between gap-8">
               <div className="flex-1">
                  <div className="flex items-center gap-4 mb-2">
-                    <span className="px-3 py-1 bg-neon/10 text-neon rounded font-mono text-sm font-bold border border-neon/20">
+                    <span className="px-3 py-1 bg-emerald-100 dark:bg-neon/10 text-emerald-700 dark:text-neon rounded font-mono text-sm font-bold border border-emerald-200 dark:border-neon/20 transition-colors">
                       {selectedItem.year}
                     </span>
-                    <h3 className="text-2xl font-bold text-white group-hover:text-neon transition-colors">{selectedItem.title}</h3>
+                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-neon transition-colors">{selectedItem.title}</h3>
                  </div>
-                 <p className="text-slate-400 text-lg leading-relaxed line-clamp-2 md:line-clamp-2 group-hover:text-slate-300">
+                 <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed line-clamp-2 md:line-clamp-2 group-hover:text-slate-800 dark:group-hover:text-slate-300 transition-colors">
                    {selectedItem.description}
                  </p>
               </div>
               
-              {/* Scroll Prompt - SCROLL DOWN text style */}
+              {/* Scroll Prompt */}
               <div className="flex-shrink-0 flex flex-col items-center justify-center gap-1 group-hover:scale-105 transition-transform duration-300">
-                  <span className="text-sm font-bold uppercase tracking-widest text-neon">Scroll Down</span>
-                  <ChevronDown size={32} className="text-white animate-bounce" strokeWidth={2} />
+                  <span className="text-sm font-bold uppercase tracking-widest text-emerald-600 dark:text-neon">Scroll Down</span>
+                  <ChevronDown size={32} className="text-slate-900 dark:text-white animate-bounce" strokeWidth={2} />
               </div>
            </div>
         </div>
@@ -263,54 +299,54 @@ const ResponsiveTimeline = () => {
       {/* SCENE 2: DETAIL VIEW (Slide Up) */}
       <div 
         ref={detailContainerRef}
-        className={`absolute inset-0 z-30 bg-slate-950 flex flex-col transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+        className={`absolute inset-0 z-30 bg-slate-50 dark:bg-slate-950 flex flex-col transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${
           viewState === 'detail' ? 'translate-y-0' : 'translate-y-[105%]'
         }`}
       >
         {/* Navigation / Dismiss Bar */}
-        <div className="flex-shrink-0 z-30 bg-slate-950/80 backdrop-blur-md border-b border-slate-800 px-6 py-4 flex items-center justify-between">
+        <div className="flex-shrink-0 z-30 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-6 py-4 flex items-center justify-between transition-colors">
           <button 
             onClick={backToGrid}
-            className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors uppercase tracking-wider text-sm font-bold"
+            className="flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors uppercase tracking-wider text-sm font-bold"
           >
             <ChevronLeft size={18} />
             Back to Timeline
           </button>
-          <div className="text-slate-500 text-xs flex items-center gap-1 opacity-60">
+          <div className="text-slate-400 dark:text-slate-500 text-xs flex items-center gap-1 opacity-80">
             <ArrowUp size={14} className="animate-bounce" />
             Scroll Up to Return
           </div>
         </div>
 
-        {/* Main Content Area with Fixed Sides */}
+        {/* Main Content Area */}
         <div className="flex-1 relative overflow-hidden">
           
-          {/* FLOATING LEFT NAVIGATION (Previous) */}
+          {/* FLOATING LEFT NAVIGATION */}
           {prevItem && (
             <button 
               onClick={(e) => { e.stopPropagation(); handleNavigate(prevItem); }}
-              className="absolute left-0 top-0 bottom-0 z-40 w-16 md:w-24 bg-gradient-to-r from-black/80 via-black/40 to-transparent flex items-center justify-center md:justify-start md:pl-6 group cursor-pointer outline-none transition-all hover:w-20 md:hover:w-32"
+              className="absolute left-0 top-0 bottom-0 z-40 w-16 md:w-24 bg-gradient-to-r from-slate-200/80 via-slate-200/40 to-transparent dark:from-black/80 dark:via-black/40 dark:to-transparent flex items-center justify-center md:justify-start md:pl-6 group cursor-pointer outline-none transition-all hover:w-20 md:hover:w-32"
               aria-label="Previous Era"
             >
                <div className="flex flex-col items-center gap-2 transform transition-transform group-hover:-translate-x-1">
-                  <ChevronLeft size={48} className="text-slate-400 group-hover:text-neon transition-colors" strokeWidth={1.5} />
-                  <span className="hidden md:block text-xs font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest rotate-90 origin-center whitespace-nowrap mt-4">
+                  <ChevronLeft size={48} className="text-slate-400 group-hover:text-emerald-600 dark:group-hover:text-neon transition-colors" strokeWidth={1.5} />
+                  <span className="hidden md:block text-xs font-bold text-slate-700 dark:text-white opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest rotate-90 origin-center whitespace-nowrap mt-4">
                     {prevItem.year}
                   </span>
                </div>
             </button>
           )}
 
-          {/* FLOATING RIGHT NAVIGATION (Next) */}
+          {/* FLOATING RIGHT NAVIGATION */}
           {nextItem && (
             <button 
               onClick={(e) => { e.stopPropagation(); handleNavigate(nextItem); }}
-              className="absolute right-0 top-0 bottom-0 z-40 w-16 md:w-24 bg-gradient-to-l from-black/80 via-black/40 to-transparent flex items-center justify-center md:justify-end md:pr-6 group cursor-pointer outline-none transition-all hover:w-20 md:hover:w-32"
+              className="absolute right-0 top-0 bottom-0 z-40 w-16 md:w-24 bg-gradient-to-l from-slate-200/80 via-slate-200/40 to-transparent dark:from-black/80 dark:via-black/40 dark:to-transparent flex items-center justify-center md:justify-end md:pr-6 group cursor-pointer outline-none transition-all hover:w-20 md:hover:w-32"
               aria-label="Next Era"
             >
               <div className="flex flex-col items-center gap-2 transform transition-transform group-hover:translate-x-1">
-                  <ChevronRight size={48} className="text-slate-400 group-hover:text-neon transition-colors" strokeWidth={1.5} />
-                  <span className="hidden md:block text-xs font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest -rotate-90 origin-center whitespace-nowrap mt-4">
+                  <ChevronRight size={48} className="text-slate-400 group-hover:text-emerald-600 dark:group-hover:text-neon transition-colors" strokeWidth={1.5} />
+                  <span className="hidden md:block text-xs font-bold text-slate-700 dark:text-white opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest -rotate-90 origin-center whitespace-nowrap mt-4">
                     {nextItem.year}
                   </span>
               </div>
@@ -329,21 +365,21 @@ const ResponsiveTimeline = () => {
               {/* Left: Text Content */}
               <div className="flex-1 p-8 lg:p-16 flex flex-col justify-center">
                 <div className="max-w-xl mx-auto w-full px-8 md:px-12">
-                  <div className="inline-block px-3 py-1 bg-neon/10 text-neon rounded-full text-sm font-mono font-bold mb-6">
+                  <div className="inline-block px-3 py-1 bg-emerald-100 dark:bg-neon/10 text-emerald-700 dark:text-neon rounded-full text-sm font-mono font-bold mb-6 transition-colors">
                     {selectedItem.year}
                   </div>
-                  <h1 className="text-4xl lg:text-6xl font-serif font-bold mb-6 text-white leading-tight">
+                  <h1 className="text-4xl lg:text-6xl font-serif font-bold mb-6 text-slate-900 dark:text-white leading-tight transition-colors">
                     {selectedItem.title}
                   </h1>
                   
-                  <div className="h-1 w-20 bg-neon mb-8"></div>
+                  <div className="h-1 w-20 bg-emerald-500 dark:bg-neon mb-8 transition-colors"></div>
                   
-                  <div className="prose prose-lg prose-invert text-slate-300 leading-relaxed mb-8">
-                    <p className="text-xl font-light text-slate-100 mb-6 border-l-4 border-slate-700 pl-4">
+                  <div className="prose prose-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-8 dark:prose-invert transition-colors">
+                    <p className="text-xl font-light text-slate-800 dark:text-slate-100 mb-6 border-l-4 border-slate-300 dark:border-slate-700 pl-4">
                       {selectedItem.description}
                     </p>
                     {selectedItem.details && (
-                      <p className="text-base text-slate-400">
+                      <p className="text-base text-slate-600 dark:text-slate-400">
                         {selectedItem.details}
                       </p>
                     )}
@@ -352,18 +388,18 @@ const ResponsiveTimeline = () => {
               </div>
 
               {/* Right: Image Placeholder */}
-              <div className="flex-1 bg-black/20 p-8 lg:p-16 flex items-center justify-center min-h-[40vh] lg:min-h-auto">
-                <div className="relative w-full aspect-[4/3] max-w-lg rounded-2xl overflow-hidden shadow-2xl bg-slate-800 ring-1 ring-white/10 group">
+              <div className="flex-1 bg-slate-100 dark:bg-black/20 p-8 lg:p-16 flex items-center justify-center min-h-[40vh] lg:min-h-auto transition-colors">
+                <div className="relative w-full aspect-[4/3] max-w-lg rounded-2xl overflow-hidden shadow-2xl bg-white dark:bg-slate-800 ring-1 ring-black/5 dark:ring-white/10 group">
                     <img 
                       key={selectedItem.year} // Force re-render on change
                       src={`https://picsum.photos/seed/${selectedItem.year}/800/600?grayscale`} 
                       alt={selectedItem.title} 
                       className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700" 
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent dark:from-slate-900 dark:via-transparent dark:to-transparent opacity-80"></div>
                     
                     {/* Simulated Upload Button */}
-                    <div className="absolute bottom-6 right-6 p-4 bg-white/10 backdrop-blur-md rounded-full text-white cursor-pointer hover:bg-neon hover:text-black transition-all">
+                    <div className="absolute bottom-6 right-6 p-4 bg-slate-900/10 dark:bg-white/10 backdrop-blur-md rounded-full text-slate-900 dark:text-white cursor-pointer hover:bg-emerald-500 dark:hover:bg-neon hover:text-white dark:hover:text-black transition-all">
                       <Upload size={24} />
                     </div>
                 </div>
@@ -377,7 +413,172 @@ const ResponsiveTimeline = () => {
   );
 };
 
-// 2. Two Column Content Layout (For Academic/Profession Details)
+// 2. Academic Layout with Vertical Marquee
+const AcademicLayout = ({ 
+  title, 
+  subtitle, 
+  modules,
+  location
+}: { 
+  title: string, 
+  subtitle: string, 
+  modules: AcademicModule[],
+  location: string
+}) => {
+  const [activeModule, setActiveModule] = useState<AcademicModule>(modules[0]);
+  const [isHoveringMarquee, setIsHoveringMarquee] = useState(false);
+
+  // Handle module activation (hover on marquee item)
+  const handleModuleHover = (module: AcademicModule) => {
+    setActiveModule(module);
+    setIsHoveringMarquee(true);
+  };
+
+  const handleMarqueeLeave = () => {
+    setIsHoveringMarquee(false);
+  };
+
+  // Render content based on module type
+  const renderModuleContent = () => {
+    const { type, content } = activeModule;
+    
+    if (type === 'grades' && Array.isArray(content)) {
+       return (
+         <div className="space-y-4 animate-fadeIn">
+            <h4 className="text-lg font-bold text-emerald-600 dark:text-neon flex items-center gap-2">
+              <GraduationCap size={20} />
+              Key Coursework
+            </h4>
+            <ul className="space-y-2">
+              {content.map((item, idx) => (
+                <li key={idx} className="flex items-center gap-3 p-3 bg-slate-100 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+                   <div className="w-2 h-2 bg-emerald-500 dark:bg-neon rounded-full" />
+                   <span className="text-slate-700 dark:text-slate-200 font-medium">{item}</span>
+                </li>
+              ))}
+            </ul>
+         </div>
+       );
+    }
+
+    if (type === 'achievements' && Array.isArray(content)) {
+       return (
+         <div className="space-y-4 animate-fadeIn">
+            <h4 className="text-lg font-bold text-emerald-600 dark:text-neon flex items-center gap-2">
+              <Award size={20} />
+              Honors & Awards
+            </h4>
+            <ul className="space-y-3">
+              {content.map((item, idx) => (
+                <li key={idx} className="p-4 bg-emerald-50 dark:bg-emerald-900/10 rounded-lg border border-emerald-100 dark:border-emerald-500/20 text-slate-700 dark:text-slate-200 relative overflow-hidden">
+                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-emerald-500 dark:bg-neon" />
+                   {item}
+                </li>
+              ))}
+            </ul>
+         </div>
+       );
+    }
+    
+    // Default text content
+    return (
+      <div className="prose prose-lg dark:prose-invert text-slate-600 dark:text-slate-300 leading-relaxed animate-fadeIn">
+        <p className="border-l-4 border-slate-300 dark:border-slate-700 pl-4">{content}</p>
+      </div>
+    );
+  };
+
+  // Prepare items for marquee (duplicate for seamless loop)
+  // Ensure we have at least 4 items for a smooth look, duplicate if necessary
+  let marqueeItems = [...modules];
+  if (marqueeItems.length < 4) {
+    marqueeItems = [...marqueeItems, ...marqueeItems]; // Duplicate to fill space
+  }
+  // Double the whole list for infinite scroll seamless join
+  const scrollItems = [...marqueeItems, ...marqueeItems];
+
+  return (
+    <div className="h-full w-full overflow-hidden bg-white dark:bg-slate-900 text-slate-900 dark:text-white transition-colors duration-300 flex flex-col lg:flex-row">
+        
+        {/* LEFT COLUMN: Dynamic Content */}
+        <div className="flex-1 p-8 lg:p-16 flex flex-col justify-center relative z-10">
+          <div className="max-w-xl mx-auto w-full">
+            {/* Header */}
+            <div className="mb-8">
+               <span className="text-xs font-bold tracking-widest text-slate-400 uppercase mb-2 block">{location}</span>
+               <h1 className="text-4xl lg:text-5xl font-serif font-bold mb-2 text-slate-900 dark:text-white">{title}</h1>
+               <div className="text-xl text-emerald-600 dark:text-neon font-medium">{subtitle}</div>
+            </div>
+
+            {/* Dynamic Body */}
+            <div className="min-h-[300px]">
+               <h2 className="text-2xl font-bold mb-6 text-slate-800 dark:text-slate-100 transition-all duration-300">
+                 {activeModule.title}
+               </h2>
+               {renderModuleContent()}
+            </div>
+
+            {/* Tags */}
+            {activeModule.tags && (
+              <div className="flex flex-wrap gap-2 mt-8 pt-8 border-t border-slate-200 dark:border-slate-800">
+                {activeModule.tags.map((tag, i) => (
+                  <span key={i} className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-full text-xs font-medium border border-slate-200 dark:border-slate-700">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* RIGHT COLUMN: Vertical Marquee */}
+        <div 
+          className="flex-1 bg-slate-100 dark:bg-black/20 relative overflow-hidden"
+          onMouseLeave={handleMarqueeLeave}
+        >
+           {/* Masking Gradients - Made Subtle */}
+           <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white dark:from-slate-900 to-transparent z-20 pointer-events-none" />
+           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white dark:from-slate-900 to-transparent z-20 pointer-events-none" />
+
+           {/* Marquee Track - Full Width, No Padding */}
+           <div className="absolute inset-0 w-full h-full group">
+              <div className="animate-marquee-vertical flex flex-col w-full group-hover:[animation-play-state:paused]">
+                 {scrollItems.map((mod, idx) => (
+                   <div 
+                     key={`${mod.type}-${idx}`}
+                     onMouseEnter={() => handleModuleHover(mod)}
+                     className={`
+                       relative w-full aspect-[16/10] overflow-hidden transition-all duration-300 cursor-pointer flex-shrink-0
+                       ${activeModule.label === mod.label && isHoveringMarquee 
+                         ? 'brightness-110 z-10 border-y-4 border-emerald-500 dark:border-neon' 
+                         : 'brightness-50 hover:brightness-100 border-y border-transparent'
+                       }
+                     `}
+                   >
+                      <img src={mod.image} alt={mod.label} className="w-full h-full object-cover" />
+                      
+                      {/* Overlay Label */}
+                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 hover:bg-black/20">
+                         <div className="bg-black/60 backdrop-blur-md px-6 py-2 rounded-full border border-white/20 transform transition-transform duration-300">
+                           <span className="text-white font-bold tracking-widest uppercase text-sm">{mod.label}</span>
+                         </div>
+                      </div>
+                   </div>
+                 ))}
+              </div>
+           </div>
+           
+           {/* Hint */}
+           <div className="absolute bottom-8 right-8 z-30 pointer-events-none opacity-50 bg-black/50 px-3 py-1 rounded text-white text-xs font-bold tracking-wider">
+              HOVER TO PAUSE
+           </div>
+        </div>
+    </div>
+  );
+};
+
+
+// 3. Two Column Content Layout (For Profession Details - Kept for backward compatibility)
 const SplitContentLayout = ({ 
   title, 
   subtitle, 
@@ -436,7 +637,7 @@ const SplitContentLayout = ({
   );
 };
 
-// 3. Skills Grid Layout
+// 4. Skills Grid Layout
 const SkillsLayout = () => {
   return (
     <div className="h-full w-full overflow-y-auto bg-white dark:bg-slate-900 text-slate-900 dark:text-white p-8 lg:p-16 transition-colors duration-300">
@@ -539,6 +740,17 @@ const App = () => {
 
     if (activeTab === 'academic') {
       dataItem = EDUCATION.find(e => e.id === activeSubTab);
+      // If we have modules (the new structured data), use the AcademicLayout
+      if (dataItem && dataItem.modules) {
+        return (
+          <AcademicLayout 
+            title={dataItem.school}
+            subtitle={dataItem.degree}
+            modules={dataItem.modules}
+            location={dataItem.location}
+          />
+        );
+      }
       type = 'academic';
     } else if (activeTab === 'profession') {
       dataItem = EXPERIENCE.find(e => e.id === activeSubTab);
@@ -546,6 +758,7 @@ const App = () => {
     }
 
     if (dataItem) {
+       // Fallback for Profession or Legacy Academic items without modules
        const content = (
          <div className="space-y-4">
            <p className="font-semibold text-lg">{dataItem.period} | {dataItem.location}</p>
@@ -592,7 +805,7 @@ const App = () => {
   const hasSubMenu = activeNavSection?.subItems && activeNavSection.subItems.length > 0;
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-slate-900 font-sans">
+    <div className="flex h-screen w-screen overflow-hidden bg-slate-50 dark:bg-slate-900 font-sans transition-colors duration-500">
       
       {/* 1. Primary Sidebar (Green area) */}
       <div className="w-24 md:w-64 bg-[#4ade80] dark:bg-emerald-600 flex-shrink-0 flex flex-col justify-between transition-all z-30 shadow-xl">
@@ -689,7 +902,7 @@ const App = () => {
       </div>
 
       {/* 3. Main Content Area */}
-      <div className="flex-1 relative bg-slate-900 overflow-hidden">
+      <div className="flex-1 relative bg-slate-50 dark:bg-slate-900 overflow-hidden transition-colors duration-500">
         {renderContent()}
       </div>
 
