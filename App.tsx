@@ -63,6 +63,7 @@ const ImageMarquee = () => {
 const ResponsiveTimeline = () => {
   const [selectedItem, setSelectedItem] = useState<TimelineItem>(TIMELINE[TIMELINE.length - 1]);
   const [viewState, setViewState] = useState<'grid' | 'detail'>('grid');
+  const [isHoveringMarquee, setIsHoveringMarquee] = useState(false);
   
   // Ref for the sliding container
   const detailContainerRef = useRef<HTMLDivElement>(null);
@@ -169,6 +170,26 @@ const ResponsiveTimeline = () => {
       detailScrollRef.current.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
+
+  // Prepare gallery items for vertical marquee (duplicate for seamless loop)
+  // Fallback to a default if no gallery exists, though TIMELINE now has placeholders
+  const defaultGallery = [
+    { image: `https://picsum.photos/seed/${selectedItem.year}-1/800/600`, description: selectedItem.title },
+    { image: `https://picsum.photos/seed/${selectedItem.year}-2/800/600`, description: "Key Milestone" },
+    { image: `https://picsum.photos/seed/${selectedItem.year}-3/800/600`, description: "Professional Growth" },
+    { image: `https://picsum.photos/seed/${selectedItem.year}-4/800/600`, description: selectedItem.year }
+  ];
+  
+  const galleryItems = selectedItem.gallery || defaultGallery;
+  
+  // Ensure enough items for smooth scroll by duplicating
+  let scrollItems = [...galleryItems];
+  if (scrollItems.length < 4) {
+    scrollItems = [...scrollItems, ...scrollItems, ...scrollItems];
+  }
+  // Double for infinite loop transition
+  scrollItems = [...scrollItems, ...scrollItems];
+
 
   return (
     <div className="relative h-full w-full bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white overflow-hidden font-sans transition-colors duration-500">
@@ -329,7 +350,7 @@ const ResponsiveTimeline = () => {
             >
                <div className="flex flex-col items-center gap-2 transform transition-transform group-hover:-translate-x-1">
                   <ChevronLeft size={48} className="text-slate-400 group-hover:text-emerald-600 dark:group-hover:text-neon transition-colors" strokeWidth={1.5} />
-                  <span className="hidden md:block text-xs font-bold text-slate-700 dark:text-white opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest rotate-90 origin-center whitespace-nowrap mt-4">
+                  <span className="hidden md:block text-xs font-bold text-slate-700 dark:text-white opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest [writing-mode:vertical-rl] whitespace-nowrap mt-4">
                     {prevItem.year}
                   </span>
                </div>
@@ -345,7 +366,7 @@ const ResponsiveTimeline = () => {
             >
               <div className="flex flex-col items-center gap-2 transform transition-transform group-hover:translate-x-1">
                   <ChevronRight size={48} className="text-slate-400 group-hover:text-emerald-600 dark:group-hover:text-neon transition-colors" strokeWidth={1.5} />
-                  <span className="hidden md:block text-xs font-bold text-slate-700 dark:text-white opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest -rotate-90 origin-center whitespace-nowrap mt-4">
+                  <span className="hidden md:block text-xs font-bold text-slate-700 dark:text-white opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest [writing-mode:vertical-rl] rotate-180 whitespace-nowrap mt-4">
                     {nextItem.year}
                   </span>
               </div>
@@ -361,8 +382,8 @@ const ResponsiveTimeline = () => {
             className="absolute inset-0 overflow-y-auto"
           >
             <div className="min-h-full flex flex-col lg:flex-row">
-              {/* Left: Text Content */}
-              <div className="flex-1 p-8 lg:p-16 flex flex-col justify-center">
+              {/* Left: Text Content - Increased flex to give more space */}
+              <div className="flex-1 lg:flex-[1.2] p-8 lg:p-16 flex flex-col justify-center">
                 <div className="max-w-xl mx-auto w-full px-8 md:px-12">
                   <div className="inline-block px-3 py-1 bg-emerald-100 dark:bg-neon/10 text-emerald-700 dark:text-neon rounded-full text-sm font-mono font-bold mb-6 transition-colors">
                     {selectedItem.year}
@@ -386,21 +407,45 @@ const ResponsiveTimeline = () => {
                 </div>
               </div>
 
-              {/* Right: Image Placeholder */}
-              <div className="flex-1 bg-slate-100 dark:bg-black/20 p-8 lg:p-16 flex items-center justify-center min-h-[40vh] lg:min-h-auto transition-colors">
-                <div className="relative w-full aspect-[4/3] max-w-lg rounded-2xl overflow-hidden shadow-2xl bg-white dark:bg-slate-800 ring-1 ring-black/5 dark:ring-white/10 group">
-                    <img 
-                      key={selectedItem.year} // Force re-render on change
-                      src={`https://picsum.photos/seed/${selectedItem.year}/800/600?grayscale`} 
-                      alt={selectedItem.title} 
-                      className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700" 
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent dark:from-slate-900 dark:via-transparent dark:to-transparent opacity-80"></div>
-                    
-                    {/* Simulated Upload Button */}
-                    <div className="absolute bottom-6 right-6 p-4 bg-slate-900/10 dark:bg-white/10 backdrop-blur-md rounded-full text-slate-900 dark:text-white cursor-pointer hover:bg-emerald-500 dark:hover:bg-neon hover:text-white dark:hover:text-black transition-all">
-                      <Upload size={24} />
-                    </div>
+              {/* Right: Vertical Image Marquee */}
+              {/* Modified wrapper: Restricts width and adds padding to right (pr-24) so content doesn't hit the arrow area */}
+              <div className="flex-1 lg:flex-none lg:w-[45%] flex flex-col justify-center p-4 lg:py-12 lg:pr-24 lg:pl-0 min-h-[40vh] lg:min-h-auto">
+                  <div 
+                    className="w-full h-full relative overflow-hidden rounded-2xl shadow-2xl bg-slate-100 dark:bg-slate-900 ring-1 ring-slate-900/5 dark:ring-white/10"
+                    onMouseEnter={() => setIsHoveringMarquee(true)}
+                    onMouseLeave={() => setIsHoveringMarquee(false)}
+                  >
+                   {/* Masking Gradients */}
+                   <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-slate-100 dark:from-slate-900 to-transparent z-20 pointer-events-none" />
+                   <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-slate-100 dark:from-slate-900 to-transparent z-20 pointer-events-none" />
+
+                   {/* Marquee Track */}
+                   <div className="absolute inset-0 w-full h-full group">
+                      <div className="animate-marquee-vertical flex flex-col w-full group-hover:[animation-play-state:paused]">
+                         {scrollItems.map((item, idx) => (
+                           <div 
+                             key={`timeline-gallery-${idx}`}
+                             className={`
+                               relative w-full aspect-[16/10] overflow-hidden transition-all duration-300 flex-shrink-0 group/item border-y border-transparent hover:border-emerald-500 dark:hover:border-neon
+                             `}
+                           >
+                              <img src={item.image} alt={item.description} className="w-full h-full object-cover transform transition-transform duration-700 group-hover/item:scale-105" />
+                              
+                              {/* Description Overlay */}
+                              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-6 pt-12 flex flex-col justify-end opacity-100 transition-opacity duration-300">
+                                 <div className="text-white font-medium text-sm md:text-base leading-snug drop-shadow-md border-l-4 border-emerald-500 dark:border-neon pl-3">
+                                   {item.description}
+                                 </div>
+                              </div>
+                           </div>
+                         ))}
+                      </div>
+                   </div>
+                   
+                   {/* Hint */}
+                   <div className={`absolute bottom-8 right-8 z-30 pointer-events-none transition-opacity duration-300 bg-black/50 px-3 py-1 rounded text-white text-xs font-bold tracking-wider ${isHoveringMarquee ? 'opacity-0' : 'opacity-50'}`}>
+                      HOVER TO PAUSE
+                   </div>
                 </div>
               </div>
 
@@ -496,7 +541,7 @@ const AcademicLayout: React.FC<AcademicLayoutProps> = ({
   // Prepare items for marquee (duplicate for seamless loop)
   // Ensure we have at least 4 items for a smooth look, duplicate if necessary
   // Default to mapped images if no gallery provided
-  const baseGalleryItems: AcademicGalleryItem[] = gallery || modules.map(m => ({ 
+  const baseGalleryItems = gallery || modules.map(m => ({ 
       image: `https://picsum.photos/seed/${m.label}/800/600`, 
       description: m.label 
   }));

@@ -17,70 +17,120 @@ export const TIMELINE: TimelineItem[] = [
     title: "Humble Beginnings",
     description: "Raised by grandmother. Parents worked labor jobs. Overcame father's suicide before high school exams.",
     icon: "User",
-    details: "Growing up in a low-income household taught me the value of every resource. I learned resilience early on, understanding that my path would require twice the effort."
+    details: "Growing up in a low-income household taught me the value of every resource. I learned resilience early on, understanding that my path would require twice the effort.",
+    gallery: [
+      { image: "https://picsum.photos/seed/child1/800/600", description: "Early childhood memories" },
+      { image: "https://picsum.photos/seed/child2/800/600", description: "Raised by grandmother" },
+      { image: "https://picsum.photos/seed/child3/800/600", description: "Learning resilience" }
+    ]
   },
   {
     year: "High School",
     title: "The Turning Point",
     description: "Ranked last until 11th grade. Scored full marks in English, then became 1st in all subjects. Graduated top of the class.",
     icon: "TrendingUp",
-    details: "A single success in an English exam sparked a chain reaction of confidence. I realized that with focused effort, I could master any subject, eventually graduating at the top of the class."
+    details: "A single success in an English exam sparked a chain reaction of confidence. I realized that with focused effort, I could master any subject, eventually graduating at the top of the class.",
+    gallery: [
+      { image: "https://picsum.photos/seed/hs1/800/600", description: "Academic Excellence Award" },
+      { image: "https://picsum.photos/seed/hs2/800/600", description: "Graduating Top of Class" },
+      { image: "https://picsum.photos/seed/hs3/800/600", description: "Hard work pays off" }
+    ]
   },
   {
     year: "2015",
     title: "Self-Taught Success",
     description: "Taught myself Java/Android. Developed an award-winning travel app in 1 month during senior year.",
     icon: "Smartphone",
-    details: "While my peers focused on design, I dove into code. I built a fully functional Android app with Google Maps integration from scratch, winning Best System Design."
+    details: "While my peers focused on design, I dove into code. I built a fully functional Android app with Google Maps integration from scratch, winning Best System Design.",
+    gallery: [
+      { image: "https://picsum.photos/seed/app1/800/600", description: "Best System Design Award" },
+      { image: "https://picsum.photos/seed/app2/800/600", description: "First Android App Interface" },
+      { image: "https://picsum.photos/seed/app3/800/600", description: "Coding in the library" }
+    ]
   },
   {
     year: "2016",
     title: "Military Service",
     description: "Served in a remote island outpost (3% chance). Endured harsh conditions and 0°C weather with resilience.",
     icon: "Shield",
-    details: "Stationed on a frontline island, I stood guard in freezing temperatures. The physical and mental endurance I built here continues to serve me in my engineering career."
+    details: "Stationed on a frontline island, I stood guard in freezing temperatures. The physical and mental endurance I built here continues to serve me in my engineering career.",
+    gallery: [
+      { image: "https://picsum.photos/seed/mil1/800/600", description: "Frontline Island Outpost" },
+      { image: "https://picsum.photos/seed/mil2/800/600", description: "Winter Guard Duty" },
+      { image: "https://picsum.photos/seed/mil3/800/600", description: "Building endurance" }
+    ]
   },
   {
     year: "2017",
     title: "Synnex Technology",
     description: "Started as a non-CS major struggling in a dev role. Became a core pillar, optimizing workflows.",
     icon: "Briefcase",
-    details: "My first dev job was brutal. I cried in the bathroom from frustration but refused to quit. Within a year, I was optimizing systems that saved the company significant time and money."
+    details: "My first dev job was brutal. I cried in the bathroom from frustration but refused to quit. Within a year, I was optimizing systems that saved the company significant time and money.",
+    gallery: [
+      { image: "https://picsum.photos/seed/syn1/800/600", description: "First Developer Role" },
+      { image: "https://picsum.photos/seed/syn2/800/600", description: "Team Collaboration" },
+      { image: "https://picsum.photos/seed/syn3/800/600", description: "Optimizing Legacy Code" }
+    ]
   },
   {
     year: "2019",
     title: "Caregiver",
     description: "Cared for mother with terminal cancer and bipolar disorder while working full-time.",
     icon: "Heart",
-    details: "Balancing a full-time engineering role with 24/7 caregiving for my terminally ill mother was the hardest period of my life, but it forged an unbreakable spirit."
+    details: "Balancing a full-time engineering role with 24/7 caregiving for my terminally ill mother was the hardest period of my life, but it forged an unbreakable spirit.",
+    gallery: [
+      { image: "https://picsum.photos/seed/care1/800/600", description: "Family Responsibilities" },
+      { image: "https://picsum.photos/seed/care2/800/600", description: "Resilience in hardship" },
+      { image: "https://picsum.photos/seed/care3/800/600", description: "Balancing life and work" }
+    ]
   },
   {
     year: "2022",
     title: "NCKU Master's",
     description: "Applied immediately after mother's passing. Admitted to Engineering Science program.",
     icon: "BookOpen",
-    details: "Honoring my promise to pursue higher education, I prepared my application in just two days after her passing and was accepted into a top engineering program."
+    details: "Honoring my promise to pursue higher education, I prepared my application in just two days after her passing and was accepted into a top engineering program.",
+    gallery: [
+      { image: "https://picsum.photos/seed/ncku1/800/600", description: "NCKU Campus" },
+      { image: "https://picsum.photos/seed/ncku2/800/600", description: "Engineering Science Dept" },
+      { image: "https://picsum.photos/seed/ncku3/800/600", description: "Beginning the Master's journey" }
+    ]
   },
   {
     year: "2022-2024",
     title: "Dual Life",
     description: "Senior Engineer at Delta + Master's Student. Averaged 3 hours of sleep.",
     icon: "Zap",
-    details: "Working days at Delta Electronics and studying nights/weekends at NCKU. I slept 3 hours a night to maintain a 3.97 GPA and perform at a senior engineering level."
+    details: "Working days at Delta Electronics and studying nights/weekends at NCKU. I slept 3 hours a night to maintain a 3.97 GPA and perform at a senior engineering level.",
+    gallery: [
+      { image: "https://picsum.photos/seed/dual1/800/600", description: "Late nights in the lab" },
+      { image: "https://picsum.photos/seed/dual2/800/600", description: "Delta Electronics Office" },
+      { image: "https://picsum.photos/seed/dual3/800/600", description: "Academic Research" }
+    ]
   },
   {
     year: "2024",
     title: "Thesis & Awards",
     description: "Highest score in oral defense. Presented at ISASD Tokyo. IET Honorable Mention.",
     icon: "Award",
-    details: "My thesis on Generative AI on Edge Devices received international recognition. I traveled to Tokyo to present it, marking a major academic milestone."
+    details: "My thesis on Generative AI on Edge Devices received international recognition. I traveled to Tokyo to present it, marking a major academic milestone.",
+    gallery: [
+      { image: "https://picsum.photos/seed/thesis1/800/600", description: "ISASD Presentation in Tokyo" },
+      { image: "https://picsum.photos/seed/thesis2/800/600", description: "IET Honorable Mention" },
+      { image: "https://picsum.photos/seed/thesis3/800/600", description: "Thesis Oral Defense" }
+    ]
   },
   {
     year: "Present",
     title: "The Next Chapter",
     description: "Debt-free, stable, and ready to pursue a US Graduate degree.",
     icon: "Plane",
-    details: "At 32, I am finally free of financial burdens and family obligations. I am ready to bring my rich life experience and technical skills to a US graduate program."
+    details: "At 32, I am finally free of financial burdens and family obligations. I am ready to bring my rich life experience and technical skills to a US graduate program.",
+    gallery: [
+      { image: "https://picsum.photos/seed/future1/800/600", description: "Looking towards the future" },
+      { image: "https://picsum.photos/seed/future2/800/600", description: "US Application Journey" },
+      { image: "https://picsum.photos/seed/future3/800/600", description: "Ready for new challenges" }
+    ]
   }
 ];
 

@@ -4,6 +4,7 @@ export interface TimelineItem {
   description: string;
   icon?: string;
   details?: string;
+  gallery?: AcademicGalleryItem[]; // New field for timeline photo marquee
 }
 
 export interface ExperienceItem {
