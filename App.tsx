@@ -348,11 +348,14 @@ const ResponsiveTimeline = () => {
               className="absolute left-0 top-0 bottom-0 z-40 w-16 md:w-24 bg-gradient-to-r from-slate-200/80 via-slate-200/40 to-transparent dark:from-black/80 dark:via-black/40 dark:to-transparent flex items-center justify-center md:justify-start md:pl-6 group cursor-pointer outline-none transition-all hover:w-20 md:hover:w-32"
               aria-label="Previous Era"
             >
-               <div className="flex flex-col items-center gap-2 transform transition-transform group-hover:-translate-x-1">
+               <div className="relative flex flex-col items-center transform transition-transform group-hover:-translate-x-1">
                   <ChevronLeft size={48} className="text-slate-400 group-hover:text-emerald-600 dark:group-hover:text-neon transition-colors" strokeWidth={1.5} />
-                  <span className="hidden md:block text-xs font-bold text-slate-700 dark:text-white opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest [writing-mode:vertical-rl] whitespace-nowrap mt-4">
-                    {prevItem.year}
-                  </span>
+                  {/* Position text absolute to prevent layout shift on vertical centering */}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 flex flex-col items-center">
+                    <span className="hidden md:block text-xs font-bold text-slate-700 dark:text-white opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest [writing-mode:vertical-rl] whitespace-nowrap">
+                      {prevItem.year}
+                    </span>
+                  </div>
                </div>
             </button>
           )}
@@ -364,11 +367,14 @@ const ResponsiveTimeline = () => {
               className="absolute right-0 top-0 bottom-0 z-40 w-16 md:w-24 bg-gradient-to-l from-slate-200/80 via-slate-200/40 to-transparent dark:from-black/80 dark:via-black/40 dark:to-transparent flex items-center justify-center md:justify-end md:pr-6 group cursor-pointer outline-none transition-all hover:w-20 md:hover:w-32"
               aria-label="Next Era"
             >
-              <div className="flex flex-col items-center gap-2 transform transition-transform group-hover:translate-x-1">
+              <div className="relative flex flex-col items-center transform transition-transform group-hover:translate-x-1">
                   <ChevronRight size={48} className="text-slate-400 group-hover:text-emerald-600 dark:group-hover:text-neon transition-colors" strokeWidth={1.5} />
-                  <span className="hidden md:block text-xs font-bold text-slate-700 dark:text-white opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest [writing-mode:vertical-rl] rotate-180 whitespace-nowrap mt-4">
-                    {nextItem.year}
-                  </span>
+                  {/* Position text absolute to prevent layout shift on vertical centering */}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 flex flex-col items-center">
+                    <span className="hidden md:block text-xs font-bold text-slate-700 dark:text-white opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest [writing-mode:vertical-rl] rotate-180 whitespace-nowrap">
+                      {nextItem.year}
+                    </span>
+                  </div>
               </div>
             </button>
           )}
