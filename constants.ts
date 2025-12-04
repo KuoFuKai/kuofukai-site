@@ -13,123 +13,157 @@ export const PERSONAL_INFO = {
 
 export const TIMELINE: TimelineItem[] = [
   {
-    year: "Childhood",
+    year: "1993",
     title: "Humble Beginnings",
-    description: "Raised by grandmother. Parents worked labor jobs. Overcame father's suicide before high school exams.",
+    description: "Born into financial adversity and raised by the enduring love of a grandmother.",
     icon: "User",
-    details: "Growing up in a low-income household taught me the value of every resource. I learned resilience early on, understanding that my path would require twice the effort.",
+    details: `I was born into a family that had fallen into decline. Originally, our family owned considerable land in Taipei, but in the year of my birth, my grandfather's company declared bankruptcy. consequently, from the moment I entered the world, my family—including my parents, uncle, and aunt—was desperately working to pay off debts. My parents were not highly educated; both only graduated from junior high school and never attended high school. My mother, an adopted daughter in an old agricultural society, was treated unfairly and poorly by her adoptive parents, and sadly, some of that physical and verbal discipline was passed down to me. Since my parents were busy working, I was raised by my grandmother from a young age. She was my primary caregiver, and I shared the deepest bond with her.
+
+Academically, I was unremarkable as a child. Throughout elementary and junior high school, I consistently ranked in the bottom three of my class, spending my days doodling in textbooks. During junior high, my father often lived at the factory, and my mother frequently worked night shifts at a nursing home caring for the elderly. As an only child, I felt a profound sense of loneliness very early on. During those times, the computer became my best friend. In my third year of junior high, I discovered online that students who got into top high schools seemed to live happy, fulfilling lives. I desperately wanted to turn my life around and be like them. However, even though I wanted to study hard and stayed late at school every day, I didn't know where to start. I lacked the foundation from previous years, and there was no one to guide me toward the future.`,
     gallery: [
-      { image: "https://picsum.photos/seed/child1/800/600", description: "Early childhood memories" },
-      { image: "https://picsum.photos/seed/child2/800/600", description: "Raised by grandmother" },
-      { image: "https://picsum.photos/seed/child3/800/600", description: "Learning resilience" }
+      { image: "https://picsum.photos/seed/1993-1/800/600", description: "Early childhood memories" },
+      { image: "https://picsum.photos/seed/1993-2/800/600", description: "Raised by grandmother" },
+      { image: "https://picsum.photos/seed/1993-3/800/600", description: "A quiet resilience" }
     ]
   },
   {
-    year: "High School",
+    year: "2008",
     title: "The Turning Point",
-    description: "Ranked last until 11th grade. Scored full marks in English, then became 1st in all subjects. Graduated top of the class.",
+    description: "Rising from academic struggles to the top of the class amidst profound family tragedy.",
     icon: "TrendingUp",
-    details: "A single success in an English exam sparked a chain reaction of confidence. I realized that with focused effort, I could master any subject, eventually graduating at the top of the class.",
+    details: `Because my scores on the national exam were mediocre, I could only enter a very poor-quality high school filled with delinquent students. I will never forget the time I scored full marks on a history exam; a classmate immediately sneered, "You're already in this school, why bother studying?" I ignored him—he was a hooligan, after all. I sought friendship among the few remaining well-behaved students, mostly from other classes.
+
+My grades remained stagnant during my first year. It wasn't until my second year, when I ranked first in an English exam and won the applause of the whole class, that I became unstoppable. I began ranking first in every subject. For the last two years of high school, I was ranked first in my class and fifth in the entire school. However, I never became arrogant; instead, I often served as a tutor for classmates who wanted to learn.
+
+Fate, however, played a cruel joke. Before my major college entrance exam, my father committed suicide due to economic pressures. At the same time, my mother was embroiled in a property dispute with my father's family. In high school, I couldn't truly forgive my mother, as I had been raised by my grandmother. Despite this overwhelming grief, I managed to rank first among all ordinary classes in the school on the national exam. This is a rare feat in Taiwan, as most parents who value education send their children to cram schools on weekends. Due to my family's financial situation, I relied almost entirely on self-study during evening sessions at school and weekends at the library. In my senior year, I was honored as a Model Student and received the Taipei Mayor's Award on behalf of my class, accepting the certificate personally from the Mayor of Taipei.`,
     gallery: [
-      { image: "https://picsum.photos/seed/hs1/800/600", description: "Academic Excellence Award" },
-      { image: "https://picsum.photos/seed/hs2/800/600", description: "Graduating Top of Class" },
-      { image: "https://picsum.photos/seed/hs3/800/600", description: "Hard work pays off" }
+      { image: "https://picsum.photos/seed/2008-1/800/600", description: "Receiving Mayor's Award" },
+      { image: "https://picsum.photos/seed/2008-2/800/600", description: "Self-study at the library" },
+      { image: "https://picsum.photos/seed/2008-3/800/600", description: "Top of the class" }
+    ]
+  },
+  {
+    year: "2011",
+    title: "Finding Passion in Limitations",
+    description: "Discovering computer science through self-determination and achieving technical excellence beyond the curriculum.",
+    icon: "Smartphone",
+    details: `Upon entering university, my academic background still limited me. Even though I was a top student at my high school, I was only on par with average students from better high schools. Although I knew my passion lay in computers, my scores prevented me from majoring in Computer Science. I had to settle for a related field, the Department of Information and Communication. However, I took many programming-related courses within the department and served as a tutor after class, particularly for Java and SQL; many classmates would ask me questions and study with me.
+
+I was not content with being an ordinary student. Starting in my sophomore year, I worked at the school library to subsidize our household income, going to work every day even during winter and summer breaks. Academically, I maximized my learning. While 128 credits were required to graduate, I completed 150 credits. I double-majored in Digital Multimedia Learning to learn computer animation and took a program in Graphic Design, mastering Photoshop and Illustrator.
+
+For our senior graduation exhibition, my group decided to build an Android App themed around independent travel. While the other four members handled planning, marketing, PM, and design, I served as the lead developer. I built my first App in just one month by buying books and teaching myself. In my department, only two people, including myself, managed to complete Android software using actual code. I won the department's "Best System Design Award" at the external exhibition. This was a glorious moment in my life; I realized that if I could achieve something the school hadn't even taught me, there was no difficulty in life I couldn't overcome.`,
+    gallery: [
+      { image: "https://picsum.photos/seed/2011-1/800/600", description: "Coding the first App" },
+      { image: "https://picsum.photos/seed/2011-2/800/600", description: "Best System Design Award" },
+      { image: "https://picsum.photos/seed/2011-3/800/600", description: "Double major studies" }
     ]
   },
   {
     year: "2015",
-    title: "Self-Taught Success",
-    description: "Taught myself Java/Android. Developed an award-winning travel app in 1 month during senior year.",
-    icon: "Smartphone",
-    details: "While my peers focused on design, I dove into code. I built a fully functional Android app with Google Maps integration from scratch, winning Best System Design.",
-    gallery: [
-      { image: "https://picsum.photos/seed/app1/800/600", description: "Best System Design Award" },
-      { image: "https://picsum.photos/seed/app2/800/600", description: "First Android App Interface" },
-      { image: "https://picsum.photos/seed/app3/800/600", description: "Coding in the library" }
-    ]
-  },
-  {
-    year: "2016",
-    title: "Military Service",
-    description: "Served in a remote island outpost (3% chance). Endured harsh conditions and 0°C weather with resilience.",
+    title: "Forged in Fire",
+    description: "Endurance, resilience, and brotherhood on the harsh frontline of the Matsu Islands.",
     icon: "Shield",
-    details: "Stationed on a frontline island, I stood guard in freezing temperatures. The physical and mental endurance I built here continues to serve me in my engineering career.",
+    details: `From July 2015 to July 2016, I served my mandatory military service in the Taiwan Air Force. Fate once again tested me; during the lottery draw, I was assigned to the most remote unit. Out of over 800 people in my draft, only 11, including me, were sent to this unit located on Dongyin, an outer island of Matsu. This small island is the frontline facing China.
+
+There, we lived under constant high stress, standing guard for three shifts a day (two hours per shift: morning, afternoon, and early morning). We could only return home once every two months. If I lost a game of Rock-Paper-Scissors, I had to jump into a freezing, foul-smelling ditch to clear grease blockages from the kitchen. I also faced unreasonable treatment and humiliation from officers and slept in tunnels blasted out by explosives.
+
+On that remote island far from home, I withstood many hardships for a year, but I also met many comrades who remain my good brothers to this day. While I stood guard in 0-degree weather in Dongyin, some of my university classmates, holding Green Cards and supported by wealthy families with houses and cars, were training to be pilots in the US—also in 0-degree weather, but with a vastly different fate.`,
     gallery: [
-      { image: "https://picsum.photos/seed/mil1/800/600", description: "Frontline Island Outpost" },
-      { image: "https://picsum.photos/seed/mil2/800/600", description: "Winter Guard Duty" },
-      { image: "https://picsum.photos/seed/mil3/800/600", description: "Building endurance" }
+      { image: "https://picsum.photos/seed/2015-1/800/600", description: "Matsu Island Outpost" },
+      { image: "https://picsum.photos/seed/2015-2/800/600", description: "Standing guard in winter" },
+      { image: "https://picsum.photos/seed/2015-3/800/600", description: "Military service brotherhood" }
     ]
   },
   {
     year: "2017",
-    title: "Synnex Technology",
-    description: "Started as a non-CS major struggling in a dev role. Became a core pillar, optimizing workflows.",
+    title: "The Rise of a Full Stack Developer",
+    description: "Overcoming imposter syndrome and personal tragedy to become a key technical contributor.",
     icon: "Briefcase",
-    details: "My first dev job was brutal. I cried in the bathroom from frustration but refused to quit. Within a year, I was optimizing systems that saved the company significant time and money.",
+    details: `After my discharge in 2017, I joined Synnex Technology International Corporation, one of the largest distributors of IT products in the world, as a Java Full Stack Developer. Because I wasn't a CS major, I faced many difficulties and obstacles in my first year. Almost every month during the Monthly Report, I was humiliated by my supervisor in front of everyone, and I shed tears in the office restroom multiple times. However, I didn't run away; I worked harder to improve myself. I believed that if I escaped then, I would face the same problems later.
+
+By my second year, my code had fewer bugs, and I developed my own ideas regarding system design. I assisted my team in implementing a shared JSON system that reduced the development time for customized order software for vendors from one week to one day, covering 80% of use cases. Once, I was assigned a critical task that a colleague hadn't been able to solve in two weeks; I finished it in two days. I pulled all-nighters until 6:00 AM for two consecutive days—still showing up for work at 8:00 AM—and successfully saved the company a 100,000 AUD reward from Apple.
+
+That year, my aunt suddenly declared bankruptcy, forcing me to shoulder a heavier financial burden at home. Simultaneously, my grandmother was diagnosed with stage 3 breast cancer. In the face of illness, I realized how small humans are. Every day after work, I would buy food and go to the hospital to eat dinner with her. Fortunately, she gradually recovered. By my third year, I began to think about further education and a career change. I wanted to learn more, take on greater responsibilities, and started dreaming of studying abroad.`,
     gallery: [
-      { image: "https://picsum.photos/seed/syn1/800/600", description: "First Developer Role" },
-      { image: "https://picsum.photos/seed/syn2/800/600", description: "Team Collaboration" },
-      { image: "https://picsum.photos/seed/syn3/800/600", description: "Optimizing Legacy Code" }
+      { image: "https://picsum.photos/seed/2017-1/800/600", description: "Working at Synnex" },
+      { image: "https://picsum.photos/seed/2017-2/800/600", description: "Optimizing system architecture" },
+      { image: "https://picsum.photos/seed/2017-3/800/600", description: "Caring for grandmother" }
     ]
   },
   {
-    year: "2019",
-    title: "Caregiver",
-    description: "Cared for mother with terminal cancer and bipolar disorder while working full-time.",
+    year: "2020",
+    title: "The Longest Night",
+    description: "Balancing a demanding career while acting as the primary caregiver for a terminally ill mother during the pandemic.",
     icon: "Heart",
-    details: "Balancing a full-time engineering role with 24/7 caregiving for my terminally ill mother was the hardest period of my life, but it forged an unbreakable spirit.",
+    details: `Just as I thought things were getting on track, in 2020, my mother was suddenly diagnosed with cancer. My personality is such that once I feel a lack of challenge in a company, I want to leave for a more challenging environment, and I also wanted to pursue a Master's degree to deepen my professional knowledge. However, because I needed more paid leave to take care of her, I had to stay at my original company. This was a challenge in itself, as my relationship with my mother was not good. Around 2019, my mother, whom I hadn't seen for a long time, suddenly showed up after work to insult my deceased father and my grandmother, who had just recovered from cancer. When she attacked my beloved grandmother, I snapped, and we argued until the police arrived.
+
+About half a year later, she got cancer. The moment I found out, I decided to take her on a trip after her hospital checkups to create memories. After surgery, we thought she was better, but the bad news returned—the cancer cells had quickly spread to her brain. During this time, she also suffered from Bipolar Disorder. The most chaotic moment involved a fire truck, a police car, and an ambulance all crowded into the alley of my home. That was the first time in my life I received calls from the police so frequently. She was eventually admitted to the psychiatric intensive care unit, where I stayed with her for quite some time—my first frequent experience with mental hospitals.
+
+My most vivid memory is from the COVID-19 pandemic. Even while working from home, I had to live in the hospital with my laptop to accompany my mother. I had to bathe her, help her to the toilet, and clean up when she wet the bed. When the cancer metastasized to her skin, I helped change her dressings almost daily. One distinct memory is when my mother needed to use the toilet but couldn't step over the small threshold. My grandmother, having just recovered from cancer, helped me support her. My mother's slipper fell off as we crossed the step, and the three of us looked at each other and shared a helpless smile. Hospital visits were the most troublesome because we lived in a walk-up apartment. I had to carry her downstairs before the visit and carry her back up afterward (luckily, I was working out at the time).
+
+Sometimes, I would cry secretly while keeping vigil, burdened by both financial and caregiving pressures. I remember one pitiful moment standing outside the examination room, holding my laptop, communicating with the nurse about my mother's condition while simultaneously discussing work progress with my remote supervisor. When she entered hospice care, to maintain my income, I took 30 minutes of leave every lunch break, rode my scooter for 30 minutes to the hospital with lunch, paid for a nasal swab test to enter, ate with her for 30 minutes, and then rode 30 minutes back to work.
+
+This life lasted for over two years. As an only child, I had to shoulder it all. However, I did not waste that time. I took vocational training courses in Python AI, Kubernetes, Podman, and Business English. On the day my mother passed away, I suddenly spoke many truths from my heart. I told her I loved her, hoped to treat her better in the next life, and promised that if I had the ability in the future, I would establish a foundation in her name to help women re-entering the workforce.
+
+I was 28, and both my parents were gone. I felt a sense of emptiness. However, within a month of her passing, at a company dinner, I realized I was the only one there with just a Bachelor's degree. That night, I decided to pursue a Master's. After a round of research, I found most deadlines were three days away. I spent two days preparing my application and recommendation letters and barely sent them out on the deadline. I wasn't immediately accepted, unlike two-thirds of the applicants; due to low application scores, I had to interview. Perhaps my mother was watching over me—I scored very high on the interview and was admitted as the first person on the waiting list to National Cheng Kung University (NCKU), a top-four university in Taiwan.`,
     gallery: [
-      { image: "https://picsum.photos/seed/care1/800/600", description: "Family Responsibilities" },
-      { image: "https://picsum.photos/seed/care2/800/600", description: "Resilience in hardship" },
-      { image: "https://picsum.photos/seed/care3/800/600", description: "Balancing life and work" }
+      { image: "https://picsum.photos/seed/2020-1/800/600", description: "Working from hospital" },
+      { image: "https://picsum.photos/seed/2020-2/800/600", description: "Vocational training" },
+      { image: "https://picsum.photos/seed/2020-3/800/600", description: "Preparing applications" }
     ]
   },
   {
     year: "2022",
-    title: "NCKU Master's",
-    description: "Applied immediately after mother's passing. Admitted to Engineering Science program.",
-    icon: "BookOpen",
-    details: "Honoring my promise to pursue higher education, I prepared my application in just two days after her passing and was accepted into a top engineering program.",
-    gallery: [
-      { image: "https://picsum.photos/seed/ncku1/800/600", description: "NCKU Campus" },
-      { image: "https://picsum.photos/seed/ncku2/800/600", description: "Engineering Science Dept" },
-      { image: "https://picsum.photos/seed/ncku3/800/600", description: "Beginning the Master's journey" }
-    ]
-  },
-  {
-    year: "2022-2024",
     title: "Dual Life",
-    description: "Senior Engineer at Delta + Master's Student. Averaged 3 hours of sleep.",
+    description: "Achieving academic distinction and professional success at the cost of extreme personal sacrifice.",
     icon: "Zap",
-    details: "Working days at Delta Electronics and studying nights/weekends at NCKU. I slept 3 hours a night to maintain a 3.97 GPA and perform at a senior engineering level.",
+    details: `NCKU is in Tainan, but I was in Taipei. Starting in 2022, I simultaneously experienced resigning, getting married, buying a house, finding my ideal job (Delta Electronics, one of the largest providers of switching power supplies and thermal management solutions in the world), and studying for my Master's. During those days, I spent 50 minutes commuting to the Southern Taiwan Science Park for work every morning, and another 50 minutes commuting to NCKU for class every night. I pulled all-nighters constantly, but I set a goal: graduate in two years.
+
+I found an advisor immediately after acceptance and joined the lab's Weekly Meetings before school even started. I also sat in on senior oral defenses—something most students don't do until later. Because I didn't want the degree just for the diploma, I deliberately chose difficult courses like Computer Networks, Computer Vision, Advanced Data Structures, and Advanced Algorithms. Despite never having taken the basic versions of some of these, I achieved straight A's.
+
+My thesis topic was my own choice. Initially, I looked at AOI defect detection, but later proposed a unique MLLM (Multimodal Large Language Model) architecture to assist blind navigation. On my teacher's advice, I pivoted the system toward digital learning and tour-guiding. As a full-time employee, this was dangerous; my thesis required on-site testing with edge devices, system stability, and questionnaire analysis—a path rarely chosen even by full-time students. But I wanted a thesis I could be proud of in my later years. Thus, I chose: Developing a Mobile Learning and Tour-Guiding System Based on a Generative AI Approach.
+
+While writing my thesis, I slept only three hours a day. I used every weekend and spare moment. In late June 2024, I passed my oral defense with the highest score. The committee members remarked that my Master's thesis was of Ph.D. level quality and jokingly asked if I ever slept. I was one of only three students (out of 30) to graduate on time.
+
+I then took my thesis to Tokyo, Japan, to present at the International Conference on Intelligent Science and Sustainable Development (ISASD). This was rare for a working student; the other two attendees only presented posters, but I cared deeply about my academic achievement. In July 2024, I flew to the Tokyo Institute of Technology and gave a full English presentation—a risk, as I had never done so before—but it received unanimous praise. My paper later won a "Honorable Mention Award" from the Institution of Engineering and Technology, Taipei Local Network in October 2024. It was also accepted by the International Journal of Human-Computer Interaction on December 3, 2025, titled From Content to Conversation: Explaining Adoption of On-Device Generative AI Tour Guides.
+
+It is worth mentioning the background of these achievements: during my Master's, my then-wife felt neglected. We often argued until 2:00 AM even when I had finals the next day. We divorced in January 2025, six months after I graduated. In the final month, I sought help from a psychiatrist. Fortunately, I have moved past that pain and continue toward my dreams. Since graduating, I haven't slowed down; I learned Scuba Diving and obtained licenses for driving fishing vessels and yachts—skills possessed by very few young people in Taiwan.`,
     gallery: [
-      { image: "https://picsum.photos/seed/dual1/800/600", description: "Late nights in the lab" },
-      { image: "https://picsum.photos/seed/dual2/800/600", description: "Delta Electronics Office" },
-      { image: "https://picsum.photos/seed/dual3/800/600", description: "Academic Research" }
+      { image: "https://picsum.photos/seed/2022-1/800/600", description: "NCKU Campus" },
+      { image: "https://picsum.photos/seed/2022-2/800/600", description: "Delta Electronics Lab" },
+      { image: "https://picsum.photos/seed/2022-3/800/600", description: "Thesis Presentation" }
     ]
   },
   {
-    year: "2024",
-    title: "Thesis & Awards",
-    description: "Highest score in oral defense. Presented at ISASD Tokyo. IET Honorable Mention.",
-    icon: "Award",
-    details: "My thesis on Generative AI on Edge Devices received international recognition. I traveled to Tokyo to present it, marking a major academic milestone.",
+    year: "2025",
+    title: "Expanding Horizons",
+    description: "Stepping onto the international stage through intensive language training and cross-cultural leadership.",
+    icon: "Globe",
+    details: `When I finally graduated in June 2024, it felt like a dream come true. I intended to resign immediately to study English in the Philippines, as applying to foreign schools requires IELTS scores, aiming for the late 2024 application season. However, out of loyalty to my supervisor who asked me to stay, I delayed my departure until March 2025.
+
+I chose what is reputed to be the best IELTS school in the Philippines, opting for the Spartan system and the "Guarantee Class." This meant I was confined to campus from Monday to Friday, attending classes from 8:00 AM to 5:00 PM, followed by mandatory self-study until 10:00 PM, with mock exams every Saturday morning. Knowing I am someone who values efficiency and maximizes results, I resolutely chose this most difficult path.
+
+My time in the Philippines marked my first true step onto the international stage. From day one, I made many friends from Japan and Korea. Despite the grueling study schedule, I organized weekly weekend trips for us in Baguio. I discovered that my personality translates across borders; just as I maintain good relationships with friends from every stage of life in Taiwan, I did the same abroad. This gave me immense confidence. Even now, though we are no longer in the Philippines, I frequently coordinate cross-national video calls, managing time zones for friends in Vancouver, Christchurch, Kuala Lumpur, Seoul, and Nagoya. During my time in the Philippines, I not only formed close bonds with my classmates but also established unparalleled relationships with every teacher, regardless of their age. One teacher described me by saying, "Every time I see you, it's like seeing the sun; however, the people who appear the most optimistic always have the saddest stories." This experience gave me lifelong friends, and we share a dream to go on a Road Trip in North America together.`,
     gallery: [
-      { image: "https://picsum.photos/seed/thesis1/800/600", description: "ISASD Presentation in Tokyo" },
-      { image: "https://picsum.photos/seed/thesis2/800/600", description: "IET Honorable Mention" },
-      { image: "https://picsum.photos/seed/thesis3/800/600", description: "Thesis Oral Defense" }
+      { image: "https://picsum.photos/seed/2025-1/800/600", description: "Studying in Philippines" },
+      { image: "https://picsum.photos/seed/2025-2/800/600", description: "International friends" },
+      { image: "https://picsum.photos/seed/2025-3/800/600", description: "Weekend trips in Baguio" }
     ]
   },
   {
     year: "Present",
-    title: "The Next Chapter",
-    description: "Debt-free, stable, and ready to pursue a US Graduate degree.",
+    title: "The Unwritten Future",
+    description: "A resilient, self-made professional ready to break the ceiling and inspire others.",
     icon: "Plane",
-    details: "At 32, I am finally free of financial burdens and family obligations. I am ready to bring my rich life experience and technical skills to a US graduate program.",
+    details: `For a child born into circumstances like mine, I know that nothing comes easily; everything requires effort. I used to blame fate, but I no longer complain. I have accepted my background and my destiny. I am 32 years old. I was born into poverty with insufficient educational resources, which forced me to strive for resources on my own. I am a late bloomer who has experienced the extreme highs and lows of life. I have lost family members, been married, and been divorced.
+
+My personality allows me to quickly understand people's traits and tendencies, offering support and encouragement tailored to their specific difficulties or goals. I have met too many people who possess resources but do not know how to use them. What I want to test is how far someone born like me can go to break through their own ceiling.
+
+Looking back on my journey, even though my starting point was lower than others, I have continued to climb. I remain passionate about life, strict with myself, and lenient with others. I hope that you, reading this, can give me a chance to realize my dreams and change my life, allowing the world to see that even a child born with my background has the opportunity to make their dreams a reality.`,
     gallery: [
-      { image: "https://picsum.photos/seed/future1/800/600", description: "Looking towards the future" },
-      { image: "https://picsum.photos/seed/future2/800/600", description: "US Application Journey" },
-      { image: "https://picsum.photos/seed/future3/800/600", description: "Ready for new challenges" }
+      { image: "https://picsum.photos/seed/present-1/800/600", description: "Ready for US Graduate School" },
+      { image: "https://picsum.photos/seed/present-2/800/600", description: "Embracing the future" },
+      { image: "https://picsum.photos/seed/present-3/800/600", description: "New beginnings" }
     ]
   }
 ];

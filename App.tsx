@@ -405,9 +405,11 @@ const ResponsiveTimeline = () => {
                       {selectedItem.description}
                     </p>
                     {selectedItem.details && (
-                      <p className="text-base text-slate-600 dark:text-slate-400">
-                        {selectedItem.details}
-                      </p>
+                      <div className="text-base text-slate-600 dark:text-slate-400 space-y-4">
+                        {selectedItem.details.split('\n\n').map((paragraph, index) => (
+                          <p key={index}>{paragraph}</p>
+                        ))}
+                      </div>
                     )}
                   </div>
                 </div>
