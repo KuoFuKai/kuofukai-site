@@ -17,9 +17,8 @@ export const TIMELINE: TimelineItem[] = [
 
 Academically, I was unremarkable as a child. Throughout elementary and junior high school, I consistently ranked in the bottom three of my class, spending my days doodling in textbooks. During junior high, my father often lived at the factory, and my mother frequently worked night shifts at a nursing home caring for the elderly. As an only child, I felt a profound sense of loneliness very early on. During those times, the computer became my best friend. In my third year of junior high, I discovered online that students who got into top high schools seemed to live happy, fulfilling lives. I desperately wanted to turn my life around and be like them. However, even though I wanted to study hard and stayed late at school every day, I didn't know where to start. I lacked the foundation from previous years, and there was no one to guide me toward the future.`,
     gallery: [
-      { image: "https://picsum.photos/seed/1993-1/800/600", description: "Early childhood memories" },
-      { image: "https://picsum.photos/seed/1993-2/800/600", description: "Raised by grandmother" },
-      { image: "https://picsum.photos/seed/1993-3/800/600", description: "A quiet resilience" }
+      { image: "/images/timeline/1993/1.jpg", description: "小學畢業照，猜的到我在哪嗎?" },
+      { image: "/images/timeline/1993/2.jpg", description: "國中班遊" }
     ]
   },
   {
@@ -33,9 +32,8 @@ My grades remained stagnant during my first year. It wasn't until my second year
 
 Fate, however, played a cruel joke. Before my major college entrance exam, my father committed suicide due to economic pressures. At the same time, my mother was embroiled in a property dispute with my father's family. In high school, I couldn't truly forgive my mother, as I had been raised by my grandmother. Despite this overwhelming grief, I managed to rank first among all ordinary classes in the school on the national exam. This is a rare feat in Taiwan, as most parents who value education send their children to cram schools on weekends. Due to my family's financial situation, I relied almost entirely on self-study during evening sessions at school and weekends at the library. In my senior year, I was honored as a Model Student and received the Taipei Mayor's Award on behalf of my class, accepting the certificate personally from the Mayor of Taipei.`,
     gallery: [
-      { image: "https://picsum.photos/seed/2008-1/800/600", description: "Receiving Mayor's Award" },
-      { image: "https://picsum.photos/seed/2008-2/800/600", description: "Self-study at the library" },
-      { image: "https://picsum.photos/seed/2008-3/800/600", description: "Top of the class" }
+      { image: "/images/timeline/2008/1.jpg", description: "畢業典禮照" },
+      { image: "/images/timeline/2008/2.jpg", description: "接收台北市市長頒發的獎狀" }
     ]
   },
   {

@@ -29,12 +29,16 @@ import { NavSection, TimelineItem, AcademicModule, AcademicGalleryItem, Experien
 
 // 0. Image Marquee Component
 const ImageMarquee = () => {
-  // Create a duplicated list for seamless looping (x2)
-  const images = [...TIMELINE, ...TIMELINE].map((item, index) => ({
-    src: `https://picsum.photos/seed/${item.year}/800/600`, 
-    alt: item.title,
-    key: `${item.year}-${index}`
+  // Use local background images from public/images/homepage/backgrounds/
+  // Assuming files are named 1.jpg, 2.jpg, etc.
+  const baseImages = [1, 2, 3, 4, 5].map((num) => ({
+    src: `/images/homepage/backgrounds/${num}.jpg`, 
+    alt: `Background ${num}`,
+    key: `bg-${num}`
   }));
+
+  // Create a duplicated list for seamless looping (triple it to ensure it covers wide screens)
+  const images = [...baseImages, ...baseImages, ...baseImages];
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden bg-slate-50 dark:bg-black select-none pointer-events-none transition-colors duration-500">
@@ -46,8 +50,8 @@ const ImageMarquee = () => {
       
       {/* Marquee Container */}
       <div className="flex h-full animate-marquee w-max">
-        {images.map((img) => (
-          <div key={img.key} className="flex-shrink-0 h-full relative border-r border-slate-200 dark:border-white/5">
+        {images.map((img, index) => (
+          <div key={`${img.key}-${index}`} className="flex-shrink-0 h-full relative border-r border-slate-200 dark:border-white/5">
             <img 
               src={img.src} 
               alt={img.alt} 
@@ -230,7 +234,7 @@ const ResponsiveTimeline = () => {
                 <div className="hidden lg:flex lg:w-1/2 justify-center items-center">
                     <div className="relative w-80 h-96 md:w-96 md:h-[500px] rounded-lg overflow-hidden shadow-2xl dark:shadow-[0_0_40px_rgba(0,0,0,0.6)] border border-slate-200 dark:border-slate-700 group transition-all duration-300">
                         <img 
-                          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=800&q=80" 
+                          src="/images/homepage/portrait_1.jpg" 
                           alt="Kevin Profile" 
                           className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out scale-100 group-hover:scale-105"
                         />
