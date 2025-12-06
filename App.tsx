@@ -13,7 +13,8 @@ import {
   ChevronLeft,
   ChevronDown,
   Award,
-  GraduationCap
+  GraduationCap,
+  Users
 } from 'lucide-react';
 import { 
   TIMELINE, 
@@ -22,7 +23,7 @@ import {
   SKILLS,
   PERSONAL_INFO
 } from './constants';
-import { NavSection, TimelineItem, AcademicModule, AcademicGalleryItem } from './types';
+import { NavSection, TimelineItem, AcademicModule, AcademicGalleryItem, ExperienceItem } from './types';
 
 // --- Components ---
 
@@ -213,7 +214,7 @@ const ResponsiveTimeline = () => {
                 {/* Left: Personal Intro */}
                 <div className="lg:w-1/2 flex flex-col justify-center">
                     <h2 className="text-4xl md:text-6xl font-serif font-bold text-emerald-600 dark:text-neon mb-4 tracking-tight drop-shadow-sm transition-colors duration-300">
-                      MY JOURNEY
+                      I'm Kevin!
                     </h2>
                     <h3 className="text-xl md:text-2xl text-slate-900 dark:text-white font-bold mb-6 leading-tight drop-shadow-sm transition-colors duration-300">
                       {PERSONAL_INFO.tagline}
@@ -469,38 +470,208 @@ const ResponsiveTimeline = () => {
 interface AcademicLayoutProps {
   title: string;
   subtitle: string;
+  period: string;
   modules: AcademicModule[];
   gallery?: AcademicGalleryItem[];
   location: string;
+  stats?: { gpa?: string; rank?: string; avgScore?: string };
+  tagline?: string; // Added optional tagline prop
+  department?: string; // Added optional department prop
+  variant?: 'tabs' | 'stack'; // Added variant to control layout mode
 }
 
 const AcademicLayout: React.FC<AcademicLayoutProps> = ({ 
   title, 
   subtitle, 
+  period,
   modules,
   gallery,
-  location
+  location,
+  stats,
+  tagline,
+  department,
+  variant = 'tabs' // Default to tabs
 }) => {
   const [activeModule, setActiveModule] = useState<AcademicModule>(modules[0]);
   const [isHoveringMarquee, setIsHoveringMarquee] = useState(false);
+
+  // Ensure activeModule is valid when switching entries or modules change
+  useEffect(() => {
+    setActiveModule(modules[0]);
+  }, [modules]);
+
+  // Determine if this is a "Full Width" module (Thesis or Capstone) which hides the marquee
+  const isFullWidth = activeModule.type === 'thesis' || activeModule.type === 'project';
 
   // Marquee pause handlers
   const handleMarqueeEnter = () => setIsHoveringMarquee(true);
   const handleMarqueeLeave = () => setIsHoveringMarquee(false);
 
+  // Helper: Parse Bold Text (**text**)
+  const parseBold = (text: string) => {
+    const parts = text.split(/(\*\*.*?\*\*)/g);
+    return parts.map((part, index) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={index} className="font-bold text-slate-900 dark:text-white">{part.slice(2, -2)}</strong>;
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
+
+  // Helper: Markdown-like Content Renderer
+  // Handles lists (- or •), headers (Emoji/Numbers), and paragraphs
+  const renderMarkdownText = (text: string) => {
+    const lines = text.split('\n');
+    const elements: React.ReactNode[] = [];
+    let currentList: React.ReactNode[] = [];
+
+    const flushList = () => {
+      if (currentList.length > 0) {
+        elements.push(
+          <ul key={`list-${elements.length}`} className="mb-4 space-y-1 text-slate-600 dark:text-slate-300">
+            {currentList}
+          </ul>
+        );
+        currentList = [];
+      }
+    };
+
+    lines.forEach((line, index) => {
+      // 1. Calculate leading spaces to detect indentation level
+      const leadingSpaces = line.search(/\S|$/); 
+      const trimmed = line.trim();
+
+      if (!trimmed) {
+        flushList();
+        // Add a small spacer for empty lines to maintain visual separation
+        if (index < lines.length - 1) {
+             elements.push(<div key={`spacer-${index}`} className="h-2" />);
+        }
+        return;
+      }
+
+      // 2. Check for list item (starts with -, •, or *)
+      if (trimmed.startsWith('- ') || trimmed.startsWith('• ') || trimmed.startsWith('* ')) {
+        const content = trimmed.substring(2);
+        
+        // Heuristic: If 2 or more spaces, treat as nested item
+        const isNested = leadingSpaces >= 2;
+
+        // Styling Logic:
+        // - Parent: Standard list-disc, green/neon marker
+        // - Nested: Hollow circle, indented (ml-8), gray marker
+        const listStyle = isNested 
+          ? "list-[circle] ml-9 marker:text-slate-400 dark:marker:text-slate-500 mt-1" 
+          : "list-disc ml-5 marker:text-emerald-500 dark:marker:text-neon";
+
+        currentList.push(
+          <li key={`li-${index}`} className={`${listStyle} pl-2`}>
+            {parseBold(content)}
+          </li>
+        );
+        return;
+      }
+
+      // If not a list item, flush any accumulated list
+      flushList();
+
+      // 3. Check for Header (Emoji or Numbered Title or Fully Bold Line)
+      // Pattern: Starts with Emoji OR "1. ", "2. " etc. OR wrapped entirely in **
+      const isEmojiHeader = /^(📖|🛠️|🚀|💡|📂)/.test(trimmed);
+      const isNumberedHeader = /^[0-9]+\.\s/.test(trimmed);
+      const isBoldLine = trimmed.startsWith('**') && trimmed.endsWith('**') && trimmed.length < 100;
+
+      if (isEmojiHeader || isNumberedHeader || isBoldLine) {
+        // Remove ** wrapper if it's a bold line for cleaner header styling
+        const headerContent = isBoldLine ? trimmed.slice(2, -2) : trimmed;
+        elements.push(
+          <h3 key={`head-${index}`} className="text-lg md:text-xl font-bold mt-8 mb-4 text-slate-800 dark:text-slate-100 leading-snug">
+            {parseBold(headerContent)}
+          </h3>
+        );
+      } else {
+        // Regular paragraph
+        elements.push(
+          <div key={`p-${index}`} className="mb-2 leading-relaxed text-slate-600 dark:text-slate-300">
+            {parseBold(trimmed)}
+          </div>
+        );
+      }
+    });
+    
+    flushList(); // Final flush
+    return elements;
+  };
+
+  // Helper: Advanced Content Parsing (Supports Markdown-style Code Blocks + New Markdown Text)
+  const parseContent = (text: string) => {
+    // Regex matches ```lang \n code ```
+    const parts = text.split(/```(\w*)\n([\s\S]*?)```/g);
+    
+    // If no code blocks found, return markdown-like text parsing
+    if (parts.length === 1) {
+      return renderMarkdownText(text);
+    }
+
+    const result = [];
+    for (let i = 0; i < parts.length; i++) {
+      if (i % 3 === 0) {
+        // Even index: Text Content -> Use Markdown Renderer
+        if (parts[i]) {
+          result.push(<div key={`text-${i}`}>{renderMarkdownText(parts[i])}</div>);
+        }
+      } else if (i % 3 === 1) {
+        // Odd index: Language Capture Group
+        // The next item (i+1) is the Code Content Capture Group
+        const lang = parts[i] || 'plaintext';
+        const code = parts[i + 1];
+        
+        result.push(
+          <div key={`code-${i}`} className="my-6 bg-[#1e1e1e] text-[#d4d4d4] rounded-lg font-mono text-sm overflow-hidden border border-slate-700 shadow-xl">
+             {/* Terminal Header */}
+             <div className="flex justify-between items-center px-4 py-2 bg-[#252526] border-b border-[#333] select-none">
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">{lang}</span>
+                <div className="flex gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></div>
+                </div>
+             </div>
+             {/* Code Body */}
+             <div className="p-4 overflow-x-auto">
+                <pre className="whitespace-pre font-mono leading-relaxed">{code}</pre>
+             </div>
+          </div>
+        );
+        i++; // Skip the code part in the loop since we handled it
+      }
+    }
+    return result;
+  };
+
   // Render content based on module type
-  const renderModuleContent = () => {
-    const { type, content, honors } = activeModule;
+  const renderModuleContent = (module: AcademicModule) => {
+    const { type, content, honors, activities } = module;
     
     // Default prose content wrapper
     const renderProse = () => (
-      <div className="prose prose-lg dark:prose-invert text-slate-600 dark:text-slate-300 leading-relaxed">
-         <p className="border-l-4 border-slate-300 dark:border-slate-700 pl-4">{content}</p>
+      <div className="prose prose-lg dark:prose-invert text-slate-600 dark:text-slate-300 leading-relaxed max-w-none">
+         {Array.isArray(content) ? (
+            <div className="space-y-2">
+              {content.map((paragraph, i) => (
+                <div key={i}>
+                  {parseContent(paragraph)}
+                </div>
+              ))}
+            </div>
+         ) : (
+            <div>{parseContent(content)}</div>
+         )}
       </div>
     );
 
-    // Honors List Component (Reusable)
-    const renderHonors = (items: string[]) => (
+    // Honors List Component (Reusable) - Updated to use object structure with year badge
+    const renderHonors = (items: { title: string; year: string }[]) => (
       <div className="space-y-4 mt-8 pt-8 border-t border-slate-200 dark:border-slate-800 animate-fadeIn">
          <h4 className="text-lg font-bold text-emerald-600 dark:text-neon flex items-center gap-2">
            <Award size={20} />
@@ -508,9 +679,27 @@ const AcademicLayout: React.FC<AcademicLayoutProps> = ({
          </h4>
          <ul className="space-y-3">
            {items.map((item, idx) => (
-             <li key={idx} className="p-4 bg-emerald-50 dark:bg-emerald-900/10 rounded-lg border border-emerald-100 dark:border-emerald-500/20 text-slate-700 dark:text-slate-200 relative overflow-hidden">
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-emerald-500 dark:bg-neon" />
-                {item}
+             <li key={idx} className="flex justify-between items-center p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700">
+                <span className="text-slate-700 dark:text-slate-200 font-medium">{item.title}</span>
+                <span className="text-sm font-mono text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900 px-2 py-1 rounded border border-slate-100 dark:border-slate-800 ml-4 flex-shrink-0">{item.year}</span>
+             </li>
+           ))}
+         </ul>
+      </div>
+    );
+
+    // Activities List Component
+    const renderActivities = (items: { name: string; year: string }[]) => (
+      <div className="space-y-4 mt-8 pt-8 border-t border-slate-200 dark:border-slate-800 animate-fadeIn">
+         <h4 className="text-lg font-bold text-emerald-600 dark:text-neon flex items-center gap-2">
+           <Users size={20} />
+           Activities & Societies
+         </h4>
+         <ul className="space-y-3">
+           {items.map((item, idx) => (
+             <li key={idx} className="flex justify-between items-center p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700">
+                <span className="text-slate-700 dark:text-slate-200 font-medium">{item.name}</span>
+                <span className="text-sm font-mono text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900 px-2 py-1 rounded border border-slate-100 dark:border-slate-800 ml-4 flex-shrink-0">{item.year}</span>
              </li>
            ))}
          </ul>
@@ -526,22 +715,42 @@ const AcademicLayout: React.FC<AcademicLayoutProps> = ({
               Key Coursework
             </h4>
             <ul className="space-y-2">
-              {content.map((item, idx) => (
-                <li key={idx} className="flex items-center gap-3 p-3 bg-slate-100 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
-                   <div className="w-2 h-2 bg-emerald-500 dark:bg-neon rounded-full" />
-                   <span className="text-slate-700 dark:text-slate-200 font-medium">{item}</span>
-                </li>
-              ))}
+              {content.map((item, idx) => {
+                // Check if string is formatted as "Course|Score|Grade"
+                if (typeof item === 'string' && item.includes('|')) {
+                  const [name, score, grade] = item.split('|');
+                  return (
+                    <li key={idx} className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 transition-colors">
+                       <span className="font-medium text-slate-700 dark:text-slate-200">{name}</span>
+                       <div className="flex items-center gap-3 text-sm flex-shrink-0">
+                          <span className="font-mono text-slate-500 dark:text-slate-400">Score: <b className="text-slate-900 dark:text-white">{score}</b></span>
+                          <span className={`min-w-[2.5rem] text-center px-2 py-0.5 rounded text-xs font-bold border ${grade.includes('A') ? 'bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-400 dark:border-emerald-800' : 'bg-slate-100 text-slate-600 border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700'}`}>
+                            {grade}
+                          </span>
+                       </div>
+                    </li>
+                  );
+                }
+                
+                // Fallback for simple list items
+                return (
+                  <li key={idx} className="flex items-center gap-3 p-3 bg-slate-100 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+                     <div className="w-2 h-2 bg-emerald-500 dark:bg-neon rounded-full" />
+                     <span className="text-slate-700 dark:text-slate-200 font-medium">{item}</span>
+                  </li>
+                );
+              })}
             </ul>
          </div>
        );
     }
     
-    // Default + Optional Honors (Merged)
+    // Default + Optional Honors + Activities (Merged)
     return (
       <div className="animate-fadeIn">
         {renderProse()}
         {honors && honors.length > 0 && renderHonors(honors)}
+        {activities && activities.length > 0 && renderActivities(activities)}
       </div>
     );
   };
@@ -565,97 +774,202 @@ const AcademicLayout: React.FC<AcademicLayoutProps> = ({
     <div className="h-full w-full overflow-hidden bg-white dark:bg-slate-900 text-slate-900 dark:text-white transition-colors duration-300 flex flex-col lg:flex-row">
         
         {/* LEFT COLUMN: Dynamic Content */}
-        <div className="flex-1 p-8 lg:p-16 flex flex-col relative z-10 overflow-y-auto">
-          <div className="max-w-xl mx-auto w-full min-h-full flex flex-col">
+        {/* Conditional styling: if full width, use w-full, else flex-1 */}
+        <div className={`${isFullWidth ? 'w-full' : 'flex-1'} p-8 lg:p-16 flex flex-col relative z-10 overflow-y-auto transition-all duration-300`}>
+          {/* Conditional Max Width: if full width, wider container (max-w-5xl), else standard (max-w-xl) */}
+          {/* Removed mx-auto to keep text left-aligned and prevent jumping when container width changes */}
+          <div className={`${isFullWidth ? 'max-w-5xl' : 'max-w-xl'} w-full min-h-full flex flex-col transition-all duration-300`}>
             
             {/* Header with Horizontal Tabs */}
             <div className="mb-8 flex-shrink-0">
                <span className="text-xs font-bold tracking-widest text-slate-400 uppercase mb-2 block">{location}</span>
                <h1 className="text-4xl lg:text-5xl font-serif font-bold mb-2 text-slate-900 dark:text-white">{title}</h1>
-               <div className="text-xl text-emerald-600 dark:text-neon font-medium mb-8">{subtitle}</div>
                
-               {/* Horizontal Tabs Navigation */}
-               <div className="flex flex-wrap gap-2 border-b border-slate-200 dark:border-slate-700 pb-1">
-                 {modules.map((mod, idx) => {
-                   const isActive = activeModule.label === mod.label;
-                   return (
-                     <button
-                       key={idx}
-                       onClick={() => setActiveModule(mod)}
-                       className={`
-                         px-4 py-2 text-sm font-bold uppercase tracking-wider rounded-t-lg transition-all duration-300
-                         ${isActive 
-                           ? 'bg-slate-100 dark:bg-slate-800 text-emerald-600 dark:text-neon border-b-2 border-emerald-500 dark:border-neon' 
-                           : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50'
-                         }
-                       `}
-                     >
-                       {mod.label}
-                     </button>
-                   );
-                 })}
-               </div>
+               {/* Tagline Display (New) */}
+               {tagline && (
+                 <p className="text-base text-slate-500 dark:text-slate-400 font-medium mb-3 italic">
+                   {tagline}
+                 </p>
+               )}
+
+               {/* Department (If present, use old "Green/Neon" style with bold uppercase) */}
+               {department && (
+                  <div className="text-lg font-bold text-emerald-600 dark:text-neon uppercase tracking-wider mb-4">
+                    {department}
+                  </div>
+               )}
+
+               {/* Role / Subtitle - Conditional Rendering */}
+               {department ? (
+                 <div className="mb-6 inline-block">
+                   <div className="flex flex-row items-center gap-6 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-800 w-fit">
+                      <div>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">JOB TITLE</div>
+                        <div className="text-xl font-bold text-slate-900 dark:text-white leading-none">{subtitle}</div>
+                      </div>
+                   </div>
+                 </div>
+               ) : (
+                 <div className="text-xl text-emerald-600 dark:text-neon font-medium mb-1">
+                   {subtitle}
+                 </div>
+               )}
+               
+               <div className="text-md text-slate-500 dark:text-slate-400 font-mono mb-4">{period}</div>
+               
+               {/* --- Updated Stats Section --- */}
+               {stats && (
+                 <div className="flex flex-row items-center gap-6 mb-8 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-800 w-fit">
+                    {stats.gpa && (
+                      <div>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">GPA</div>
+                        <div className="text-xl font-mono font-bold text-slate-900 dark:text-white leading-none">{stats.gpa}</div>
+                      </div>
+                    )}
+                    
+                    {stats.avgScore && (
+                      <>
+                        <div className="w-px h-8 bg-slate-200 dark:bg-slate-700"></div>
+                        <div>
+                          <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">AVG</div>
+                          <div className="text-xl font-mono font-bold text-slate-900 dark:text-white leading-none">{stats.avgScore}</div>
+                        </div>
+                      </>
+                    )}
+
+                    {stats.rank && (
+                      <>
+                        <div className="w-px h-8 bg-slate-200 dark:bg-slate-700"></div>
+                        <div>
+                          <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">{stats.rankLabel || 'Rank'}</div>
+                          <div className="text-xl font-mono font-bold text-emerald-600 dark:text-neon leading-none">{stats.rank}</div>
+                        </div>
+                      </>
+                    )}
+                 </div>
+               )}
+
+               {/* Horizontal Tabs Navigation - Only show if variant is 'tabs' */}
+               {variant === 'tabs' && (
+                 <div className="flex flex-wrap gap-2 border-b border-slate-200 dark:border-slate-700 pb-1 mt-6">
+                   {modules.map((mod, idx) => {
+                     const isActive = activeModule.label === mod.label;
+                     return (
+                       <button
+                         key={idx}
+                         onClick={() => setActiveModule(mod)}
+                         className={`
+                           px-4 py-2 text-sm font-bold uppercase tracking-wider rounded-t-lg transition-all duration-300
+                           ${isActive 
+                             ? 'bg-slate-100 dark:bg-slate-800 text-emerald-600 dark:text-neon border-b-2 border-emerald-500 dark:border-neon' 
+                             : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50'
+                           }
+                         `}
+                       >
+                         {mod.label}
+                       </button>
+                     );
+                   })}
+                 </div>
+               )}
             </div>
 
             {/* Dynamic Body */}
             <div className="flex-1">
-               <h2 className="text-2xl font-bold mb-6 text-slate-800 dark:text-slate-100 transition-all duration-300">
-                 {activeModule.title}
-               </h2>
-               {renderModuleContent()}
+              {variant === 'tabs' ? (
+                // --- TABS MODE: Show only active module ---
+                <div className="animate-fadeIn">
+                   <h2 className="text-2xl font-bold mb-6 text-slate-800 dark:text-slate-100 transition-all duration-300">
+                     {activeModule.title}
+                   </h2>
+                   {renderModuleContent(activeModule)}
 
-                {/* Tags */}
-                {activeModule.tags && (
-                  <div className="flex flex-wrap gap-2 mt-8 pt-8 border-t border-slate-200 dark:border-slate-800">
-                    {activeModule.tags.map((tag, i) => (
-                      <span key={i} className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-full text-xs font-medium border border-slate-200 dark:border-slate-700">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
+                    {/* Tags */}
+                    {activeModule.tags && (
+                      <div className="flex flex-wrap gap-2 mt-8 pt-8 border-t border-slate-200 dark:border-slate-800">
+                        {activeModule.tags.map((tag, i) => (
+                          <span key={i} className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-full text-xs font-medium border border-slate-200 dark:border-slate-700">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                </div>
+              ) : (
+                // --- STACK MODE: Show all modules vertically ---
+                <div>
+                  {modules.map((module, index) => (
+                    <div key={index} className="mb-12 border-b border-slate-100 dark:border-slate-800/50 last:border-0 pb-12 last:pb-0">
+                        {/* Module Header */}
+                        <div className="mb-6">
+                            <span className="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-neon mb-2 block">{module.label}</span>
+                            <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
+                                {module.title}
+                            </h2>
+                        </div>
+                        
+                        {/* Content */}
+                        {renderModuleContent(module)}
+
+                        {/* Tags */}
+                        {module.tags && (
+                          <div className="flex flex-wrap gap-2 mt-6">
+                            {module.tags.map((tag, i) => (
+                              <span key={i} className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-full text-xs font-medium border border-slate-200 dark:border-slate-700">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
 
         {/* RIGHT COLUMN: Vertical Marquee (Gallery) */}
-        <div 
-          className="flex-1 bg-slate-100 dark:bg-black/20 relative overflow-hidden"
-          onMouseEnter={handleMarqueeEnter}
-          onMouseLeave={handleMarqueeLeave}
-        >
-           {/* Masking Gradients - Made Subtle */}
-           <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white dark:from-slate-900 to-transparent z-20 pointer-events-none" />
-           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white dark:from-slate-900 to-transparent z-20 pointer-events-none" />
+        {/* Only show if not full width */}
+        {!isFullWidth && (
+          <div 
+            className="flex-1 bg-slate-100 dark:bg-black/20 relative overflow-hidden transition-all duration-300"
+            onMouseEnter={handleMarqueeEnter}
+            onMouseLeave={handleMarqueeLeave}
+          >
+            {/* Masking Gradients - Made Subtle */}
+            <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white dark:from-slate-900 to-transparent z-20 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white dark:from-slate-900 to-transparent z-20 pointer-events-none" />
 
-           {/* Marquee Track - Full Width, No Padding */}
-           <div className="absolute inset-0 w-full h-full group">
-              <div className="animate-marquee-vertical flex flex-col w-full group-hover:[animation-play-state:paused]">
-                 {scrollItems.map((item, idx) => (
-                   <div 
-                     key={`gallery-${idx}`}
-                     className={`
-                       relative w-full aspect-[16/10] overflow-hidden transition-all duration-300 flex-shrink-0 group/item border-y border-transparent hover:border-emerald-500 dark:hover:border-neon
-                     `}
-                   >
-                      <img src={item.image} alt="Gallery Item" className="w-full h-full object-cover transform transition-transform duration-700 group-hover/item:scale-105" />
-                      
-                      {/* Description Overlay */}
-                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-6 pt-12 flex flex-col justify-end opacity-100 transition-opacity duration-300">
-                         <div className="text-white font-medium text-sm md:text-base leading-snug drop-shadow-md border-l-4 border-emerald-500 dark:border-neon pl-3">
-                           {item.description}
-                         </div>
-                      </div>
-                   </div>
-                 ))}
-              </div>
-           </div>
-           
-           {/* Hint */}
-           <div className={`absolute bottom-8 right-8 z-30 pointer-events-none transition-opacity duration-300 bg-black/50 px-3 py-1 rounded text-white text-xs font-bold tracking-wider ${isHoveringMarquee ? 'opacity-0' : 'opacity-50'}`}>
-              HOVER TO PAUSE
-           </div>
-        </div>
+            {/* Marquee Track - Full Width, No Padding */}
+            <div className="absolute inset-0 w-full h-full group">
+                <div className="animate-marquee-vertical flex flex-col w-full group-hover:[animation-play-state:paused]">
+                  {scrollItems.map((item, idx) => (
+                    <div 
+                      key={`gallery-${idx}`}
+                      className={`
+                        relative w-full aspect-[16/10] overflow-hidden transition-all duration-300 flex-shrink-0 group/item border-y border-transparent hover:border-emerald-500 dark:hover:border-neon
+                      `}
+                    >
+                        <img src={item.image} alt="Gallery Item" className="w-full h-full object-cover transform transition-transform duration-700 group-hover/item:scale-105" />
+                        
+                        {/* Description Overlay */}
+                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-6 pt-12 flex flex-col justify-end opacity-100 transition-opacity duration-300">
+                          <div className="text-white font-medium text-sm md:text-base leading-snug drop-shadow-md border-l-4 border-emerald-500 dark:border-neon pl-3">
+                            {item.description}
+                          </div>
+                        </div>
+                    </div>
+                  ))}
+                </div>
+            </div>
+            
+            {/* Hint */}
+            <div className={`absolute bottom-8 right-8 z-30 pointer-events-none transition-opacity duration-300 bg-black/50 px-3 py-1 rounded text-white text-xs font-bold tracking-wider ${isHoveringMarquee ? 'opacity-0' : 'opacity-50'}`}>
+                HOVER TO PAUSE
+            </div>
+          </div>
+        )}
     </div>
   );
 };
@@ -668,22 +982,43 @@ const SplitContentLayout = ({
   content, 
   tags,
   imageSrc = "https://picsum.photos/800/600",
-  onImageUpload 
+  onImageUpload,
+  tagline // New prop for company description
 }: { 
   title: string, 
   subtitle: string, 
   content: React.ReactNode, 
   tags?: string[],
   imageSrc?: string,
-  onImageUpload?: () => void
+  onImageUpload?: () => void,
+  tagline?: string;
 }) => {
+  // Parsing helper specifically for this component to handle bolding in details list
+  const parseText = (text: string) => {
+    const parts = text.split(/(\*\*.*?\*\*)/g);
+    return parts.map((part, index) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={index} className="font-bold text-slate-900 dark:text-white">{part.slice(2, -2)}</strong>;
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
+
   return (
     <div className="h-full w-full overflow-y-auto bg-white dark:bg-slate-900 text-slate-900 dark:text-white transition-colors duration-300">
       <div className="flex flex-col lg:flex-row min-h-full">
         {/* Left Column: Text */}
         <div className="flex-1 p-8 lg:p-16 flex flex-col justify-center">
           <div className="max-w-xl mx-auto w-full">
-            <h1 className="text-4xl lg:text-5xl font-serif font-bold mb-4 text-slate-900 dark:text-white">{title}</h1>
+            <h1 className="text-4xl lg:text-5xl font-serif font-bold mb-2 text-slate-900 dark:text-white">{title}</h1>
+            
+            {/* Tagline Display */}
+            {tagline && (
+              <p className="text-sm md:text-base text-slate-500 dark:text-slate-400 font-medium mb-4 italic leading-relaxed border-l-4 border-slate-200 dark:border-slate-700 pl-3">
+                {tagline}
+              </p>
+            )}
+
             <div className="text-xl text-accent mb-8 font-medium">{subtitle}</div>
             
             <div className="prose prose-lg dark:prose-invert mb-8 text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -881,20 +1216,41 @@ const App = () => {
             key={dataItem.id} // Added key to force remount on school change
             title={dataItem.school}
             subtitle={dataItem.degree}
+            period={dataItem.period}
             modules={dataItem.modules}
             gallery={dataItem.gallery}
             location={dataItem.location}
+            stats={dataItem.stats} // Pass stats (GPA/Rank) to layout
+            variant="tabs" // Use Tabs for Academic
           />
         );
       }
       type = 'academic';
     } else if (activeTab === 'profession') {
       dataItem = EXPERIENCE.find(e => e.id === activeSubTab);
+      // Profession now uses the same module structure as Academic
+      if (dataItem && (dataItem as ExperienceItem).modules) {
+        return (
+          <AcademicLayout
+            key={dataItem.id}
+            title={dataItem.company}
+            subtitle={dataItem.role}
+            period={dataItem.period}
+            modules={(dataItem as ExperienceItem).modules}
+            gallery={(dataItem as ExperienceItem).gallery}
+            location={dataItem.location}
+            tagline={(dataItem as ExperienceItem).tagline}
+            department={(dataItem as ExperienceItem).department}
+            variant="stack" // Use Stack for Profession
+            // No stats for profession typically, but could be added if needed
+          />
+        );
+      }
       type = 'profession';
     }
 
     if (dataItem) {
-       // Fallback for Profession or Legacy Academic items without modules
+       // Fallback for any legacy item without modules (should be none now)
        const content = (
          <div className="space-y-4">
            <p className="font-semibold text-lg">{dataItem.period} | {dataItem.location}</p>
@@ -915,7 +1271,19 @@ const App = () => {
              <div className="mt-4">
                <h4 className="font-bold mb-2">Details</h4>
                <ul className="list-disc pl-5 space-y-1">
-                 {dataItem.details.map((d: string, i: number) => <li key={i}>{d}</li>)}
+                 {/* Updated to use helper for parsing bold text in details */}
+                 {dataItem.details.map((d: string, i: number) => {
+                    const parseText = (text: string) => {
+                      const parts = text.split(/(\*\*.*?\*\*)/g);
+                      return parts.map((part, index) => {
+                        if (part.startsWith('**') && part.endsWith('**')) {
+                          return <strong key={index} className="font-bold text-slate-900 dark:text-white">{part.slice(2, -2)}</strong>;
+                        }
+                        return <span key={index}>{part}</span>;
+                      });
+                    };
+                    return <li key={i}>{parseText(d)}</li>;
+                 })}
                </ul>
              </div>
            )}
@@ -930,11 +1298,12 @@ const App = () => {
            tags={type === 'academic' ? ['Education', dataItem.location] : ['Work', dataItem.location]}
            imageSrc={dataItem.image || `https://picsum.photos/seed/${dataItem.id}/800/600`}
            onImageUpload={() => alert("Image upload simulation")}
+           tagline={(dataItem as ExperienceItem).tagline}
          />
        );
     }
 
-    return <div className="p-10 text-white">Select an item to view details</div>;
+    return <div className="p-10 text-slate-400 dark:text-slate-500 flex justify-center items-center h-full">Select an item to view details</div>;
   };
 
   const activeNavSection = NAV_SECTIONS.find(s => s.id === activeTab);

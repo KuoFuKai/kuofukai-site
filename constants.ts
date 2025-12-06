@@ -2,12 +2,8 @@ import { TimelineItem, ExperienceItem, EducationItem, Recommendation, Transcript
 
 export const PERSONAL_INFO = {
   name: "Kevin",
-  tagline: "Resilience. Innovation. The American Dream.",
-  about: `Although my undergraduate degree was in Information and Communications rather than computer science, I have been deeply passionate about software development since college. I believe that well-designed software has the power to improve people’s quality of life. 
-  
-  I am not a person born with a silver spoon or innate genius. I often think it is a miracle that I did not go astray. I was born into a family that had fallen on hard times. My parents, who only had a junior high school education, worked as an ironworker and a cleaner. I lost my father to suicide due to economic pressures before my high school exams, and my mother passed away from cancer during my early career. Raised by my grandmother, I learned independence early.
-  
-  Despite these hardships, I have never made a choice I regretted. From self-teaching Android development to caring for my terminally ill mother while working full-time, and later achieving top marks in my Master's degree while working as a Senior Engineer, I give my all to everything I do.`,
+  tagline: "8+ Years Senior Software Engineer",
+  about: `Welcome to my personal website! My life reads like a twisting novel; I was not born into a well-educated family, nor was I gifted with innate genius or extraordinary luck. I often think it is a miracle that I didn't go astray or end up in a low-skilled trade. Yet, I have always felt that I don't belong here, but rather in a distant Western country. If you have a moment, I invite you to read my story. Perhaps it might resonate with your own journey.`,
   dei_statement: `Coming from an impoverished background with limited educational resources, I learned to be resourceful and resilient. As an Asian male, my diversity lies in my non-traditional path: a "late bloomer" who overcame significant family tragedy and economic hardship to excel in engineering. I have developed a strong capacity for empathy, allowing me to connect with people from all walks of life—whether leading study groups in a language school in the Philippines or hosting international friends in Taiwan. My mentors have described me as "a burning sun," bringing energy and cohesion to diverse teams.`
 };
 
@@ -228,11 +224,42 @@ export const EXPERIENCE: ExperienceItem[] = [
     role: "Senior Software Design Engineer",
     period: "July 2022 – March 2025",
     location: "Tainan, Taiwan",
-    achievements: [
-      "Analyzed and developed industrial automation applications, including monitoring software for multi-vendor equipment such as pick-and-place machines and reflow ovens.",
-      "Held regular meetings with equipment vendors (Panasonic, Ersa, Rehm) to ensure development of IPC-CFX data structures aligned with Industry 4.0 strategy."
+    tagline: "one of the largest providers of switching power supplies and thermal management solutions in the world",
+    department: "SMART MANUFACTURING (SMT)",
+    modules: [
+      {
+        type: "intro",
+        label: "Overview",
+        title: "Role & Impact",
+        content: "At Delta, I bridged the gap between hardware and software in a high-stakes manufacturing environment. I led the development of monitoring systems that are critical for the SMT process, working directly with international equipment vendors to standardize data protocols."
+      },
+      {
+        type: "achievements",
+        label: "Achievements",
+        title: "Key Contributions",
+        content: [
+          "Analyzed and developed industrial automation applications, including monitoring software for multi-vendor equipment such as pick-and-place machines and reflow ovens.",
+          "Held regular meetings with equipment vendors (Panasonic, Ersa, Rehm) to ensure development of IPC-CFX data structures aligned with Industry 4.0 strategy."
+        ]
+      },
+      {
+        type: "project",
+        label: "Tech Stack",
+        title: "Tools & Technologies",
+        content: [
+          "**Core & Backend:** Java 17, Spring Boot, Node-RED (IoT Flows), SQL",
+          "**Data & Performance:** ElasticSearch (Log/Search), Redis (Caching)",
+          "**Infrastructure & DevOps:** Docker, Linux, Git (Version Control)",
+          "**API & Tools:** Swagger (OpenAPI), Postman, IntelliJ IDEA, DBeaver"
+        ]
+      }
     ],
-    description: "At Delta, I bridged the gap between hardware and software in a high-stakes manufacturing environment. I led the development of monitoring systems that are critical for the SMT process, working directly with international equipment vendors to standardize data protocols."
+    gallery: [
+      { image: "https://picsum.photos/seed/delta-1/800/600", description: "Delta Electronics HQ" },
+      { image: "https://picsum.photos/seed/delta-2/800/600", description: "SMT Production Line" }
+    ],
+    achievements: [], // Kept for type compatibility if strict
+    description: "", // Kept for type compatibility if strict
   },
   {
     id: "synnex",
@@ -240,12 +267,44 @@ export const EXPERIENCE: ExperienceItem[] = [
     role: "Senior Java Full Stack Developer",
     period: "February 2017 – June 2022",
     location: "Taipei, Taiwan",
-    achievements: [
-      "Collaborated with international vendors (Apple, Cisco, Google, HP, Microsoft) to develop EDI/API data transmission systems.",
-      "Developed shared functionalities covering 80% of data exchange scenarios, reducing B2B development time from a week to a day.",
-      "Completed a critical two-week project in two days, securing a client's AUD 100,000 reward."
+    tagline: "one of the largest distributors of IT products in the world",
+    department: "VENDOR DATA INTEGRATED PLATFORM (VDIP)",
+    modules: [
+      {
+        type: "intro",
+        label: "Overview",
+        title: "Role & Impact",
+        content: "As a core member of the VDIP (Vendor Data Integration Platform) team, I was responsible for the full lifecycle (Analysis, Design, Programming) of the group's B2B systems. I facilitated seamless information exchange between Synnex and over 20 global tech giants across Australia, China, Hong Kong, New Zealand, and Taiwan."
+      },
+      {
+        type: "achievements",
+        label: "Achievements",
+        title: "Key Contributions",
+        content: [
+          "Engineered shared EDI/API modules for Purchasing & Product Management, reducing B2B integration time from 1 week to 1 day (80% efficiency gain).",
+          "Led technical communications in English with global Vendor IT teams to define specs and implement cross-system integrations.",
+          "Completed a critical integration project for an Australian client in 2 days (estimated 2 weeks), securing a 100,000 AUD reward."
+        ]
+      },
+      {
+        type: "project",
+        label: "Tech Stack",
+        title: "Enterprise Ecosystem",
+        content: [
+          "**Integration & Middleware:** Software AG WebMethods (v6.5/10.5/10.11), Microsoft Azure, SSIS, Oracle WebLogic, Wildfly (JBoss)",
+          "**Languages & Backend:** Java (6/8/11), Spring Boot, Spring MVC, Spring Data JPA, Struts, Hibernate",
+          "**Frontend:** JSP, jQuery, DWR",
+          "**Database:** Oracle (PL/SQL), PostgreSQL, MS SQL Server",
+          "**Tools & QA:** Eclipse, SVN, Postman, Micro Focus UFT (Automation)"
+        ]
+      }
     ],
-    description: "Starting as a junior developer, I rapidly grew into a senior role. My focus was on high-efficiency data exchange platforms. I took pride in optimizing legacy code and creating reusable frameworks that drastically reduced development time for the entire team."
+    gallery: [
+      { image: "https://picsum.photos/seed/synnex-1/800/600", description: "Synnex Technology Office" },
+      { image: "https://picsum.photos/seed/synnex-2/800/600", description: "Global Vendor Integration" }
+    ],
+    achievements: [], // Kept for type compatibility if strict
+    description: "", // Kept for type compatibility if strict
   }
 ];
 
@@ -257,17 +316,23 @@ export const EDUCATION: EducationItem[] = [
     period: "Sep 2022 – Jun 2024",
     location: "Tainan, Taiwan",
     gpa: "3.97/4.3 (Avg: 91.3)",
+    stats: {
+      gpa: "3.97 / 4.3",
+      avgScore: "91.3",
+      rank: "10% (3/30)",
+      rankLabel: "2-Year Grad Rate"
+    },
     modules: [
       {
         type: "intro",
         label: "Introduction",
-        title: "Master's Journey",
-        content: "My Master's journey was defined by efficiency and innovation. Despite working full-time, I maintained top grades. My research focused on running modern Generative AI on edge devices (NVIDIA Jetson), proving that powerful AI doesn't always need a cloud connection.",
+        title: "The Dual Life: Engineer & Scholar",
+        content: "My Master's degree was a victory over time and circumstance. Living a 'dual life,' I commuted between Tainan and the Science Park daily, balancing a high-pressure Senior Engineer role at Delta Electronics with rigorous academic research. I often think it is a miracle that I didn't go astray or end up in a low-skilled trade. Yet, I have always felt that I don't belong here, but rather in a distant Western country. If you have a moment, I invite you to read my story. Perhaps it might resonate with your own journey.",
         tags: ["Edge AI", "NVIDIA Jetson", "Resilience"],
         honors: [
-          "Highest Score in Oral Defense among all candidates.",
-          "Honorable Mention by IET Taipei Local Network (2024).",
-          "Oral Presentation at ISASD 2024 in Tokyo, Japan."
+          { title: "Accepted by IJHCI (SSCI): 'From Content to Conversation: Explaining Adoption of On-Device Generative AI Tour Guides'", year: "December 3, 2025" },
+          { title: "Honorable Mention - Institution of Engineering and Technology (IET), Taipei Local Network", year: "October, 2024" },
+          { title: "Published and Presented at International Conference on Intelligent Science and Sustainable Development (ISASD), Tokyo", year: "July, 2024" }
         ]
       },
       {
@@ -275,20 +340,39 @@ export const EDUCATION: EducationItem[] = [
         label: "Transcript",
         title: "Academic Excellence",
         content: [
-          "GPA: 3.97/4.3 (Average: 91.3)",
-          "Artificial Intelligence: 95 (A+)",
-          "Digital Integrated Circuit Design: 95 (A+)",
-          "Heterogeneous Multicore Systems: 94 (A+)",
-          "Computer Vision: 88 (A)"
+          // AI & Algorithms (Core)
+          "Artificial Intelligence|95|A+",
+          "Computer Vision|88|A",
+          "Advanced Algorithm|85|A",
+          "Advanced Data Structures|86|A",
+          // Embedded Systems & Hardware (Specialization)
+          "Digital Integrated Circuit Design|95|A+",
+          "Implementation of Heterogeneous Multicore Embedded System|94|A+",
+          "Networked Embedded System and Its Applications|84|A-",
+          "Computer Networks|82|A-",
+          "Fundamentals of Computer|84|A-",
+          // Other Engineering
+          "Introduction to Electronic Packaging|84|A-",
+          "Biomimetic System|84|A-"
         ],
-        tags: ["GPA 3.97", "Top of Class"]
+        tags: ["GPA 3.97", "Avg Score: 91.3"]
       },
       {
         type: "thesis",
         label: "Thesis",
-        title: "Generative AI on Edge",
-        content: "Thesis: Developing a Mobile Learning and Tour-Guiding System Based on Generative AI Approach. I proposed a low-energy Multimodal Large Language Model (MLLM) architecture integrated with RAG and YOLO, capable of running offline on NVIDIA Jetson hardware.",
-        tags: ["LLM", "RAG", "YOLO", "Python"]
+        title: "Edge AI Smart Tour Guide (Master's Thesis Project)",
+        content: [
+          "📖 **Overview**\nDeveloping a Mobile Learning and Tour-guiding System based on Generative AI Approach. This project is an offline multimodal generative AI tour assistant based on **Embedded Systems**, designed to solve the issues of high latency, cost, and network dependency associated with cloud-based LLMs.\n\nThe system runs entirely offline on a single-board computer (**Nvidia Jetson Orin NX**), integrating Visual Recognition (**YOLO**), Voice Interaction (**Whisper / eSpeak**), and Large Language Models (**Breeze-7B**). It utilizes **RAG (Retrieval-Augmented Generation)** technology to access local knowledge bases. Field experiments at the Tainan Confucius Temple confirmed that this system improved learning efficiency by **18.0%** compared to human guides.",
+          
+          "🛠️ **Tech Stack**\nThis project demonstrates the ability to deploy and optimize large AI models on edge devices.\n\n• **Hardware:** Nvidia Jetson Orin NX (16GB RAM)\n• **Language:** Python 3.10\n• **Core Models:**\n  - LLM: MediaTek Breeze-7B (Traditional Chinese model based on Mistral-7B)\n  - Vision: YOLOv8 (Object Detection)\n  - ASR (Speech-to-Text): OpenAI Whisper (Base model)\n  - TTS (Text-to-Speech): eSpeak / pyttsx3\n• **Key Technologies:**\n  - RAG (Retrieval-Augmented Generation): LangChain + FAISS + Sentence-Transformers (Knowledge Base Retrieval)\n  - Quantization: BitsAndBytes (4-bit NF4 Quantization, significantly reducing VRAM usage)\n  - Multiprocessing: Separated vision inference and language interaction loops using threading/multiprocessing to ensure real-time performance.\n• **Tools:** PyTorch, CUDA 11.8/12.1, OpenCV",
+          
+          "🚀 **System Architecture & Features**\n1. **Multimodal Interaction on Edge**\n  - **See:** Uses YOLOv8 to detect historical buildings (e.g., Dacheng Hall) in real-time.\n  - **Listen:** Uses Whisper for offline speech recognition, supporting Chinese spoken commands.\n  - **Think:** Uses quantized Breeze-7B (4-bit) for natural language understanding and generation.\n  - **Speak:** Outputs AI-generated tour content via TTS.\n\n2. **RAG (Retrieval-Augmented Generation)**\n  To solve LLM hallucinations and supplement domain-specific knowledge (Confucius Temple History), a FAISS-based vector database was implemented.\n  The system converts user voice queries into embeddings, retrieves relevant article chunks from the database, and feeds them to the LLM to generate accurate explanations.\n\n3. **Performance Optimization**\n  - **Memory Management:** Successfully deployed a 7B parameter model on a 16GB embedded device using 4-bit quantization.\n  - **Multitasking:** Implemented multiprocessing to decouple the 'Object Detection Loop' from the 'LLM Inference Loop', preventing vision lag from affecting voice interaction.",
+          
+          "📂 **Code Structure**\n```plaintext\nsrc/\n├── activate.sh          # System Startup Script (Env Vars)\n├── main.py              # Main Entry Point (Multithreading)\n├── llm_setup.py         # LLM Loader & BitsAndBytes Quantization\n├── rag_setup.py         # Vector DB (FAISS) & Embedding Loader\n├── yolo_util.py         # YOLOv8 Inference & Image Preprocessing\n├── llm_util.py          # RAG Retrieval Process & Prompt Templates\n├── tts_util.py          # Text-to-Speech Module (pyttsx3)\n└── log_util.py          # System Logging\n```",
+
+          "💡 **Results**\n• **Offline Capability:** Successfully achieved full AI tour service without internet access.\n• **Low Power:** System power consumption is only **10W-25W** (vs. hundreds of watts for Cloud GPUs).\n• **Educational Impact:** The experimental group's post-test scores improved by **34.2%**, significantly outperforming the control group."
+        ],
+        tags: ["Edge AI", "NVIDIA Jetson", "RAG", "YOLO", "LLM", "Python"]
       }
     ],
     gallery: [
@@ -314,21 +398,29 @@ export const EDUCATION: EducationItem[] = [
   },
   {
     id: "university",
-    school: "Shih Hsin University",
-    degree: "Bachelor of Arts in Info. & Comms.",
+    school: "Shih Hsin University (SHU)",
+    degree: "Bachelor of Arts in Information and Communications",
     period: "Sep 2011 – Jun 2015",
     location: "Taipei, Taiwan",
     gpa: "3.8/4.0 (Avg: 84.1)",
+    stats: {
+      gpa: "3.8 / 4.0",
+      avgScore: "84.1",
+      rank: "13 / 58"
+    },
     modules: [
       {
         type: "intro",
         label: "Introduction",
-        title: "The Self-Taught Developer",
-        content: "Although my degree was in Info & Comms, I steered my education towards computer science. My capstone project was a testament to self-learning: I built a complete Android app using Google Maps API by studying books in the library.",
+        title: "Finding Passion in Limitations",
+        content: "Determined to bridge the gap between my Information & Communications major and a true Computer Science curriculum, I refused to be limited by the standard path. I completed 150 credits—far beyond the required 128—while double-majoring in Digital Multimedia to master the full creative stack. Outside the classroom, I supported my family by working at the university library and established myself as a peer tutor for Java and SQL. This era was defined by a hunger for knowledge and the discipline to acquire it against all odds.",
         tags: ["Self-Taught", "Android", "Java"],
         honors: [
-          "Best System Design Award (2015) - Dept. of Info & Comms",
-          "Academic Excellence Award (Graduation)"
+          { title: "Best System Design Award - Department of Information and Communications", year: "November, 2014" }
+        ],
+        activities: [
+           { name: "Department Student Association (Info. & Comms.)", year: "2013 – 2014" },
+           { name: "Guitar Club", year: "2012 – 2013" }
         ]
       },
       {
@@ -336,19 +428,51 @@ export const EDUCATION: EducationItem[] = [
         label: "Transcript",
         title: "Core CS Coursework",
         content: [
-          "Computer & Information Tech: 99 (A)",
-          "Image Digitizing: 95 (A)",
-          "Computer Animation II: 95 (A)",
-          "Intro to Info & Comm: 94 (A)"
+          // Core Computer Science
+          "Computer and Information Technology|99|A",
+          "Introduction to Programming Language|78|B",
+          "System Analysis|88|A",
+          "Database Management System|70|B",
+          "Network Communications|75|B",
+          "Fundamental Data Analysis|61|C",
+          // Web & Digital Design
+          "Web-page Design|90|A",
+          "Planning and Designing of Web Sites|88|A",
+          "Internet Content Design|83|A",
+          "Markup Language|85|A",
+          "Introduction to Digital Content|91|A",
+          "Digital Content Management|82|A",
+          "Image Digitizing|95|A",
+          "Digital Graphic Design|84|A",
+          // Animation & Multimedia
+          "Computer Animation II|95|A",
+          "Computer Animation I|80|A",
+          "Introduction to Computer Animation|75|B",
+          // General
+          "Competitive Intelligence|86|A",
+          "Advanced English Usage|80|A",
+          "Intermediate English Usage|78|B"
         ],
-        tags: ["GPA 3.8", "Computer Science"]
+        tags: ["GPA 3.8", "Dept Rank: 13/58"]
       },
       {
         type: "project",
         label: "Capstone",
-        title: "Android Travel Planner",
-        content: "Independently developed an Android application integrating Google Maps API to assist independent travelers. Built entirely through self-study of Java and Android frameworks, doing the work of a full team solo.",
-        tags: ["Best System Design", "Google Maps API"]
+        title: "Taiwander: Roaming Taiwan (Android App)",
+        content: [
+          "📱 **Taiwander (Android App)**\nA native Android application integrating LBS positioning, itinerary planning, and local travel information. Won **Best System Design Award**.",
+          
+          "📖 **Overview**\nDesigned for independent travelers, Taiwander solves the problem of fragmented travel information. It integrates attraction recommendations, transportation info, and accommodation searches with Google Maps API. Users can arrange depth tours (1-5 days) with offline access support.",
+          
+          "🛠️ **Tech Stack**\nBuilt with **Native Java** on the Android SDK, focusing on offline capabilities and hardware integration.\n\n• **Core:** Java (JDK 7), Android SDK (Activity, Fragment, ViewPager)\n• **Data:** SQLite (Raw SQL queries, SQLiteOpenHelper)\n• **Maps & LBS:** Google Maps Android API v2, LocationManager (GPS/Network)\n• **Performance:** AsyncTasks for background operations, Bitmap memory optimization",
+          
+          "🚀 **Key Engineering Features**\n1. **Smart Itinerary Planner**\n  - Implements **ViewPager + Fragments** for swipeable multi-day scheduling.\n  - Saves user planning results into local SQLite tables for full offline access.\n\n2. **Pre-loaded Database Deployment**\n  - Solved 'out-of-box' data requirement by packaging a pre-made DB in assets.\n  - streams the DB binary to system paths upon first launch.\n\n3. **Dynamic Recommendation Engine**\n  - Filters attractions based on User Preferences (Region/Type).\n  - Dynamically assembles SQL queries to bind results to UI adapters.\n\n4. **Memory Optimization**\n  - Implemented efficient **BitmapFactory** decoding to prevent Out-Of-Memory (OOM) crashes on older devices.",
+
+          "📂 **Project Structure**\n```plaintext\nsrc/com/example/happy/\n├── MainActivity.java       # Entry Point & Navigation\n├── Map.java                # Google Maps Controller\n├── DBManager.java          # Asset to System DB Migration\n├── CustomTour.java         # Itinerary Logic (FragmentActivity)\n├── RecommendedTour.java    # SQL Query Builder\n└── [Region]Content.java    # Dynamic Content Loaders\n```",
+          
+          "💡 **Conclusion**\nAlthough built during the early stages of Android development, this project encompassed the complete App development lifecycle—ranging from database planning and UI/UX design to Google services integration and hardware sensor (GPS) application. It serves not only as a travel tool but as a testament to my learning journey, evolving from basic Java logic to mastering complex Android frameworks."
+        ],
+        tags: ["Java", "Android SDK", "SQLite", "Google Maps API", "LBS", "ViewPager"]
       }
     ],
     gallery: [
@@ -374,36 +498,51 @@ export const EDUCATION: EducationItem[] = [
   },
   {
     id: "highschool",
-    school: "Jingwen High School",
-    degree: "High School Diploma",
+    school: "Taipei Municipal Vocational High School",
+    degree: "Vocational High School Diploma",
     period: "Sep 2008 – Jun 2011",
     location: "Taipei, Taiwan",
+    stats: {
+      rank: "Top 1% (5/Entire School)",
+      rankLabel: "School Rank"
+    },
     modules: [
       {
         type: "intro",
-        label: "Introduction",
+        label: "Story",
         title: "The Turning Point",
-        content: "This was my turning point. Coming from the bottom of the rankings, I discovered the joy of academic achievement through sheer hard work. Overcoming my father's tragic passing right before exams, I still managed to graduate at the top of my class.",
-        tags: ["Resilience", "Top Rank"],
+        content: "Entering high school marked the lowest point of my academic journey initially, as I was assigned to a school with a reputation for delinquency. However, it became the stage for my most significant transformation. Amidst a challenging environment, I found the resolve to change my destiny. Starting with a perfect score in History, I built momentum that propelled me to the top of my class. This period defined my resilience, proving that one's starting point does not dictate their finish line.",
+        tags: ["Resilience", "Top 1%", "Mayor's Award"],
         honors: [
-          "Ranked 1st in class (2010, 2011)",
-          "Mayor’s Award to Outstanding Graduates",
-          "Transformation: From last place to Valedictorian level performance."
+          { title: "Taipei Mayor's Award (Highest Honor for Graduates)", year: "2011" },
+          { title: "Model Student Award", year: "2011" },
+          { title: "Ranked 1st in Class for 4 consecutive semesters", year: "2009-2011" },
+          { title: "Ranked 5th in Entire School (across all departments)", year: "2011" }
+        ]
+      },
+      {
+        type: "achievements",
+        label: "Achievements",
+        title: "Rising Above",
+        content: [
+          "**Taipei Mayor's Award:** Awarded to the top student of the graduating class, presented personally by the Mayor of Taipei. This symbolized a complete turnaround from my earlier academic struggles.",
+          "**Self-Directed Learning:** Due to my family's financial situation after my father's passing, I relied entirely on self-study, spending evenings at school and weekends at the library instead of attending cram schools.",
+          "**Peer Leadership:** Served as a tutor for classmates in English and History, fostering a supportive learning environment despite the school's general atmosphere."
         ]
       }
     ],
     gallery: [
-       {
-        image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=1000&auto=format&fit=crop",
-        description: "Receiving the Mayor's Award for Academic Excellence (2011)"
+      {
+        image: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=1000&auto=format&fit=crop",
+        description: "Receiving the Taipei Mayor's Award"
       },
       {
-        image: "https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=1000&auto=format&fit=crop",
-        description: "High School Graduation Ceremony - Top of Class"
+        image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1000&auto=format&fit=crop",
+        description: "Self-study at the library"
       }
     ],
-    details: [],
-    description: ""
+    details: [], 
+    description: "" 
   }
 ];
 

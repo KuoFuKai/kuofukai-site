@@ -1,3 +1,4 @@
+
 export interface TimelineItem {
   year: string;
   title: string;
@@ -13,9 +14,18 @@ export interface ExperienceItem {
   role: string;
   period: string;
   location: string;
-  achievements: string[];
-  description?: string;
-  image?: string;
+  tagline?: string; // Added field for company description/market position
+  department?: string; // Added field for department name
+  modules: AcademicModule[]; // Unified structure
+  gallery?: AcademicGalleryItem[];
+  image?: string; // Keep for backward compatibility if needed, though gallery is preferred
+  achievements?: string[]; // Legacy field for backward compatibility
+  description?: string; // Legacy field for backward compatibility
+}
+
+export interface AcademicActivity {
+  name: string;
+  year: string;
 }
 
 export interface AcademicModule {
@@ -24,7 +34,8 @@ export interface AcademicModule {
   title: string; // Content Title
   content: string | string[]; 
   tags?: string[];
-  honors?: string[]; // Field to embed honors/awards list inside a module (e.g. Intro)
+  honors?: { title: string; year: string }[]; // Changed to object array to support year badges
+  activities?: AcademicActivity[]; // New field for extracurricular activities
 }
 
 export interface AcademicGalleryItem {
@@ -44,6 +55,12 @@ export interface EducationItem {
   image?: string;
   modules?: AcademicModule[]; 
   gallery?: AcademicGalleryItem[]; // New field for the independent photo marquee
+  stats?: {
+    gpa?: string;
+    avgScore?: string;
+    rank?: string;
+    rankLabel?: string; // Added to support custom labels like "2-Year Grad Rate"
+  };
 }
 
 export interface Recommendation {
