@@ -394,8 +394,9 @@ const ResponsiveTimeline = () => {
           >
             <div className="min-h-full flex flex-col lg:flex-row">
               {/* Left: Text Content - Increased flex to give more space */}
-              <div className="flex-1 lg:flex-[1.2] p-8 lg:p-16 flex flex-col justify-center">
-                <div className="max-w-xl mx-auto w-full px-8 md:px-12">
+              <div className="flex-1 lg:flex-[2.5] py-8 lg:py-4 flex flex-col justify-center">
+                {/* Modified container: Removed max-w, added symmetrical padding for arrows */}
+                <div className="w-full px-16 md:px-24">
                   <div className="inline-block px-3 py-1 bg-emerald-100 dark:bg-neon/10 text-emerald-700 dark:text-neon rounded-full text-sm font-mono font-bold mb-6 transition-colors">
                     {selectedItem.year}
                   </div>
@@ -405,7 +406,7 @@ const ResponsiveTimeline = () => {
                   
                   <div className="h-1 w-20 bg-emerald-500 dark:bg-neon mb-8 transition-colors"></div>
                   
-                  <div className="prose prose-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-8 dark:prose-invert transition-colors">
+                  <div className="prose prose-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-8 dark:prose-invert transition-colors max-w-none">
                     <p className="text-xl font-light text-slate-800 dark:text-slate-100 mb-6 border-l-4 border-slate-300 dark:border-slate-700 pl-4">
                       {selectedItem.description}
                     </p>
@@ -421,8 +422,8 @@ const ResponsiveTimeline = () => {
               </div>
 
               {/* Right: Vertical Image Marquee */}
-              {/* Modified wrapper: Restricts width and adds padding to right (pr-24) so content doesn't hit the arrow area */}
-              <div className="flex-1 lg:flex-none lg:w-[45%] flex flex-col justify-center p-4 lg:py-12 lg:pr-24 lg:pl-0 min-h-[40vh] lg:min-h-auto">
+              {/* Modified wrapper: Widen to 38% (approx 1/3) while keeping pr-24 padding for arrows */}
+              <div className="flex-1 lg:flex-none lg:w-[38%] flex flex-col justify-center p-4 lg:py-12 lg:pr-24 lg:pl-0 min-h-[40vh] lg:min-h-auto">
                   <div 
                     className="w-full h-full relative overflow-hidden rounded-2xl shadow-2xl bg-slate-100 dark:bg-slate-900 ring-1 ring-slate-900/5 dark:ring-white/10"
                     onMouseEnter={() => setIsHoveringMarquee(true)}
