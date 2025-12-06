@@ -28,6 +28,12 @@ export interface AcademicActivity {
   year: string;
 }
 
+export interface AcademicJob {
+  role: string;
+  company: string;
+  year: string;
+}
+
 export interface AcademicModule {
   type: 'intro' | 'grades' | 'thesis' | 'project' | 'achievements';
   label: string; // Tab Label
@@ -36,6 +42,7 @@ export interface AcademicModule {
   tags?: string[];
   honors?: { title: string; year: string }[]; // Changed to object array to support year badges
   activities?: AcademicActivity[]; // New field for extracurricular activities
+  jobs?: AcademicJob[]; // New field for internships/part-time work in academic context
 }
 
 export interface AcademicGalleryItem {

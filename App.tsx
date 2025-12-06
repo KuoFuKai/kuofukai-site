@@ -23,7 +23,7 @@ import {
   SKILLS,
   PERSONAL_INFO
 } from './constants';
-import { NavSection, TimelineItem, AcademicModule, AcademicGalleryItem, ExperienceItem } from './types';
+import { NavSection, TimelineItem, AcademicModule, AcademicGalleryItem, ExperienceItem, AcademicJob } from './types';
 
 // --- Components ---
 
@@ -651,7 +651,7 @@ const AcademicLayout: React.FC<AcademicLayoutProps> = ({
 
   // Render content based on module type
   const renderModuleContent = (module: AcademicModule) => {
-    const { type, content, honors, activities } = module;
+    const { type, content, honors, activities, jobs } = module;
     
     // Default prose content wrapper
     const renderProse = () => (
@@ -682,6 +682,27 @@ const AcademicLayout: React.FC<AcademicLayoutProps> = ({
              <li key={idx} className="flex justify-between items-center p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700">
                 <span className="text-slate-700 dark:text-slate-200 font-medium">{item.title}</span>
                 <span className="text-sm font-mono text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900 px-2 py-1 rounded border border-slate-100 dark:border-slate-800 ml-4 flex-shrink-0">{item.year}</span>
+             </li>
+           ))}
+         </ul>
+      </div>
+    );
+
+    // Jobs List Component
+    const renderJobs = (items: AcademicJob[]) => (
+      <div className="space-y-4 mt-8 pt-8 border-t border-slate-200 dark:border-slate-800 animate-fadeIn">
+         <h4 className="text-lg font-bold text-emerald-600 dark:text-neon flex items-center gap-2">
+           <Briefcase size={20} />
+           Internships & Part-time Work
+         </h4>
+         <ul className="space-y-3">
+           {items.map((item, idx) => (
+             <li key={idx} className="flex justify-between items-center p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700">
+                <div className="flex flex-col">
+                    <span className="text-slate-700 dark:text-slate-200 font-medium">{item.role}</span>
+                    <span className="text-xs text-slate-500 dark:text-slate-400 mt-1">{item.company}</span>
+                </div>
+                <span className="text-sm font-mono text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900 px-2 py-1 rounded border border-slate-100 dark:border-slate-800 ml-4 flex-shrink-0 text-right">{item.year}</span>
              </li>
            ))}
          </ul>
@@ -745,11 +766,12 @@ const AcademicLayout: React.FC<AcademicLayoutProps> = ({
        );
     }
     
-    // Default + Optional Honors + Activities (Merged)
+    // Default + Optional Honors + Jobs + Activities (Merged)
     return (
       <div className="animate-fadeIn">
         {renderProse()}
         {honors && honors.length > 0 && renderHonors(honors)}
+        {jobs && jobs.length > 0 && renderJobs(jobs)}
         {activities && activities.length > 0 && renderActivities(activities)}
       </div>
     );
@@ -883,17 +905,6 @@ const AcademicLayout: React.FC<AcademicLayoutProps> = ({
                      {activeModule.title}
                    </h2>
                    {renderModuleContent(activeModule)}
-
-                    {/* Tags */}
-                    {activeModule.tags && (
-                      <div className="flex flex-wrap gap-2 mt-8 pt-8 border-t border-slate-200 dark:border-slate-800">
-                        {activeModule.tags.map((tag, i) => (
-                          <span key={i} className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-full text-xs font-medium border border-slate-200 dark:border-slate-700">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
                 </div>
               ) : (
                 // --- STACK MODE: Show all modules vertically ---
@@ -910,17 +921,6 @@ const AcademicLayout: React.FC<AcademicLayoutProps> = ({
                         
                         {/* Content */}
                         {renderModuleContent(module)}
-
-                        {/* Tags */}
-                        {module.tags && (
-                          <div className="flex flex-wrap gap-2 mt-6">
-                            {module.tags.map((tag, i) => (
-                              <span key={i} className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-full text-xs font-medium border border-slate-200 dark:border-slate-700">
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        )}
                     </div>
                   ))}
                 </div>

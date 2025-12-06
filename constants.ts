@@ -418,6 +418,23 @@ export const EDUCATION: EducationItem[] = [
         honors: [
           { title: "Best System Design Award - Department of Information and Communications", year: "November, 2014" }
         ],
+        jobs: [
+          {
+            role: "Logistics Assistant",
+            company: "Yang Feng International Co., Ltd.",
+            year: "Apr 2015 – Jun 2015"
+          },
+          {
+            role: "Digital Content Assistant",
+            company: "Hwa Da Digital Co., Ltd.",
+            year: "Mar 2014 – Mar 2015"
+          },
+          {
+            role: "Information Service Assistant",
+            company: "Shih Hsin University Library",
+            year: "Jul 2012 – Jan 2014"
+          }
+        ],
         activities: [
            { name: "Department Student Association (Info. & Comms.)", year: "2013 – 2014" },
            { name: "Guitar Club", year: "2012 – 2013" }
@@ -518,6 +535,9 @@ export const EDUCATION: EducationItem[] = [
           { title: "Model Student Award", year: "2011" },
           { title: "Ranked 1st in Class for 4 consecutive semesters", year: "2009-2011" },
           { title: "Ranked 5th in Entire School (across all departments)", year: "2011" }
+        ],
+        activities: [
+          { name: "Information Technology Club", year: "2008 – 2011" }
         ]
       },
       {
