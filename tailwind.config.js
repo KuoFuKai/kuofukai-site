@@ -18,7 +18,7 @@ export default {
         neon: '#84cc16', // Lime 500
       },
       animation: {
-        marquee: 'marquee 60s linear infinite',
+        marquee: 'marquee 100s linear infinite',
         'marquee-vertical': 'marquee-vertical 40s linear infinite', // Faster than horizontal
       },
       keyframes: {
