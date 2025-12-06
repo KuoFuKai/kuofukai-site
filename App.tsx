@@ -478,7 +478,7 @@ interface AcademicLayoutProps {
   modules: AcademicModule[];
   gallery?: AcademicGalleryItem[];
   location: string;
-  stats?: { gpa?: string; rank?: string; avgScore?: string };
+  stats?: { gpa?: string; rank?: string; avgScore?: string; rankLabel?: string }; // Added rankLabel
   tagline?: string; // Added optional tagline prop
   department?: string; // Added optional department prop
   variant?: 'tabs' | 'stack'; // Added variant to control layout mode
@@ -997,17 +997,6 @@ const SplitContentLayout = ({
   onImageUpload?: () => void,
   tagline?: string;
 }) => {
-  // Parsing helper specifically for this component to handle bolding in details list
-  const parseText = (text: string) => {
-    const parts = text.split(/(\*\*.*?\*\*)/g);
-    return parts.map((part, index) => {
-      if (part.startsWith('**') && part.endsWith('**')) {
-        return <strong key={index} className="font-bold text-slate-900 dark:text-white">{part.slice(2, -2)}</strong>;
-      }
-      return <span key={index}>{part}</span>;
-    });
-  };
-
   return (
     <div className="h-full w-full overflow-y-auto bg-white dark:bg-slate-900 text-slate-900 dark:text-white transition-colors duration-300">
       <div className="flex flex-col lg:flex-row min-h-full">
