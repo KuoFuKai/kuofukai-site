@@ -801,11 +801,11 @@ const AcademicLayout: React.FC<AcademicLayoutProps> = ({
     <div className="h-full w-full overflow-hidden bg-white dark:bg-slate-900 text-slate-900 dark:text-white transition-colors duration-300 flex flex-col lg:flex-row">
         
         {/* LEFT COLUMN: Dynamic Content */}
-        {/* Conditional styling: if full width, use w-full, else flex-1 */}
-        <div className={`${isFullWidth ? 'w-full' : 'flex-1'} p-8 lg:p-16 flex flex-col relative z-10 overflow-y-auto transition-all duration-300`}>
-          {/* Conditional Max Width: if full width, wider container (max-w-5xl), else standard (max-w-xl) */}
-          {/* Removed mx-auto to keep text left-aligned and prevent jumping when container width changes */}
-          <div className={`${isFullWidth ? 'max-w-5xl' : 'max-w-xl'} w-full min-h-full flex flex-col transition-all duration-300`}>
+        {/* Conditional styling: if full width, use w-full, else flex-1 and lg:w-1/2 (50%) */}
+        {/* Added px-12 lg:px-24 padding to match Timeline Detail View whitespace */}
+        <div className={`${isFullWidth ? 'w-full' : 'flex-1 lg:w-1/2'} px-12 py-8 lg:px-24 lg:py-16 flex flex-col relative z-10 overflow-y-auto transition-all duration-300`}>
+          {/* Conditional Max Width: if full width, wider container (max-w-5xl), else remove limit to fill space (max-w-none) */}
+          <div className={`${isFullWidth ? 'max-w-5xl' : 'max-w-none'} w-full min-h-full flex flex-col transition-all duration-300`}>
             
             {/* Header with Horizontal Tabs */}
             <div className="mb-8 flex-shrink-0">
@@ -935,10 +935,10 @@ const AcademicLayout: React.FC<AcademicLayoutProps> = ({
         </div>
 
         {/* RIGHT COLUMN: Vertical Marquee (Gallery) */}
-        {/* Only show if not full width */}
+        {/* Only show if not full width. Width set to lg:w-1/2 (50%) with pr-24 padding */}
         {!isFullWidth && (
           <div 
-            className="flex-1 bg-slate-100 dark:bg-black/20 relative overflow-hidden transition-all duration-300"
+            className="flex-1 lg:flex-none lg:w-1/2 bg-slate-100 dark:bg-black/20 relative overflow-hidden transition-all duration-300 lg:pr-24"
             onMouseEnter={handleMarqueeEnter}
             onMouseLeave={handleMarqueeLeave}
           >
@@ -1002,8 +1002,8 @@ const SplitContentLayout = ({
     <div className="h-full w-full overflow-y-auto bg-white dark:bg-slate-900 text-slate-900 dark:text-white transition-colors duration-300">
       <div className="flex flex-col lg:flex-row min-h-full">
         {/* Left Column: Text */}
-        <div className="flex-1 p-8 lg:p-16 flex flex-col justify-center">
-          <div className="max-w-xl mx-auto w-full">
+        <div className="flex-1 p-8 lg:px-24 lg:py-16 flex flex-col justify-center">
+          <div className="max-w-none w-full">
             <h1 className="text-4xl lg:text-5xl font-serif font-bold mb-2 text-slate-900 dark:text-white">{title}</h1>
             
             {/* Tagline Display */}
@@ -1032,7 +1032,8 @@ const SplitContentLayout = ({
         </div>
 
         {/* Right Column: Image Placeholder */}
-        <div className="flex-1 bg-slate-100 dark:bg-black/20 p-8 lg:p-16 flex items-center justify-center relative group min-h-[300px] lg:min-h-auto">
+        {/* Adjusted to lg:w-1/2 (50%) with pr-24 padding */}
+        <div className="flex-1 lg:flex-none lg:w-1/2 bg-slate-100 dark:bg-black/20 p-8 lg:p-16 lg:pr-24 flex items-center justify-center relative group min-h-[300px] lg:min-h-auto">
           <div className="relative w-full aspect-[4/3] max-w-lg rounded-2xl overflow-hidden shadow-2xl bg-slate-200 dark:bg-slate-800">
              <img src={imageSrc} alt={title} className="w-full h-full object-cover" />
              
