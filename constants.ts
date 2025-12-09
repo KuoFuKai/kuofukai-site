@@ -1,6 +1,10 @@
 
 import { TimelineItem, ExperienceItem, EducationItem, Recommendation, TranscriptCourse, ProjectItem, SkillItem } from './types';
 
+/**
+ * Personal Information
+ * Contains basic profile details, tagline, and personal statements (About & DEI).
+ */
 export const PERSONAL_INFO = {
   name: "Kevin",
   tagline: "8+ Years Senior Software Engineer",
@@ -8,6 +12,12 @@ export const PERSONAL_INFO = {
   dei_statement: `Coming from an impoverished background with limited educational resources, I learned to be resourceful and resilient. As an Asian male, my diversity lies in my non-traditional path: a "late bloomer" who overcame significant family tragedy and economic hardship to excel in engineering. I have developed a strong capacity for empathy, allowing me to connect with people from all walks of life—whether leading study groups in a language school in the Philippines or hosting international friends in Taiwan. My mentors have described me as "a burning sun," bringing energy and cohesion to diverse teams.`
 };
 
+/**
+ * Timeline Data
+ * Represents the chronological journey of life events, including personal milestones,
+ * challenges, and turning points. Each item includes a year, title, description,
+ * detailed narrative, and a photo gallery.
+ */
 export const TIMELINE: TimelineItem[] = [
   {
     year: "1993",
@@ -235,6 +245,11 @@ Looking back on my journey, even though my starting point was lower than others,
   }
 ];
 
+/**
+ * Skills Data
+ * Categorized technical and professional skills.
+ * Each category contains a list of skills with proficiency levels and start years.
+ */
 export const SKILLS: SkillItem[] = [
   {
     category: "Languages & Core",
@@ -288,6 +303,11 @@ export const SKILLS: SkillItem[] = [
   }
 ];
 
+/**
+ * Professional Experience Data
+ * Detailed work history including company, role, period, location, and specific
+ * modules describing the role, achievements, and tech stack.
+ */
 export const EXPERIENCE: ExperienceItem[] = [
   {
     id: "delta",
@@ -385,6 +405,11 @@ export const EXPERIENCE: ExperienceItem[] = [
   }
 ];
 
+/**
+ * Education Data
+ * Academic history including degrees, schools, GPA/stats, and detailed modules
+ * covering coursework, thesis projects, and extracurricular activities.
+ */
 export const EDUCATION: EducationItem[] = [
   {
     id: "master",
@@ -440,12 +465,12 @@ export const EDUCATION: EducationItem[] = [
         title: "Edge AI Smart Tour Guide (Master's Thesis Project)",
         content: [
           "📖 **Overview**\nDeveloping a Mobile Learning and Tour-guiding System based on Generative AI Approach. This project is an offline multimodal generative AI tour assistant based on **Embedded Systems**, designed to solve the issues of high latency, cost, and network dependency associated with cloud-based LLMs.\n\nThe system runs entirely offline on a single-board computer (**Nvidia Jetson Orin NX**), integrating Visual Recognition (**YOLO**), Voice Interaction (**Whisper / eSpeak**), and Large Language Models (**Breeze-7B**). It utilizes **RAG (Retrieval-Augmented Generation)** technology to access local knowledge bases. Field experiments at the Tainan Confucius Temple confirmed that this system improved learning efficiency by **18.0%** compared to human guides.",
-          
+
           "🛠️ **Tech Stack**\nThis project demonstrates the ability to deploy and optimize large AI models on edge devices.\n\n• **Hardware:** Nvidia Jetson Orin NX (16GB RAM)\n• **Language:** Python 3.10\n• **Core Models:**\n  - LLM: MediaTek Breeze-7B (Traditional Chinese model based on Mistral-7B)\n  - Vision: YOLOv8 (Object Detection)\n  - ASR (Speech-to-Text): OpenAI Whisper (Base model)\n  - TTS (Text-to-Speech): eSpeak / pyttsx3\n• **Key Technologies:**\n  - RAG (Retrieval-Augmented Generation): LangChain + FAISS + Sentence-Transformers (Knowledge Base Retrieval)\n  - Quantization: BitsAndBytes (4-bit NF4 Quantization, significantly reducing VRAM usage)\n  - Multiprocessing: Separated vision inference and language interaction loops using threading/multiprocessing to ensure real-time performance.\n• **Tools:** PyTorch, CUDA 11.8/12.1, OpenCV",
-          
+
           "🚀 **System Architecture & Features**\n1. **Multimodal Interaction on Edge**\n  - **See:** Uses YOLOv8 to detect historical buildings (e.g., Dacheng Hall) in real-time.\n  - **Listen:** Uses Whisper for offline speech recognition, supporting Chinese spoken commands.\n  - **Think:** Uses quantized Breeze-7B (4-bit) for natural language understanding and generation.\n  - **Speak:** Outputs AI-generated tour content via TTS.\n\n2. **RAG (Retrieval-Augmented Generation)**\n  To solve LLM hallucinations and supplement domain-specific knowledge (Confucius Temple History), a FAISS-based vector database was implemented.\n  The system converts user voice queries into embeddings, retrieves relevant article chunks from the database, and feeds them to the LLM to generate accurate explanations.\n\n3. **Performance Optimization**\n  - **Memory Management:** Successfully deployed a 7B parameter model on a 16GB embedded device using 4-bit quantization.\n  - **Multitasking:** Implemented multiprocessing to decouple the 'Object Detection Loop' from the 'LLM Inference Loop', preventing vision lag from affecting voice interaction.",
 
-          "📂 **Code Structure**\n```plaintext\nsrc/\n├── activate.sh          # System Startup Script (Env Vars)\n├── main.py              # Main Entry Point (Multithreading)\n├── llm_setup.py         # LLM Loader & BitsAndBytes Quantization\n├── rag_setup.py         # Vector DB (FAISS) & Embedding Loader\n├── yolo_util.py         # YOLOv8 Inference & Image Preprocessing\n├── llm_util.py          # RAG Retrieval Process & Prompt Templates\n├── tts_util.py          # Text-to-Speech Module (pyttsx3)\n└── log_util.py          # System Logging\n```",
+          "📂 **Project Structure**\n```plaintext\nsrc/\n├── activate.sh          # System Startup Script (Env Vars)\n├── main.py              # Main Entry Point (Multithreading)\n├── llm_setup.py         # LLM Loader & BitsAndBytes Quantization\n├── rag_setup.py         # Vector DB (FAISS) & Embedding Loader\n├── yolo_util.py         # YOLOv8 Inference & Image Preprocessing\n├── llm_util.py          # RAG Retrieval Process & Prompt Templates\n├── tts_util.py          # Text-to-Speech Module (pyttsx3)\n└── log_util.py          # System Logging\n```",
 
           "💡 **Results**\n• **Offline Capability:** Successfully achieved full AI tour service without internet access.\n• **Low Power:** System power consumption is only **10W-25W** (vs. hundreds of watts for Cloud GPUs).\n• **Educational Impact:** The experimental group's post-test scores improved by **34.2%**, significantly outperforming the control group."
         ],
@@ -506,8 +531,8 @@ export const EDUCATION: EducationItem[] = [
           }
         ],
         activities: [
-           { name: "Department Student Association (Info. & Comms.)", year: "2013 – 2014" },
-           { name: "Guitar Club", year: "2012 – 2013" }
+          { name: "Department Student Association (Info. & Comms.)", year: "2013 – 2014" },
+          { name: "Guitar Club", year: "2012 – 2013" }
         ]
       },
       {
@@ -547,17 +572,15 @@ export const EDUCATION: EducationItem[] = [
         label: "Capstone",
         title: "Taiwander: Roaming Taiwan (Android App)",
         content: [
-          "📱 **Taiwander (Android App)**\nA native Android application integrating LBS positioning, itinerary planning, and local travel information. Won **Best System Design Award**.",
-          
           "📖 **Overview**\nDesigned for independent travelers, Taiwander solves the problem of fragmented travel information. It integrates attraction recommendations, transportation info, and accommodation searches with Google Maps API. Users can arrange depth tours (1-5 days) with offline access support.",
-          
+
           "🛠️ **Tech Stack**\nBuilt with **Native Java** on the Android SDK, focusing on offline capabilities and hardware integration.\n\n• **Core:** Java (JDK 7), Android SDK (Activity, Fragment, ViewPager)\n• **Data:** SQLite (Raw SQL queries, SQLiteOpenHelper)\n• **Maps & LBS:** Google Maps Android API v2, LocationManager (GPS/Network)\n• **Performance:** AsyncTasks for background operations, Bitmap memory optimization",
-          
-          "🚀 **Key Engineering Features**\n1. **Smart Itinerary Planner**\n  - Implements **ViewPager + Fragments** for swipeable multi-day scheduling.\n  - Saves user planning results into local SQLite tables for full offline access.\n\n2. **Pre-loaded Database Deployment**\n  - Solved 'out-of-box' data requirement by packaging a pre-made DB in assets.\n  - streams the DB binary to system paths upon first launch.\n\n3. **Dynamic Recommendation Engine**\n  - Filters attractions based on User Preferences (Region/Type).\n  - Dynamically assembles SQL queries to bind results to UI adapters.\n\n4. **Memory Optimization**\n  - Implemented efficient **BitmapFactory** decoding to prevent Out-Of-Memory (OOM) crashes on older devices.",
+
+          "🚀 **System Architecture & Features**\n1. **Smart Itinerary Planner**\n  - Implements **ViewPager + Fragments** for swipeable multi-day scheduling.\n  - Saves user planning results into local SQLite tables for full offline access.\n\n2. **Pre-loaded Database Deployment**\n  - Solved 'out-of-box' data requirement by packaging a pre-made DB in assets.\n  - streams the DB binary to system paths upon first launch.\n\n3. **Dynamic Recommendation Engine**\n  - Filters attractions based on User Preferences (Region/Type).\n  - Dynamically assembles SQL queries to bind results to UI adapters.\n\n4. **Memory Optimization**\n  - Implemented efficient **BitmapFactory** decoding to prevent Out-Of-Memory (OOM) crashes on older devices.",
 
           "📂 **Project Structure**\n```plaintext\nsrc/com/example/happy/\n├── MainActivity.java       # Entry Point & Navigation\n├── Map.java                # Google Maps Controller\n├── DBManager.java          # Asset to System DB Migration\n├── CustomTour.java         # Itinerary Logic (FragmentActivity)\n├── RecommendedTour.java    # SQL Query Builder\n└── [Region]Content.java    # Dynamic Content Loaders\n```",
-          
-          "💡 **Conclusion**\nAlthough built during the early stages of Android development, this project encompassed the complete App development lifecycle—ranging from database planning and UI/UX design to Google services integration and hardware sensor (GPS) application. It serves not only as a travel tool but as a testament to my learning journey, evolving from basic Java logic to mastering complex Android frameworks."
+
+          "💡 **Results**\nAlthough built during the early stages of Android development, this project encompassed the complete App development lifecycle—ranging from database planning and UI/UX design to Google services integration and hardware sensor (GPS) application. It serves not only as a travel tool but as a testament to my learning journey, evolving from basic Java logic to mastering complex Android frameworks."
         ],
         tags: ["Java", "Android SDK", "SQLite", "Google Maps API", "LBS", "ViewPager"]
       }
@@ -615,11 +638,15 @@ export const EDUCATION: EducationItem[] = [
       { image: "images/academic/highschool/2.webp", description: "Receiving the graduate award at the ceremony" },
       { image: "images/academic/highschool/3.webp", description: "Receiving the Mayor's Award from the Mayor of Taipei (Grandpa on the right)" }
     ],
-    details: [], 
-    description: "" 
+    details: [],
+    description: ""
   }
 ];
 
+/**
+ * Recommendations
+ * Testimonials from professors, supervisors, and colleagues.
+ */
 export const RECOMMENDATIONS: Recommendation[] = [
   {
     author: "Mu-Yen Chen",
@@ -652,6 +679,10 @@ export const RECOMMENDATIONS: Recommendation[] = [
   }
 ];
 
+/**
+ * Transcript Data
+ * A selected list of key courses with grades and scores to showcase academic performance.
+ */
 export const TRANSCRIPTS: TranscriptCourse[] = [
   // NCKU
   { title: "Artificial Intelligence", credits: 3, score: 95, grade: "A+", semester: "Fall 2022" },
@@ -669,6 +700,11 @@ export const TRANSCRIPTS: TranscriptCourse[] = [
   { title: "Case Study on Digital Resource Management", credits: 3, score: 93, grade: "A", semester: "Spring 2015" },
 ];
 
+/**
+ * Projects Data
+ * Highlighted projects (e.g., Thesis, Capstone) with descriptions, tags, and achievements.
+ * Used for quick summaries or specific project sections.
+ */
 export const PROJECTS: ProjectItem[] = [
   {
     title: "Generative AI Mobile Guide",
