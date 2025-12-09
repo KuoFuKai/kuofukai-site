@@ -13,12 +13,18 @@ export const TIMELINE: TimelineItem[] = [
     title: "Humble Beginnings",
     description: "Born into financial adversity and raised by the enduring love of a grandmother.",
     icon: "User",
-    details: `I was born into a family that had fallen into decline. Originally, our family owned considerable land in Taipei, but in the year of my birth, my grandfather's company declared bankruptcy. consequently, from the moment I entered the world, my family—including my parents, uncle, and aunt—was desperately working to pay off debts. My parents were not highly educated; both only graduated from junior high school and never attended high school. My mother, an adopted daughter in an old agricultural society, was treated unfairly and poorly by her adoptive parents, and sadly, some of that physical and verbal discipline was passed down to me. Since my parents were busy working, I was raised by my grandmother from a young age. She was my primary caregiver, and I shared the deepest bond with her.
+    details: `I was born into a family that had fallen into decline. I am an only child; my father was an ironworker, and my mother was a cleaner. Originally, our family owned considerable land in Taipei, but in the year of my birth, my grandfather's company declared bankruptcy. Consequently, from the moment I entered the world, my family—including my parents, uncle, and aunt—was desperately working to pay off debts. My parents were not highly educated; both only graduated from junior high school and never attended high school. My mother, an adopted daughter in an old agricultural society, was treated unfairly and poorly by her adoptive parents, and sadly, some of that physical and verbal discipline was passed down to me. Driven by economic necessity, like most modern parents, my father and mother were busy working when I was very young. Therefore, I was raised by my grandmother from a young age. She was my primary caregiver, and I shared the deepest bond with her—even closer than the bond I had with my mother.
 
 Academically, I was unremarkable as a child. Throughout elementary and junior high school, I consistently ranked in the bottom three of my class, spending my days doodling in textbooks. During junior high, my father often lived at the factory, and my mother frequently worked night shifts at a nursing home caring for the elderly. As an only child, I felt a profound sense of loneliness very early on. During those times, the computer became my best friend. In my third year of junior high, I discovered online that students who got into top high schools seemed to live happy, fulfilling lives. I desperately wanted to turn my life around and be like them. However, even though I wanted to study hard and stayed late at school every day, I didn't know where to start. I lacked the foundation from previous years, and there was no one to guide me toward the future.`,
     gallery: [
-      { image: "/images/timeline/1993/1.jpg", description: "小學畢業照，猜的到我在哪嗎?" },
-      { image: "/images/timeline/1993/2.jpg", description: "國中班遊" }
+      { image: "/images/timelines/1993/1.webp", description: "剛出生的我在媽媽手中" },
+      { image: "/images/timelines/1993/2.webp", description: "1993 Snapshot 2" },
+      { image: "/images/timelines/1993/3.webp", description: "1993 Snapshot 3" },
+      { image: "/images/timelines/1993/4.webp", description: "1993 Snapshot 4" },
+      { image: "/images/timelines/1993/5.webp", description: "1993 Snapshot 5" },
+      { image: "/images/timelines/1993/6.webp", description: "1993 Snapshot 6" },
+      { image: "/images/timelines/1993/7.webp", description: "1993 Snapshot 7" },
+      { image: "/images/timelines/1993/8.webp", description: "國中畢業典禮前，我與朋友們在一起" }
     ]
   },
   {
@@ -32,8 +38,12 @@ My grades remained stagnant during my first year. It wasn't until my second year
 
 Fate, however, played a cruel joke. Before my major college entrance exam, my father committed suicide due to economic pressures. At the same time, my mother was embroiled in a property dispute with my father's family. In high school, I couldn't truly forgive my mother, as I had been raised by my grandmother. Despite this overwhelming grief, I managed to rank first among all ordinary classes in the school on the national exam. This is a rare feat in Taiwan, as most parents who value education send their children to cram schools on weekends. Due to my family's financial situation, I relied almost entirely on self-study during evening sessions at school and weekends at the library. In my senior year, I was honored as a Model Student and received the Taipei Mayor's Award on behalf of my class, accepting the certificate personally from the Mayor of Taipei.`,
     gallery: [
-      { image: "/images/timeline/2008/1.jpg", description: "畢業典禮照" },
-      { image: "/images/timeline/2008/2.jpg", description: "接收台北市市長頒發的獎狀" }
+      { image: "/images/timelines/2008/1.webp", description: "高中校慶時，與朋友合照" },
+      { image: "/images/timelines/2008/2.webp", description: "2008 Snapshot 2" },
+      { image: "/images/timelines/2008/3.webp", description: "2008 Snapshot 3" },
+      { image: "/images/timelines/2008/4.webp", description: "2008 Snapshot 4" },
+      { image: "/images/timelines/2008/5.webp", description: "即使到現在，我們這些高中同學仍會定期碰面-1" },
+      { image: "/images/timelines/2008/6.webp", description: "即使到現在，我們這些高中同學仍會定期碰面-2" }
     ]
   },
   {
@@ -47,9 +57,15 @@ I was not content with being an ordinary student. Starting in my sophomore year,
 
 For our senior graduation exhibition, my group decided to build an Android App themed around independent travel. While the other four members handled planning, marketing, PM, and design, I served as the lead developer. I built my first App in just one month by buying books and teaching myself. In my department, only two people, including myself, managed to complete Android software using actual code. I won the department's "Best System Design Award" at the external exhibition. This was a glorious moment in my life; I realized that if I could achieve something the school hadn't even taught me, there was no difficulty in life I couldn't overcome.`,
     gallery: [
-      { image: "https://picsum.photos/seed/2011-1/800/600", description: "Coding the first App" },
-      { image: "https://picsum.photos/seed/2011-2/800/600", description: "Best System Design Award" },
-      { image: "https://picsum.photos/seed/2011-3/800/600", description: "Double major studies" }
+      { image: "/images/timelines/2011/1.webp", description: "大學時參加吉他社的花絮" },
+      { image: "/images/timelines/2011/2.webp", description: "大三時，我組織了班上的機車環台灣島-1" },
+      { image: "/images/timelines/2011/3.webp", description: "大三時，我組織了班上的機車環台灣島-2" },
+      { image: "/images/timelines/2011/4.webp", description: "我參加了系對抗的壘球賽" },
+      { image: "/images/timelines/2011/5.webp", description: "我們這團忙著進行Capstone的研究" },
+      { image: "/images/timelines/2011/6.webp", description: "校外成果展，給民眾展現大學四年所學" },
+      { image: "/images/timelines/2011/7.webp", description: "校外展大獲成功" },
+      { image: "/images/timelines/2011/8.webp", description: "我與朋友們一起著學士服合照" },
+      { image: "/images/timelines/2011/9.webp", description: "在泰國的畢業旅行，啦啦隊是我們大學的傳統" }
     ]
   },
   {
@@ -59,13 +75,15 @@ For our senior graduation exhibition, my group decided to build an Android App t
     icon: "Shield",
     details: `From July 2015 to July 2016, I served my mandatory military service in the Taiwan Air Force. Fate once again tested me; during the lottery draw, I was assigned to the most remote unit. Out of over 800 people in my draft, only 11, including me, were sent to this unit located on Dongyin, an outer island of Matsu. This small island is the frontline facing China.
 
-There, we lived under constant high stress, standing guard for three shifts a day (two hours per shift: morning, afternoon, and early morning). We could only return home once every two months. If I lost a game of Rock-Paper-Scissors, I had to jump into a freezing, foul-smelling ditch to clear grease blockages from the kitchen. I also faced unreasonable treatment and humiliation from officers and slept in tunnels blasted out by explosives.
-
-On that remote island far from home, I withstood many hardships for a year, but I also met many comrades who remain my good brothers to this day. While I stood guard in 0-degree weather in Dongyin, some of my university classmates, holding Green Cards and supported by wealthy families with houses and cars, were training to be pilots in the US—also in 0-degree weather, but with a vastly different fate.`,
+There, we lived under constant high stress, standing guard for three shifts a day (two hours per shift: morning, afternoon, and early morning). We could only return home once every two months. I have a vivid memory from winter when the kitchen sewage pipe was clogged with food residue and grease. I had to strip down to my underwear and jump into the sub-zero, foul-smelling ditch to clear it. On that remote island far from home, because of my good nature, I was often targeted by officers who wanted to "make an example" of someone to scare the others. I faced unreasonable treatment and humiliation daily, sleeping in tunnels blasted out by explosives. I viewed this suffering as training and withstood these hardships for a year. Through it all, I met many comrades in the camp who remain my good brothers to this day. Ironically, while I stood guard in 0-degree weather in Dongyin, some of my university classmates, holding Green Cards and supported by wealthy families with houses and cars, were training to be pilots in the US—also in 0-degree weather, but with a vastly different fate.`,
     gallery: [
-      { image: "https://picsum.photos/seed/2015-1/800/600", description: "Matsu Island Outpost" },
-      { image: "https://picsum.photos/seed/2015-2/800/600", description: "Standing guard in winter" },
-      { image: "https://picsum.photos/seed/2015-3/800/600", description: "Military service brotherhood" }
+      { image: "/images/timelines/2015/1.webp", description: "在我當兵的小島，沒有飛機，返鄉都要靠船" },
+      { image: "/images/timelines/2015/2.webp", description: "2015 Snapshot 2" },
+      { image: "/images/timelines/2015/3.webp", description: "2015 Snapshot 3" },
+      { image: "/images/timelines/2015/4.webp", description: "2015 Snapshot 4" },
+      { image: "/images/timelines/2015/5.webp", description: "2015 Snapshot 5" },
+      { image: "/images/timelines/2015/6.webp", description: "2015 Snapshot 6" },
+      { image: "/images/timelines/2015/7.webp", description: "退伍時的合照" }
     ]
   },
   {
@@ -73,15 +91,21 @@ On that remote island far from home, I withstood many hardships for a year, but 
     title: "The Rise of a Full Stack Developer",
     description: "Overcoming imposter syndrome and personal tragedy to become a key technical contributor.",
     icon: "Briefcase",
-    details: `After my discharge in 2017, I joined Synnex Technology International Corporation, one of the largest distributors of IT products in the world, as a Java Full Stack Developer. Because I wasn't a CS major, I faced many difficulties and obstacles in my first year. Almost every month during the Monthly Report, I was humiliated by my supervisor in front of everyone, and I shed tears in the office restroom multiple times. However, I didn't run away; I worked harder to improve myself. I believed that if I escaped then, I would face the same problems later.
+    details: `After my discharge in 2017, I joined Synnex Technology International Corporation, one of the largest distributors of IT products in the world, as a Java Full Stack Developer. Because I wasn't a CS major, I faced many difficulties and obstacles in my first year. Almost every month during the Monthly Report, I was humiliated by my supervisor in front of everyone, and I shed tears in the office restroom multiple times. However, I didn't run away; I worked harder to improve myself. I believed that if I escaped then, I would face the same problems later. I put in many times more effort than others, staying up late to make up for my deficiencies.
 
-By my second year, my code had fewer bugs, and I developed my own ideas regarding system design. I assisted my team in implementing a shared JSON system that reduced the development time for customized order software for vendors from one week to one day, covering 80% of use cases. Once, I was assigned a critical task that a colleague hadn't been able to solve in two weeks; I finished it in two days. I pulled all-nighters until 6:00 AM for two consecutive days—still showing up for work at 8:00 AM—and successfully saved the company a 100,000 AUD reward from Apple.
+Finally, by my second year, my code had fewer bugs, and I developed my own ideas regarding system design. I assisted my team in implementing a shared JSON system that reduced the development time for customized order software for vendors from one week to one day, covering 80% of use cases. Once, I was assigned a critical task that a colleague hadn't been able to solve in two weeks; I finished it in two days. I pulled all-nighters until 6:00 AM for two consecutive days—still showing up for work at 8:00 AM—and successfully saved the company a 100,000 AUD reward from Apple.
 
 That year, my aunt suddenly declared bankruptcy, forcing me to shoulder a heavier financial burden at home. Simultaneously, my grandmother was diagnosed with stage 3 breast cancer. In the face of illness, I realized how small humans are. Every day after work, I would buy food and go to the hospital to eat dinner with her. Fortunately, she gradually recovered. By my third year, I began to think about further education and a career change. I wanted to learn more, take on greater responsibilities, and started dreaming of studying abroad.`,
     gallery: [
-      { image: "https://picsum.photos/seed/2017-1/800/600", description: "Working at Synnex" },
-      { image: "https://picsum.photos/seed/2017-2/800/600", description: "Optimizing system architecture" },
-      { image: "https://picsum.photos/seed/2017-3/800/600", description: "Caring for grandmother" }
+      { image: "/images/timelines/2017/1.webp", description: "上班時大家一起討論愉快的氛圍" },
+      { image: "/images/timelines/2017/2.webp", description: "2017 Snapshot 2" },
+      { image: "/images/timelines/2017/3.webp", description: "2017 Snapshot 3" },
+      { image: "/images/timelines/2017/4.webp", description: "2017 Snapshot 4" },
+      { image: "/images/timelines/2017/5.webp", description: "2017 Snapshot 5" },
+      { image: "/images/timelines/2017/6.webp", description: "2017 Snapshot 6" },
+      { image: "/images/timelines/2017/7.webp", description: "2017 Snapshot 7" },
+      { image: "/images/timelines/2017/8.webp", description: "2017 Snapshot 8" },
+      { image: "/images/timelines/2017/9.webp", description: "即使大多數的人身在不同公司，但我仍組織了我們組的聚餐，前主管與前同事都來參加" }
     ]
   },
   {
@@ -91,7 +115,7 @@ That year, my aunt suddenly declared bankruptcy, forcing me to shoulder a heavie
     icon: "Heart",
     details: `Just as I thought things were getting on track, in 2020, my mother was suddenly diagnosed with cancer. My personality is such that once I feel a lack of challenge in a company, I want to leave for a more challenging environment, and I also wanted to pursue a Master's degree to deepen my professional knowledge. However, because I needed more paid leave to take care of her, I had to stay at my original company. This was a challenge in itself, as my relationship with my mother was not good. Around 2019, my mother, whom I hadn't seen for a long time, suddenly showed up after work to insult my deceased father and my grandmother, who had just recovered from cancer. When she attacked my beloved grandmother, I snapped, and we argued until the police arrived.
 
-About half a year later, she got cancer. The moment I found out, I decided to take her on a trip after her hospital checkups to create memories. After surgery, we thought she was better, but the bad news returned—the cancer cells had quickly spread to her brain. During this time, she also suffered from Bipolar Disorder. The most chaotic moment involved a fire truck, a police car, and an ambulance all crowded into the alley of my home. That was the first time in my life I received calls from the police so frequently. She was eventually admitted to the psychiatric intensive care unit, where I stayed with her for quite some time—my first frequent experience with mental hospitals.
+About half a year later, she got cancer. The moment I found out, I decided to take her on a trip after her hospital checkups to create memories. After surgery, we thought she was better, but the bad news returned—the cancer cells had quickly spread to her brain. During this time, she also suffered from Bipolar Disorder. The most chaotic moment involved a fire truck, a police car, and an ambulance all crowded into the alley of my home. That period marked the first time in my life I received calls from the police so frequently. Following one incident where the police were called, she was admitted to the psychiatric intensive care unit. I stayed there with her for quite some time. This was my first frequent experience with mental hospitals, and I still recall the psychiatric ICU with fear: windowless rooms filled with red graffiti and text, and patients groaning or behaving strangely.
 
 My most vivid memory is from the COVID-19 pandemic. Even while working from home, I had to live in the hospital with my laptop to accompany my mother. I had to bathe her, help her to the toilet, and clean up when she wet the bed. When the cancer metastasized to her skin, I helped change her dressings almost daily. One distinct memory is when my mother needed to use the toilet but couldn't step over the small threshold. My grandmother, having just recovered from cancer, helped me support her. My mother's slipper fell off as we crossed the step, and the three of us looked at each other and shared a helpless smile. Hospital visits were the most troublesome because we lived in a walk-up apartment. I had to carry her downstairs before the visit and carry her back up afterward (luckily, I was working out at the time).
 
@@ -101,9 +125,11 @@ This life lasted for over two years. As an only child, I had to shoulder it all.
 
 I was 28, and both my parents were gone. I felt a sense of emptiness. However, within a month of her passing, at a company dinner, I realized I was the only one there with just a Bachelor's degree. That night, I decided to pursue a Master's. After a round of research, I found most deadlines were three days away. I spent two days preparing my application and recommendation letters and barely sent them out on the deadline. I wasn't immediately accepted, unlike two-thirds of the applicants; due to low application scores, I had to interview. Perhaps my mother was watching over me—I scored very high on the interview and was admitted as the first person on the waiting list to National Cheng Kung University (NCKU), a top-four university in Taiwan.`,
     gallery: [
-      { image: "https://picsum.photos/seed/2020-1/800/600", description: "Working from hospital" },
-      { image: "https://picsum.photos/seed/2020-2/800/600", description: "Vocational training" },
-      { image: "https://picsum.photos/seed/2020-3/800/600", description: "Preparing applications" }
+      { image: "/images/timelines/2020/1.webp", description: "自從知道媽媽身患癌症後，我便帶著她到處出遊" },
+      { image: "/images/timelines/2020/2.webp", description: "2020 Snapshot 2" },
+      { image: "/images/timelines/2020/3.webp", description: "2020 Snapshot 3" },
+      { image: "/images/timelines/2020/4.webp", description: "2020 Snapshot 4" },
+      { image: "/images/timelines/2020/5.webp", description: "快整理完前，與爸媽的婚紗照合照" }
     ]
   },
   {
@@ -111,7 +137,7 @@ I was 28, and both my parents were gone. I felt a sense of emptiness. However, w
     title: "Dual Life",
     description: "Achieving academic distinction and professional success at the cost of extreme personal sacrifice.",
     icon: "Zap",
-    details: `NCKU is in Tainan, but I was in Taipei. Starting in 2022, I simultaneously experienced resigning, getting married, buying a house, finding my ideal job (Delta Electronics, one of the largest providers of switching power supplies and thermal management solutions in the world), and studying for my Master's. During those days, I spent 50 minutes commuting to the Southern Taiwan Science Park for work every morning, and another 50 minutes commuting to NCKU for class every night. I pulled all-nighters constantly, but I set a goal: graduate in two years.
+    details: `NCKU is in Tainan, but I was in Taipei. Starting in 2022, I simultaneously experienced resigning, getting married, buying a house, finding my ideal job (Delta Electronics, one of the largest providers of switching power supplies and thermal management solutions in the world), and studying for my Master's. During those days, I spent 50 minutes commuting to the Southern Taiwan Science Park for work every morning, and another 50 minutes commuting to NCKU for class every night. Throughout this period of studying and working, I stayed up late every day, often sleeping less than three hours, but I set a goal for myself: I must graduate within two years.
 
 I found an advisor immediately after acceptance and joined the lab's Weekly Meetings before school even started. I also sat in on senior oral defenses—something most students don't do until later. Because I didn't want the degree just for the diploma, I deliberately chose difficult courses like Computer Networks, Computer Vision, Advanced Data Structures, and Advanced Algorithms. Despite never having taken the basic versions of some of these, I achieved straight A's.
 
@@ -121,11 +147,31 @@ While writing my thesis, I slept only three hours a day. I used every weekend an
 
 I then took my thesis to Tokyo, Japan, to present at the International Conference on Intelligent Science and Sustainable Development (ISASD). This was rare for a working student; the other two attendees only presented posters, but I cared deeply about my academic achievement. In July 2024, I flew to the Tokyo Institute of Technology and gave a full English presentation—a risk, as I had never done so before—but it received unanimous praise. My paper later won a "Honorable Mention Award" from the Institution of Engineering and Technology, Taipei Local Network in October 2024. It was also accepted by the International Journal of Human-Computer Interaction on December 3, 2025, titled From Content to Conversation: Explaining Adoption of On-Device Generative AI Tour Guides.
 
-It is worth mentioning the background of these achievements: during my Master's, my then-wife felt neglected. We often argued until 2:00 AM even when I had finals the next day. We divorced in January 2025, six months after I graduated. In the final month, I sought help from a psychiatrist. Fortunately, I have moved past that pain and continue toward my dreams. Since graduating, I haven't slowed down; I learned Scuba Diving and obtained licenses for driving fishing vessels and yachts—skills possessed by very few young people in Taiwan.`,
+It is worth mentioning the background of these achievements: during my Master's, my then-wife felt neglected. We often argued until 2:00 AM even when I had finals the next day. We divorced in January 2025, six months after I graduated. In the final month, I sought help from a psychiatrist. Fortunately, I have moved past that pain and continue toward my dreams. Since graduating, I haven't slowed down; I learned IELTS English, Scuba Diving, and obtained licenses for driving power boats and yachts—skills possessed by very few young people in Taiwan.`,
     gallery: [
-      { image: "https://picsum.photos/seed/2022-1/800/600", description: "NCKU Campus" },
-      { image: "https://picsum.photos/seed/2022-2/800/600", description: "Delta Electronics Lab" },
-      { image: "https://picsum.photos/seed/2022-3/800/600", description: "Thesis Presentation" }
+      { image: "/images/timelines/2022/1.webp", description: "面試NCKU工程科學系的早晨" },
+      { image: "/images/timelines/2022/2.webp", description: "2022 Snapshot 2" },
+      { image: "/images/timelines/2022/3.webp", description: "2022 Snapshot 3" },
+      { image: "/images/timelines/2022/4.webp", description: "2022 Snapshot 4" },
+      { image: "/images/timelines/2022/5.webp", description: "2022 Snapshot 5" },
+      { image: "/images/timelines/2022/6.webp", description: "2022 Snapshot 6" },
+      { image: "/images/timelines/2022/7.webp", description: "2022 Snapshot 7" },
+      { image: "/images/timelines/2022/8.webp", description: "2022 Snapshot 8" },
+      { image: "/images/timelines/2022/9.webp", description: "2022 Snapshot 9" },
+      { image: "/images/timelines/2022/10.webp", description: "2022 Snapshot 10" },
+      { image: "/images/timelines/2022/11.webp", description: "2022 Snapshot 11" },
+      { image: "/images/timelines/2022/12.webp", description: "2022 Snapshot 12" },
+      { image: "/images/timelines/2022/13.webp", description: "2022 Snapshot 13" },
+      { image: "/images/timelines/2022/14.webp", description: "2022 Snapshot 14" },
+      { image: "/images/timelines/2022/15.webp", description: "2022 Snapshot 15" },
+      { image: "/images/timelines/2022/16.webp", description: "2022 Snapshot 16" },
+      { image: "/images/timelines/2022/17.webp", description: "2022 Snapshot 17" },
+      { image: "/images/timelines/2022/18.webp", description: "2022 Snapshot 18" },
+      { image: "/images/timelines/2022/19.webp", description: "2022 Snapshot 19" },
+      { image: "/images/timelines/2022/20.webp", description: "2022 Snapshot 20" },
+      { image: "/images/timelines/2022/21.webp", description: "2022 Snapshot 21" },
+      { image: "/images/timelines/2022/22.webp", description: "2022 Snapshot 22" },
+      { image: "/images/timelines/2022/23.webp", description: "離開台達電子的當下" }
     ]
   },
   {
@@ -139,9 +185,22 @@ I chose what is reputed to be the best IELTS school in the Philippines, opting f
 
 My time in the Philippines marked my first true step onto the international stage. From day one, I made many friends from Japan and Korea. Despite the grueling study schedule, I organized weekly weekend trips for us in Baguio. I discovered that my personality translates across borders; just as I maintain good relationships with friends from every stage of life in Taiwan, I did the same abroad. This gave me immense confidence. Even now, though we are no longer in the Philippines, I frequently coordinate cross-national video calls, managing time zones for friends in Vancouver, Christchurch, Kuala Lumpur, Seoul, and Nagoya. During my time in the Philippines, I not only formed close bonds with my classmates but also established unparalleled relationships with every teacher, regardless of their age. One teacher described me by saying, "Every time I see you, it's like seeing the sun; however, the people who appear the most optimistic always have the saddest stories." This experience gave me lifelong friends, and we share a dream to go on a Road Trip in North America together.`,
     gallery: [
-      { image: "https://picsum.photos/seed/2025-1/800/600", description: "Studying in Philippines" },
-      { image: "https://picsum.photos/seed/2025-2/800/600", description: "International friends" },
-      { image: "https://picsum.photos/seed/2025-3/800/600", description: "Weekend trips in Baguio" }
+      { image: "/images/timelines/2025/1.webp", description: "我在入學後的第二個禮拜，便組織了不同國籍的同學間，兩天一夜的旅行" },
+      { image: "/images/timelines/2025/2.webp", description: "2025 Snapshot 2" },
+      { image: "/images/timelines/2025/3.webp", description: "2025 Snapshot 3" },
+      { image: "/images/timelines/2025/4.webp", description: "2025 Snapshot 4" },
+      { image: "/images/timelines/2025/5.webp", description: "2025 Snapshot 5" },
+      { image: "/images/timelines/2025/6.webp", description: "2025 Snapshot 6" },
+      { image: "/images/timelines/2025/7.webp", description: "2025 Snapshot 7" },
+      { image: "/images/timelines/2025/8.webp", description: "2025 Snapshot 8" },
+      { image: "/images/timelines/2025/9.webp", description: "2025 Snapshot 9" },
+      { image: "/images/timelines/2025/10.webp", description: "2025 Snapshot 10" },
+      { image: "/images/timelines/2025/11.webp", description: "2025 Snapshot 11" },
+      { image: "/images/timelines/2025/12.webp", description: "2025 Snapshot 12" },
+      { image: "/images/timelines/2025/13.webp", description: "2025 Snapshot 13" },
+      { image: "/images/timelines/2025/14.webp", description: "2025 Snapshot 14" },
+      { image: "/images/timelines/2025/15.webp", description: "2025 Snapshot 15" },
+      { image: "/images/timelines/2025/16.webp", description: "我與我菲律賓的老師們都保持著非常好的關係" }
     ]
   },
   {
@@ -155,9 +214,23 @@ My personality allows me to quickly understand people's traits and tendencies, o
 
 Looking back on my journey, even though my starting point was lower than others, I have continued to climb. I remain passionate about life, strict with myself, and lenient with others. I hope that you, reading this, can give me a chance to realize my dreams and change my life, allowing the world to see that even a child born with my background has the opportunity to make their dreams a reality.`,
     gallery: [
-      { image: "https://picsum.photos/seed/present-1/800/600", description: "Ready for US Graduate School" },
-      { image: "https://picsum.photos/seed/present-2/800/600", description: "Embracing the future" },
-      { image: "https://picsum.photos/seed/present-3/800/600", description: "New beginnings" }
+      { image: "/images/timelines/present/1.webp", description: "玉山登山口的照片，時間為凌晨兩點" },
+      { image: "/images/timelines/present/2.webp", description: "Present Snapshot 2" },
+      { image: "/images/timelines/present/3.webp", description: "Present Snapshot 3" },
+      { image: "/images/timelines/present/4.webp", description: "Present Snapshot 4" },
+      { image: "/images/timelines/present/5.webp", description: "Present Snapshot 5" },
+      { image: "/images/timelines/present/6.webp", description: "Present Snapshot 6" },
+      { image: "/images/timelines/present/7.webp", description: "Present Snapshot 7" },
+      { image: "/images/timelines/present/8.webp", description: "Present Snapshot 8" },
+      { image: "/images/timelines/present/9.webp", description: "Present Snapshot 9" },
+      { image: "/images/timelines/present/10.webp", description: "Present Snapshot 10" },
+      { image: "/images/timelines/present/11.webp", description: "Present Snapshot 11" },
+      { image: "/images/timelines/present/12.webp", description: "Present Snapshot 12" },
+      { image: "/images/timelines/present/13.webp", description: "Present Snapshot 13" },
+      { image: "/images/timelines/present/14.webp", description: "Present Snapshot 14" },
+      { image: "/images/timelines/present/15.webp", description: "Present Snapshot 15" },
+      { image: "/images/timelines/present/16.webp", description: "Present Snapshot 16" },
+      { image: "/images/timelines/present/17.webp", description: "我的興趣是組裝電腦，我同事、朋友的電腦都是我組裝的" }
     ]
   }
 ];
@@ -253,8 +326,11 @@ export const EXPERIENCE: ExperienceItem[] = [
       }
     ],
     gallery: [
-      { image: "https://picsum.photos/seed/delta-1/800/600", description: "Delta Electronics HQ" },
-      { image: "https://picsum.photos/seed/delta-2/800/600", description: "SMT Production Line" }
+      { image: "/images/profession/delta/1.webp", description: "這是我所屬的部門" },
+      { image: "/images/profession/delta/2.webp", description: "Delta Snapshot 2" },
+      { image: "/images/profession/delta/3.webp", description: "Delta Snapshot 3" },
+      { image: "/images/profession/delta/4.webp", description: "Delta Snapshot 4" },
+      { image: "/images/profession/delta/5.webp", description: "這是我們設計的軟體於展覽上的照片" }
     ],
     achievements: [], // Kept for type compatibility if strict
     description: "", // Kept for type compatibility if strict
@@ -298,8 +374,11 @@ export const EXPERIENCE: ExperienceItem[] = [
       }
     ],
     gallery: [
-      { image: "https://picsum.photos/seed/synnex-1/800/600", description: "Synnex Technology Office" },
-      { image: "https://picsum.photos/seed/synnex-2/800/600", description: "Global Vendor Integration" }
+      { image: "/images/profession/synnex/1.webp", description: "我組織的部門聚餐" },
+      { image: "/images/profession/synnex/2.webp", description: "Synnex Snapshot 2" },
+      { image: "/images/profession/synnex/3.webp", description: "Synnex Snapshot 3" },
+      { image: "/images/profession/synnex/4.webp", description: "Synnex Snapshot 4" },
+      { image: "/images/profession/synnex/5.webp", description: "我的員工識別證" }
     ],
     achievements: [], // Kept for type compatibility if strict
     description: "", // Kept for type compatibility if strict
@@ -311,7 +390,7 @@ export const EDUCATION: EducationItem[] = [
     id: "master",
     school: "National Cheng Kung University (NCKU)",
     degree: "Master of Science in Engineering Science",
-    period: "Sep 2022 – Jun 2024",
+    period: "Sep 2022 – Jun 2014",
     location: "Tainan, Taiwan",
     gpa: "3.97/4.3 (Avg: 91.3)",
     stats: {
@@ -374,22 +453,15 @@ export const EDUCATION: EducationItem[] = [
       }
     ],
     gallery: [
-      {
-        image: "https://images.unsplash.com/photo-1567427018141-0584cfcbf1b8?q=80&w=1000&auto=format&fit=crop",
-        description: "Received Honorable Mention by IET Taipei Local Network (2024) in Taipei, Taiwan"
-      },
-      {
-        image: "https://images.unsplash.com/photo-1551818255-e6e10975bc17?q=80&w=1000&auto=format&fit=crop",
-        description: "Presented Thesis on ISASD in Tokyo, Japan (2024)"
-      },
-      {
-        image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1000&auto=format&fit=crop",
-        description: "Working late nights at Delta Electronics Lab"
-      },
-      {
-        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop",
-        description: "Testing Generative AI models on NVIDIA Jetson Edge devices"
-      }
+      { image: "/images/academic/master/1.webp", description: "口試結束的照片" },
+      { image: "/images/academic/master/2.webp", description: "Master Snapshot 2" },
+      { image: "/images/academic/master/3.webp", description: "Master Snapshot 3" },
+      { image: "/images/academic/master/4.webp", description: "Master Snapshot 4" },
+      { image: "/images/academic/master/5.webp", description: "Master Snapshot 5" },
+      { image: "/images/academic/master/6.webp", description: "Master Snapshot 6" },
+      { image: "/images/academic/master/7.webp", description: "Master Snapshot 7" },
+      { image: "/images/academic/master/8.webp", description: "Master Snapshot 8" },
+      { image: "/images/academic/master/9.webp", description: "IET, Taipei Local Network給的Honrable Mention獎" }
     ],
     details: [], // Fallback
     description: "" // Fallback
@@ -491,30 +563,19 @@ export const EDUCATION: EducationItem[] = [
       }
     ],
     gallery: [
-      {
-        image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=1000&auto=format&fit=crop",
-        description: "Awarded Best System Design for Android Travel Planner Capstone (2015)"
-      },
-      {
-        image: "https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=1000&auto=format&fit=crop",
-        description: "Graduated with Academic Excellence Award"
-      },
-      {
-        image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=1000&auto=format&fit=crop",
-        description: "Self-studying Android Development in the library"
-      },
-      {
-        image: "https://images.unsplash.com/photo-1517842645767-c639042777db?q=80&w=1000&auto=format&fit=crop",
-        description: "Developing early prototypes for mobile applications"
-      }
+      { image: "/images/academic/bachelor/1.webp", description: "我獲得最佳系統設計獎後，與前來觀展的家人們一起合照" },
+      { image: "/images/academic/bachelor/2.webp", description: "Bachelor Snapshot 2" },
+      { image: "/images/academic/bachelor/3.webp", description: "Bachelor Snapshot 3" },
+      { image: "/images/academic/bachelor/4.webp", description: "Bachelor Snapshot 4" },
+      { image: "/images/academic/bachelor/5.webp", description: "這是我的畢業照" }
     ],
     details: [],
     description: ""
   },
   {
     id: "highschool",
-    school: "Taipei Municipal Vocational High School",
-    degree: "Vocational High School Diploma",
+    school: "Taipei Private Jingwen High School",
+    degree: "High School Diploma",
     period: "Sep 2008 – Jun 2011",
     location: "Taipei, Taiwan",
     stats: {
@@ -550,14 +611,9 @@ export const EDUCATION: EducationItem[] = [
       }
     ],
     gallery: [
-      {
-        image: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=1000&auto=format&fit=crop",
-        description: "Receiving the Taipei Mayor's Award"
-      },
-      {
-        image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1000&auto=format&fit=crop",
-        description: "Self-study at the library"
-      }
+      { image: "/images/academic/highschool/1.webp", description: "高中時努力學習的我" },
+      { image: "/images/academic/highschool/2.webp", description: "High School Snapshot 2" },
+      { image: "/images/academic/highschool/3.webp", description: "從台北市長手中接過獎項的照片，最左方為高中校長，最右方為我阿公" }
     ],
     details: [], 
     description: "" 
