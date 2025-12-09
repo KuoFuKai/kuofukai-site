@@ -18,14 +18,14 @@ export const TIMELINE: TimelineItem[] = [
 
 Academically, I was unremarkable as a child. Throughout elementary and junior high school, I consistently ranked in the bottom three of my class, spending my days doodling in textbooks. During junior high, my father often lived at the factory, and my mother frequently worked night shifts at a nursing home caring for the elderly. As an only child, I felt a profound sense of loneliness very early on. During those times, the computer became my best friend. In my third year of junior high, I discovered online that students who got into top high schools seemed to live happy, fulfilling lives. I desperately wanted to turn my life around and be like them. However, even though I wanted to study hard and stayed late at school every day, I didn't know where to start. I lacked the foundation from previous years, and there was no one to guide me toward the future.`,
     gallery: [
-      { image: "/images/timelines/1993/1.webp", description: "Me as a newborn in my mother's arms" },
-      { image: "/images/timelines/1993/2.webp", description: "Held by my grandmother (I'm on the far left)" },
-      { image: "/images/timelines/1993/3.webp", description: "My father playfully putting sunglasses on me" },
-      { image: "/images/timelines/1993/4.webp", description: "Around one year old" },
-      { image: "/images/timelines/1993/5.webp", description: "Kindergarten photo" },
-      { image: "/images/timelines/1993/6.webp", description: "Elementary school graduation" },
-      { image: "/images/timelines/1993/7.webp", description: "I loved playing basketball in Junior High" },
-      { image: "/images/timelines/1993/8.webp", description: "With friends before Junior High graduation" }
+      { image: "images/timelines/1993/1.webp", description: "Me as a newborn in my mother's arms" },
+      { image: "images/timelines/1993/2.webp", description: "Held by my grandmother (I'm on the far left)" },
+      { image: "images/timelines/1993/3.webp", description: "My father playfully putting sunglasses on me" },
+      { image: "images/timelines/1993/4.webp", description: "Around one year old" },
+      { image: "images/timelines/1993/5.webp", description: "Kindergarten photo" },
+      { image: "images/timelines/1993/6.webp", description: "Elementary school graduation" },
+      { image: "images/timelines/1993/7.webp", description: "I loved playing basketball in Junior High" },
+      { image: "images/timelines/1993/8.webp", description: "With friends before Junior High graduation" }
     ]
   },
   {
@@ -39,12 +39,12 @@ My grades remained stagnant during my first year. It wasn't until my second year
 
 Fate, however, played a cruel joke. Before my major college entrance exam, my father committed suicide due to economic pressures. At the same time, my mother was embroiled in a property dispute with my father's family. In high school, I couldn't truly forgive my mother, as I had been raised by my grandmother. Despite this overwhelming grief, I managed to rank first among all ordinary classes in the school on the national exam. This is a rare feat in Taiwan, as most parents who value education send their children to cram schools on weekends. Due to my family's financial situation, I relied almost entirely on self-study during evening sessions at school and weekends at the library. In my senior year, I was honored as a Model Student and received the Taipei Mayor's Award on behalf of my class, accepting the certificate personally from the Mayor of Taipei.`,
     gallery: [
-      { image: "/images/timelines/2008/1.webp", description: "High school anniversary celebration with friends" },
-      { image: "/images/timelines/2008/2.webp", description: "High school graduation ceremony" },
-      { image: "/images/timelines/2008/3.webp", description: "Award certificate received at graduation" },
-      { image: "/images/timelines/2008/4.webp", description: "Organizing sports activities between study sessions" },
-      { image: "/images/timelines/2008/5.webp", description: "Meeting with high school classmates (Part 1)" },
-      { image: "/images/timelines/2008/6.webp", description: "Meeting with high school classmates (Part 2)" }
+      { image: "images/timelines/2008/1.webp", description: "High school anniversary celebration with friends" },
+      { image: "images/timelines/2008/2.webp", description: "High school graduation ceremony" },
+      { image: "images/timelines/2008/3.webp", description: "Award certificate received at graduation" },
+      { image: "images/timelines/2008/4.webp", description: "Organizing sports activities between study sessions" },
+      { image: "images/timelines/2008/5.webp", description: "Meeting with high school classmates (Part 1)" },
+      { image: "images/timelines/2008/6.webp", description: "Meeting with high school classmates (Part 2)" }
     ]
   },
   {
@@ -58,15 +58,15 @@ I was not content with being an ordinary student. Starting in my sophomore year,
 
 For our senior graduation exhibition, my group decided to build an Android App themed around independent travel. While the other four members handled planning, marketing, PM, and design, I served as the lead developer. I built my first App in just one month by buying books and teaching myself. In my department, only two people, including myself, managed to complete Android software using actual code. I won the department's "Best System Design Award" at the external exhibition. This was a glorious moment in my life; I realized that if I could achieve something the school hadn't even taught me, there was no difficulty in life I couldn't overcome.`,
     gallery: [
-      { image: "/images/timelines/2011/1.webp", description: "Playing in the Guitar Club during university" },
-      { image: "/images/timelines/2011/2.webp", description: "Junior year: Organized a motorcycle road trip around Taiwan (Part 1)" },
-      { image: "/images/timelines/2011/3.webp", description: "Junior year: Organized a motorcycle road trip around Taiwan (Part 2)" },
-      { image: "/images/timelines/2011/4.webp", description: "Participating in the departmental softball tournament" },
-      { image: "/images/timelines/2011/5.webp", description: "Working hard with my team on our Capstone research" },
-      { image: "/images/timelines/2011/6.webp", description: "External exhibition showcasing our 4 years of work to the public" },
-      { image: "/images/timelines/2011/7.webp", description: "The exhibition was a huge success" },
-      { image: "/images/timelines/2011/8.webp", description: "Graduation photo with friends in academic dress" },
-      { image: "/images/timelines/2011/9.webp", description: "Graduation trip to Thailand; cheerleading was a university tradition" }
+      { image: "images/timelines/2011/1.webp", description: "Playing in the Guitar Club during university" },
+      { image: "images/timelines/2011/2.webp", description: "Junior year: Organized a motorcycle road trip around Taiwan (Part 1)" },
+      { image: "images/timelines/2011/3.webp", description: "Junior year: Organized a motorcycle road trip around Taiwan (Part 2)" },
+      { image: "images/timelines/2011/4.webp", description: "Participating in the departmental softball tournament" },
+      { image: "images/timelines/2011/5.webp", description: "Working hard with my team on our Capstone research" },
+      { image: "images/timelines/2011/6.webp", description: "External exhibition showcasing our 4 years of work to the public" },
+      { image: "images/timelines/2011/7.webp", description: "The exhibition was a huge success" },
+      { image: "images/timelines/2011/8.webp", description: "Graduation photo with friends in academic dress" },
+      { image: "images/timelines/2011/9.webp", description: "Graduation trip to Thailand; cheerleading was a university tradition" }
     ]
   },
   {
@@ -78,13 +78,13 @@ For our senior graduation exhibition, my group decided to build an Android App t
 
 There, we lived under constant high stress, standing guard for three shifts a day (two hours per shift: morning, afternoon, and early morning). We could only return home once every two months. I have a vivid memory from winter when the kitchen sewage pipe was clogged with food residue and grease. I had to strip down to my underwear and jump into the sub-zero, foul-smelling ditch to clear it. On that remote island far from home, because of my good nature, I was often targeted by officers who wanted to "make an example" of someone to scare the others. I faced unreasonable treatment and humiliation daily, sleeping in tunnels blasted out by explosives. I viewed this suffering as training and withstood these hardships for a year. Through it all, I met many comrades in the camp who remain my good brothers to this day. Ironically, while I stood guard in 0-degree weather in Dongyin, some of my university classmates, holding Green Cards and supported by wealthy families with houses and cars, were training to be pilots in the US—also in 0-degree weather, but with a vastly different fate.`,
     gallery: [
-      { image: "/images/timelines/2015/1.webp", description: "The remote island where I served; no planes, only boats for travel" },
-      { image: "/images/timelines/2015/2.webp", description: "Landscape of the island I was stationed on" },
-      { image: "/images/timelines/2015/3.webp", description: "Rookie days photo; the bond between us was incredibly strong" },
-      { image: "/images/timelines/2015/4.webp", description: "I lived in tunnels like this daily (this photo is from a tourist site)" },
-      { image: "/images/timelines/2015/5.webp", description: "We could only stay on the island during holidays" },
-      { image: "/images/timelines/2015/6.webp", description: "Photo taken upon our discharge" },
-      { image: "/images/timelines/2015/7.webp", description: "Group photo at discharge" }
+      { image: "images/timelines/2015/1.webp", description: "The remote island where I served; no planes, only boats for travel" },
+      { image: "images/timelines/2015/2.webp", description: "Landscape of the island I was stationed on" },
+      { image: "images/timelines/2015/3.webp", description: "Rookie days photo; the bond between us was incredibly strong" },
+      { image: "images/timelines/2015/4.webp", description: "I lived in tunnels like this daily (this photo is from a tourist site)" },
+      { image: "images/timelines/2015/5.webp", description: "We could only stay on the island during holidays" },
+      { image: "images/timelines/2015/6.webp", description: "Photo taken upon our discharge" },
+      { image: "images/timelines/2015/7.webp", description: "Group photo at discharge" }
     ]
   },
   {
@@ -98,15 +98,15 @@ Finally, by my second year, my code had fewer bugs, and I developed my own ideas
 
 That year, my aunt suddenly declared bankruptcy, forcing me to shoulder a heavier financial burden at home. Simultaneously, my grandmother was diagnosed with stage 3 breast cancer. In the face of illness, I realized how small humans are. Every day after work, I would buy food and go to the hospital to eat dinner with her. Fortunately, she gradually recovered. By my third year, I began to think about further education and a career change. I wanted to learn more, take on greater responsibilities, and started dreaming of studying abroad.`,
     gallery: [
-      { image: "/images/timelines/2017/1.webp", description: "Discussing work in a positive atmosphere" },
-      { image: "/images/timelines/2017/2.webp", description: "I often ordered lunch for the whole office" },
-      { image: "/images/timelines/2017/3.webp", description: "Department dinner I organized" },
-      { image: "/images/timelines/2017/4.webp", description: "Department BBQ I organized" },
-      { image: "/images/timelines/2017/5.webp", description: "Colleagues taking us surfing" },
-      { image: "/images/timelines/2017/6.webp", description: "Learning how to surf" },
-      { image: "/images/timelines/2017/7.webp", description: "Colleagues celebrating my birthday" },
-      { image: "/images/timelines/2017/8.webp", description: "Karaoke farewell party when I resigned" },
-      { image: "/images/timelines/2017/9.webp", description: "Organized a reunion dinner; even former managers attended" }
+      { image: "images/timelines/2017/1.webp", description: "Discussing work in a positive atmosphere" },
+      { image: "images/timelines/2017/2.webp", description: "I often ordered lunch for the whole office" },
+      { image: "images/timelines/2017/3.webp", description: "Department dinner I organized" },
+      { image: "images/timelines/2017/4.webp", description: "Department BBQ I organized" },
+      { image: "images/timelines/2017/5.webp", description: "Colleagues taking us surfing" },
+      { image: "images/timelines/2017/6.webp", description: "Learning how to surf" },
+      { image: "images/timelines/2017/7.webp", description: "Colleagues celebrating my birthday" },
+      { image: "images/timelines/2017/8.webp", description: "Karaoke farewell party when I resigned" },
+      { image: "images/timelines/2017/9.webp", description: "Organized a reunion dinner; even former managers attended" }
     ]
   },
   {
@@ -126,11 +126,11 @@ This life lasted for over two years. As an only child, I had to shoulder it all.
 
 I was 28, and both my parents were gone. I felt a sense of emptiness. However, within a month of her passing, at a company dinner, I realized I was the only one there with just a Bachelor's degree. That night, I decided to pursue a Master's. After a round of research, I found most deadlines were three days away. I spent two days preparing my application and recommendation letters and barely sent them out on the deadline. I wasn't immediately accepted, unlike two-thirds of the applicants; due to low application scores, I had to interview. Perhaps my mother was watching over me—I scored very high on the interview and was admitted as the first person on the waiting list to National Cheng Kung University (NCKU), a top-four university in Taiwan.`,
     gallery: [
-      { image: "/images/timelines/2020/1.webp", description: "Traveling with Mom after her diagnosis" },
-      { image: "/images/timelines/2020/2.webp", description: "Sneaking Mom out in a wheelchair for fresh air" },
-      { image: "/images/timelines/2020/3.webp", description: "Celebrating my birthday with Mom in the hospital" },
-      { image: "/images/timelines/2020/4.webp", description: "Grandma helping me clear out Mom's rental (my childhood home)" },
-      { image: "/images/timelines/2020/5.webp", description: "Photo with my parents' wedding picture while clearing the house" }
+      { image: "images/timelines/2020/1.webp", description: "Traveling with Mom after her diagnosis" },
+      { image: "images/timelines/2020/2.webp", description: "Sneaking Mom out in a wheelchair for fresh air" },
+      { image: "images/timelines/2020/3.webp", description: "Celebrating my birthday with Mom in the hospital" },
+      { image: "images/timelines/2020/4.webp", description: "Grandma helping me clear out Mom's rental (my childhood home)" },
+      { image: "images/timelines/2020/5.webp", description: "Photo with my parents' wedding picture while clearing the house" }
     ]
   },
   {
@@ -150,29 +150,29 @@ I then took my thesis to Tokyo, Japan, to present at the International Conferenc
 
 It is worth mentioning the background of these achievements: during my Master's, my then-wife felt neglected. We often argued until 2:00 AM even when I had finals the next day. We divorced in January 2025, six months after I graduated. In the final month, I sought help from a psychiatrist. Fortunately, I have moved past that pain and continue toward my dreams. Since graduating, I haven't slowed down; I learned IELTS English, Scuba Diving, and obtained licenses for driving power boats and yachts—skills possessed by very few young people in Taiwan.`,
     gallery: [
-      { image: "/images/timelines/2022/1.webp", description: "Morning interview at NCKU Dept. of Engineering Science" },
-      { image: "/images/timelines/2022/2.webp", description: "Got my heavy motorcycle license in 2 weeks for commuting in Tainan" },
-      { image: "/images/timelines/2022/3.webp", description: "Assembling furniture in my new home" },
-      { image: "/images/timelines/2022/4.webp", description: "First day at Delta Electronics" },
-      { image: "/images/timelines/2022/5.webp", description: "Commuting to classes at night" },
-      { image: "/images/timelines/2022/6.webp", description: "Participating in the company Darts Club in spare time" },
-      { image: "/images/timelines/2022/7.webp", description: "Accidentally won 3rd place in darts" },
-      { image: "/images/timelines/2022/8.webp", description: "Sitting in on senior thesis defense" },
-      { image: "/images/timelines/2022/9.webp", description: "Researching for my thesis system even while eating" },
-      { image: "/images/timelines/2022/10.webp", description: "Main tool for my thesis system" },
-      { image: "/images/timelines/2022/11.webp", description: "Holding the research device" },
-      { image: "/images/timelines/2022/12.webp", description: "Guiding a participant on how to operate the system" },
-      { image: "/images/timelines/2022/13.webp", description: "Oral defense successfully completed" },
-      { image: "/images/timelines/2022/14.webp", description: "Celebrating with classmates after defense" },
-      { image: "/images/timelines/2022/15.webp", description: "Graduation Ceremony" },
-      { image: "/images/timelines/2022/16.webp", description: "Family/Friends coming from Taipei to celebrate (Part 1)" },
-      { image: "/images/timelines/2022/17.webp", description: "Family/Friends coming from Taipei to celebrate (Part 2)" },
-      { image: "/images/timelines/2022/18.webp", description: "Presenting at ISASD in Tokyo" },
-      { image: "/images/timelines/2022/19.webp", description: "With the judges at ISASD" },
-      { image: "/images/timelines/2022/20.webp", description: "Receiving Honorable Mention with advisor at IET" },
-      { image: "/images/timelines/2022/21.webp", description: "Staying at a friend's house after separation" },
-      { image: "/images/timelines/2022/22.webp", description: "The day of the divorce" },
-      { image: "/images/timelines/2022/23.webp", description: "Leaving Delta Electronics" }
+      { image: "images/timelines/2022/1.webp", description: "Morning interview at NCKU Dept. of Engineering Science" },
+      { image: "images/timelines/2022/2.webp", description: "Got my heavy motorcycle license in 2 weeks for commuting in Tainan" },
+      { image: "images/timelines/2022/3.webp", description: "Assembling furniture in my new home" },
+      { image: "images/timelines/2022/4.webp", description: "First day at Delta Electronics" },
+      { image: "images/timelines/2022/5.webp", description: "Commuting to classes at night" },
+      { image: "images/timelines/2022/6.webp", description: "Participating in the company Darts Club in spare time" },
+      { image: "images/timelines/2022/7.webp", description: "Accidentally won 3rd place in darts" },
+      { image: "images/timelines/2022/8.webp", description: "Sitting in on senior thesis defense" },
+      { image: "images/timelines/2022/9.webp", description: "Researching for my thesis system even while eating" },
+      { image: "images/timelines/2022/10.webp", description: "Main tool for my thesis system" },
+      { image: "images/timelines/2022/11.webp", description: "Holding the research device" },
+      { image: "images/timelines/2022/12.webp", description: "Guiding a participant on how to operate the system" },
+      { image: "images/timelines/2022/13.webp", description: "Oral defense successfully completed" },
+      { image: "images/timelines/2022/14.webp", description: "Celebrating with classmates after defense" },
+      { image: "images/timelines/2022/15.webp", description: "Graduation Ceremony" },
+      { image: "images/timelines/2022/16.webp", description: "Family/Friends coming from Taipei to celebrate (Part 1)" },
+      { image: "images/timelines/2022/17.webp", description: "Family/Friends coming from Taipei to celebrate (Part 2)" },
+      { image: "images/timelines/2022/18.webp", description: "Presenting at ISASD in Tokyo" },
+      { image: "images/timelines/2022/19.webp", description: "With the judges at ISASD" },
+      { image: "images/timelines/2022/20.webp", description: "Receiving Honorable Mention with advisor at IET" },
+      { image: "images/timelines/2022/21.webp", description: "Staying at a friend's house after separation" },
+      { image: "images/timelines/2022/22.webp", description: "The day of the divorce" },
+      { image: "images/timelines/2022/23.webp", description: "Leaving Delta Electronics" }
     ]
   },
   {
@@ -186,21 +186,21 @@ I chose what is reputed to be the best IELTS school in the Philippines, opting f
 
 My time in the Philippines marked my first true step onto the international stage. From day one, I made many friends from Japan and Korea. Despite the grueling study schedule, I organized weekly weekend trips for us in Baguio. I discovered that my personality translates across borders; just as I maintain good relationships with friends from every stage of life in Taiwan, I did the same abroad. This gave me immense confidence. Even now, though we are no longer in the Philippines, I frequently coordinate cross-national video calls, managing time zones for friends in Vancouver, Christchurch, Kuala Lumpur, Seoul, and Nagoya. During my time in the Philippines, I not only formed close bonds with my classmates but also established unparalleled relationships with every teacher, regardless of their age. One teacher described me by saying, "Every time I see you, it's like seeing the sun; however, the people who appear the most optimistic always have the saddest stories." This experience gave me lifelong friends, and we share a dream to go on a Road Trip in North America together.`,
     gallery: [
-      { image: "/images/timelines/2025/1.webp", description: "Organized a 2-day multinational trip in my 2nd week" },
-      { image: "/images/timelines/2025/2.webp", description: "Theme park trip I organized" },
-      { image: "/images/timelines/2025/3.webp", description: "Met a retired US couple while dining with classmates" },
-      { image: "/images/timelines/2025/4.webp", description: "Receiving an award for the poetry contest at school" },
-      { image: "/images/timelines/2025/5.webp", description: "River trekking trip I organized" },
-      { image: "/images/timelines/2025/6.webp", description: "Zipline adventure I organized" },
-      { image: "/images/timelines/2025/7.webp", description: "Farewell for a classmate returning home" },
-      { image: "/images/timelines/2025/8.webp", description: "Celebrating a classmate's birthday" },
-      { image: "/images/timelines/2025/9.webp", description: "In the classroom with our teacher" },
-      { image: "/images/timelines/2025/10.webp", description: "Korean friend sent food delivery to support my IELTS prep" },
-      { image: "/images/timelines/2025/11.webp", description: "Discussing and preparing for IELTS" },
-      { image: "/images/timelines/2025/12.webp", description: "After IELTS exam; we both scored Overall 7.0" },
-      { image: "/images/timelines/2025/13.webp", description: "Final dinner in the Philippines" },
-      { image: "/images/timelines/2025/14.webp", description: "Saying goodbye to everyone" },
-      { image: "/images/timelines/2025/15.webp", description: "I maintain great relationships with my Filipino teachers" }
+      { image: "images/timelines/2025/1.webp", description: "Organized a 2-day multinational trip in my 2nd week" },
+      { image: "images/timelines/2025/2.webp", description: "Theme park trip I organized" },
+      { image: "images/timelines/2025/3.webp", description: "Met a retired US couple while dining with classmates" },
+      { image: "images/timelines/2025/4.webp", description: "Receiving an award for the poetry contest at school" },
+      { image: "images/timelines/2025/5.webp", description: "River trekking trip I organized" },
+      { image: "images/timelines/2025/6.webp", description: "Zipline adventure I organized" },
+      { image: "images/timelines/2025/7.webp", description: "Farewell for a classmate returning home" },
+      { image: "images/timelines/2025/8.webp", description: "Celebrating a classmate's birthday" },
+      { image: "images/timelines/2025/9.webp", description: "In the classroom with our teacher" },
+      { image: "images/timelines/2025/10.webp", description: "Korean friend sent food delivery to support my IELTS prep" },
+      { image: "images/timelines/2025/11.webp", description: "Discussing and preparing for IELTS" },
+      { image: "images/timelines/2025/12.webp", description: "After IELTS exam; we both scored Overall 7.0" },
+      { image: "images/timelines/2025/13.webp", description: "Final dinner in the Philippines" },
+      { image: "images/timelines/2025/14.webp", description: "Saying goodbye to everyone" },
+      { image: "images/timelines/2025/15.webp", description: "I maintain great relationships with my Filipino teachers" }
     ]
   },
   {
@@ -214,23 +214,23 @@ My personality allows me to quickly understand people's traits and tendencies, o
 
 Looking back on my journey, even though my starting point was lower than others, I have continued to climb. I remain passionate about life, strict with myself, and lenient with others. I hope that you, reading this, can give me a chance to realize my dreams and change my life, allowing the world to see that even a child born with my background has the opportunity to make their dreams a reality.`,
     gallery: [
-      { image: "/images/timelines/present/1.webp", description: "Yushan trailhead at 2:00 AM" },
-      { image: "/images/timelines/present/2.webp", description: "Reached the peak (3952m) at noon; returned at midnight" },
-      { image: "/images/timelines/present/3.webp", description: "Learning to scuba dive (Part 1)" },
-      { image: "/images/timelines/present/4.webp", description: "Learning to scuba dive (Part 2)" },
-      { image: "/images/timelines/present/5.webp", description: "Learning to drive a boat" },
-      { image: "/images/timelines/present/6.webp", description: "Great relationships with boat classmates despite age gaps" },
-      { image: "/images/timelines/present/7.webp", description: "Reunion with language school classmates in Japan (Part 1)" },
-      { image: "/images/timelines/present/8.webp", description: "Reunion with language school classmates in Japan (Part 2)" },
-      { image: "/images/timelines/present/9.webp", description: "Mistaken for staff by tourists while visiting friends in Korea" },
-      { image: "/images/timelines/present/10.webp", description: "With my Korean brothers near Incheon Airport" },
-      { image: "/images/timelines/present/11.webp", description: "Hosting a Korean friend in Taipei, introducing him to family" },
-      { image: "/images/timelines/present/12.webp", description: "Celebrating Grandma's birthday with family and friends" },
-      { image: "/images/timelines/present/13.webp", description: "First Junior High reunion in 15 years, organized by me" },
-      { image: "/images/timelines/present/14.webp", description: "Organized a BBQ for friends and relatives of all ages" },
-      { image: "/images/timelines/present/15.webp", description: "Organized a Christmas gift exchange" },
-      { image: "/images/timelines/present/16.webp", description: "Monthly dinner with former colleagues" },
-      { image: "/images/timelines/present/17.webp", description: "My hobby is building PCs; I build them for all my friends" }
+      { image: "images/timelines/present/1.webp", description: "Yushan trailhead at 2:00 AM" },
+      { image: "images/timelines/present/2.webp", description: "Reached the peak (3952m) at noon; returned at midnight" },
+      { image: "images/timelines/present/3.webp", description: "Learning to scuba dive (Part 1)" },
+      { image: "images/timelines/present/4.webp", description: "Learning to scuba dive (Part 2)" },
+      { image: "images/timelines/present/5.webp", description: "Learning to drive a boat" },
+      { image: "images/timelines/present/6.webp", description: "Great relationships with boat classmates despite age gaps" },
+      { image: "images/timelines/present/7.webp", description: "Reunion with language school classmates in Japan (Part 1)" },
+      { image: "images/timelines/present/8.webp", description: "Reunion with language school classmates in Japan (Part 2)" },
+      { image: "images/timelines/present/9.webp", description: "Mistaken for staff by tourists while visiting friends in Korea" },
+      { image: "images/timelines/present/10.webp", description: "With my Korean brothers near Incheon Airport" },
+      { image: "images/timelines/present/11.webp", description: "Hosting a Korean friend in Taipei, introducing him to family" },
+      { image: "images/timelines/present/12.webp", description: "Celebrating Grandma's birthday with family and friends" },
+      { image: "images/timelines/present/13.webp", description: "First Junior High reunion in 15 years, organized by me" },
+      { image: "images/timelines/present/14.webp", description: "Organized a BBQ for friends and relatives of all ages" },
+      { image: "images/timelines/present/15.webp", description: "Organized a Christmas gift exchange" },
+      { image: "images/timelines/present/16.webp", description: "Monthly dinner with former colleagues" },
+      { image: "images/timelines/present/17.webp", description: "My hobby is building PCs; I build them for all my friends" }
     ]
   }
 ];
@@ -326,11 +326,11 @@ export const EXPERIENCE: ExperienceItem[] = [
       }
     ],
     gallery: [
-      { image: "/images/profession/delta/1.webp", description: "My department at Delta" },
-      { image: "/images/profession/delta/2.webp", description: "Our monitoring software in use at the factory" },
-      { image: "/images/profession/delta/3.webp", description: "Meeting during a business trip to Shanghai" },
-      { image: "/images/profession/delta/4.webp", description: "Team dinner during Shanghai trip" },
-      { image: "/images/profession/delta/5.webp", description: "Our software showcased at an exhibition" }
+      { image: "images/profession/delta/1.webp", description: "My department at Delta" },
+      { image: "images/profession/delta/2.webp", description: "Our monitoring software in use at the factory" },
+      { image: "images/profession/delta/3.webp", description: "Meeting during a business trip to Shanghai" },
+      { image: "images/profession/delta/4.webp", description: "Team dinner during Shanghai trip" },
+      { image: "images/profession/delta/5.webp", description: "Our software showcased at an exhibition" }
     ],
     achievements: [], // Kept for type compatibility if strict
     description: "", // Kept for type compatibility if strict
@@ -374,11 +374,11 @@ export const EXPERIENCE: ExperienceItem[] = [
       }
     ],
     gallery: [
-      { image: "/images/profession/synnex/1.webp", description: "Department dinner I organized" },
-      { image: "/images/profession/synnex/2.webp", description: "Farewell party for a colleague" },
-      { image: "/images/profession/synnex/3.webp", description: "Close bonds with everyone in the department" },
-      { image: "/images/profession/synnex/4.webp", description: "Farewell when I resigned" },
-      { image: "/images/profession/synnex/5.webp", description: "My employee ID badge" }
+      { image: "images/profession/synnex/1.webp", description: "Department dinner I organized" },
+      { image: "images/profession/synnex/2.webp", description: "Farewell party for a colleague" },
+      { image: "images/profession/synnex/3.webp", description: "Close bonds with everyone in the department" },
+      { image: "images/profession/synnex/4.webp", description: "Farewell when I resigned" },
+      { image: "images/profession/synnex/5.webp", description: "My employee ID badge" }
     ],
     achievements: [], // Kept for type compatibility if strict
     description: "", // Kept for type compatibility if strict
@@ -453,15 +453,15 @@ export const EDUCATION: EducationItem[] = [
       }
     ],
     gallery: [
-      { image: "/images/academic/master/1.webp", description: "Photo after oral defense" },
-      { image: "/images/academic/master/2.webp", description: "Only three of us graduated on time (out of 30)" },
-      { image: "/images/academic/master/3.webp", description: "At Tokyo Institute of Technology for ISASD 2024" },
-      { image: "/images/academic/master/4.webp", description: "Giving my full English presentation" },
-      { image: "/images/academic/master/5.webp", description: "Group photo with conference attendees" },
-      { image: "/images/academic/master/6.webp", description: "With my advisor at the IET conference" },
-      { image: "/images/academic/master/7.webp", description: "Honorable Mention Award from IET" },
-      { image: "/images/academic/master/8.webp", description: "Celebrating the honor with my advisor" },
-      { image: "/images/academic/master/9.webp", description: "The Honorable Mention certificate" }
+      { image: "images/academic/master/1.webp", description: "Photo after oral defense" },
+      { image: "images/academic/master/2.webp", description: "Only three of us graduated on time (out of 30)" },
+      { image: "images/academic/master/3.webp", description: "At Tokyo Institute of Technology for ISASD 2024" },
+      { image: "images/academic/master/4.webp", description: "Giving my full English presentation" },
+      { image: "images/academic/master/5.webp", description: "Group photo with conference attendees" },
+      { image: "images/academic/master/6.webp", description: "With my advisor at the IET conference" },
+      { image: "images/academic/master/7.webp", description: "Honorable Mention Award from IET" },
+      { image: "images/academic/master/8.webp", description: "Celebrating the honor with my advisor" },
+      { image: "images/academic/master/9.webp", description: "The Honorable Mention certificate" }
     ],
     details: [], // Fallback
     description: "" // Fallback
@@ -563,11 +563,11 @@ export const EDUCATION: EducationItem[] = [
       }
     ],
     gallery: [
-      { image: "/images/academic/bachelor/1.webp", description: "My internship location" },
-      { image: "/images/academic/bachelor/2.webp", description: "My Capstone team members" },
-      { image: "/images/academic/bachelor/3.webp", description: "Our booth at the external exhibition" },
-      { image: "/images/academic/bachelor/4.webp", description: "Family visiting after I won the Best System Design Award" },
-      { image: "/images/academic/bachelor/5.webp", description: "My graduation photo" }
+      { image: "images/academic/bachelor/1.webp", description: "My internship location" },
+      { image: "images/academic/bachelor/2.webp", description: "My Capstone team members" },
+      { image: "images/academic/bachelor/3.webp", description: "Our booth at the external exhibition" },
+      { image: "images/academic/bachelor/4.webp", description: "Family visiting after I won the Best System Design Award" },
+      { image: "images/academic/bachelor/5.webp", description: "My graduation photo" }
     ],
     details: [],
     description: ""
@@ -611,9 +611,9 @@ export const EDUCATION: EducationItem[] = [
       }
     ],
     gallery: [
-      { image: "/images/academic/highschool/1.webp", description: "Studying hard in high school" },
-      { image: "/images/academic/highschool/2.webp", description: "Receiving the graduate award at the ceremony" },
-      { image: "/images/academic/highschool/3.webp", description: "Receiving the Mayor's Award from the Mayor of Taipei (Grandpa on the right)" }
+      { image: "images/academic/highschool/1.webp", description: "Studying hard in high school" },
+      { image: "images/academic/highschool/2.webp", description: "Receiving the graduate award at the ceremony" },
+      { image: "images/academic/highschool/3.webp", description: "Receiving the Mayor's Award from the Mayor of Taipei (Grandpa on the right)" }
     ],
     details: [], 
     description: "" 
