@@ -194,8 +194,8 @@ const ResponsiveTimeline = () => {
   }
 
   // 2. Calculate duration based on the unique set length to ensure constant speed
-  // Speed assumption: 6 seconds per image panel
-  const duration = Math.max(20, baseScrollItems.length * 6); 
+  // Speed assumption: 4 seconds per image panel
+  const duration = Math.max(10, baseScrollItems.length * 4); 
 
   // 3. Create render list (Doubled for seamless loop)
   const renderScrollItems = [...baseScrollItems, ...baseScrollItems];
@@ -807,8 +807,8 @@ const AcademicLayout: React.FC<AcademicLayoutProps> = ({
   }
 
   // 2. Calculate duration based on the unique set length to ensure constant speed
-  // Speed assumption: 6 seconds per image panel
-  const duration = Math.max(20, baseScrollItems.length * 6); 
+  // Speed assumption: 4 seconds per image panel
+  const duration = Math.max(10, baseScrollItems.length * 4); 
 
   // 3. Create render list (Doubled for seamless loop)
   const renderScrollItems = [...baseScrollItems, ...baseScrollItems];
