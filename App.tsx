@@ -177,8 +177,7 @@ const ResponsiveTimeline = () => {
     }
   };
 
-  // Prepare gallery items for vertical marquee (duplicate for seamless loop)
-  // Fallback to a default if no gallery exists, though TIMELINE now has placeholders
+  // Prepare gallery items for vertical marquee
   const defaultGallery = [
     { image: `https://picsum.photos/seed/${selectedItem.year}-1/800/600`, description: selectedItem.title },
     { image: `https://picsum.photos/seed/${selectedItem.year}-2/800/600`, description: "Key Milestone" },
@@ -188,13 +187,18 @@ const ResponsiveTimeline = () => {
   
   const galleryItems = selectedItem.gallery || defaultGallery;
   
-  // Ensure enough items for smooth scroll by duplicating
-  let scrollItems = [...galleryItems];
-  if (scrollItems.length < 4) {
-    scrollItems = [...scrollItems, ...scrollItems, ...scrollItems];
+  // 1. Prepare base list (ensure minimum density)
+  let baseScrollItems = [...galleryItems];
+  if (baseScrollItems.length < 4) {
+    baseScrollItems = [...baseScrollItems, ...baseScrollItems, ...baseScrollItems];
   }
-  // Double for infinite loop transition
-  scrollItems = [...scrollItems, ...scrollItems];
+
+  // 2. Calculate duration based on the unique set length to ensure constant speed
+  // Speed assumption: 6 seconds per image panel
+  const duration = Math.max(20, baseScrollItems.length * 6); 
+
+  // 3. Create render list (Doubled for seamless loop)
+  const renderScrollItems = [...baseScrollItems, ...baseScrollItems];
 
 
   return (
@@ -436,8 +440,11 @@ const ResponsiveTimeline = () => {
 
                    {/* Marquee Track */}
                    <div className="absolute inset-0 w-full h-full group">
-                      <div className="animate-marquee-vertical flex flex-col w-full group-hover:[animation-play-state:paused]">
-                         {scrollItems.map((item, idx) => (
+                      <div 
+                        className="animate-marquee-vertical flex flex-col w-full group-hover:[animation-play-state:paused]"
+                        style={{ animationDuration: `${duration}s` }}
+                      >
+                         {renderScrollItems.map((item, idx) => (
                            <div 
                              key={`timeline-gallery-${idx}`}
                              className={`
@@ -793,12 +800,18 @@ const AcademicLayout: React.FC<AcademicLayoutProps> = ({
       description: m.label 
   }));
   
-  let marqueeItems = [...baseGalleryItems];
-  if (marqueeItems.length < 4) {
-    marqueeItems = [...marqueeItems, ...marqueeItems, ...marqueeItems]; // Duplicate multiple times to fill space
+  // 1. Prepare base list (ensure minimum density)
+  let baseScrollItems = [...baseGalleryItems];
+  if (baseScrollItems.length < 4) {
+    baseScrollItems = [...baseScrollItems, ...baseScrollItems, ...baseScrollItems];
   }
-  // Double the whole list for infinite scroll seamless join
-  const scrollItems = [...marqueeItems, ...marqueeItems];
+
+  // 2. Calculate duration based on the unique set length to ensure constant speed
+  // Speed assumption: 6 seconds per image panel
+  const duration = Math.max(20, baseScrollItems.length * 6); 
+
+  // 3. Create render list (Doubled for seamless loop)
+  const renderScrollItems = [...baseScrollItems, ...baseScrollItems];
 
   return (
     <div className="h-full w-full overflow-hidden bg-white dark:bg-slate-900 text-slate-900 dark:text-white transition-colors duration-300 flex flex-col lg:flex-row">
@@ -951,8 +964,11 @@ const AcademicLayout: React.FC<AcademicLayoutProps> = ({
 
             {/* Marquee Track - Full Width, No Padding */}
             <div className="absolute inset-0 w-full h-full group">
-                <div className="animate-marquee-vertical flex flex-col w-full group-hover:[animation-play-state:paused]">
-                  {scrollItems.map((item, idx) => (
+                <div 
+                  className="animate-marquee-vertical flex flex-col w-full group-hover:[animation-play-state:paused]"
+                  style={{ animationDuration: `${duration}s` }}
+                >
+                  {renderScrollItems.map((item, idx) => (
                     <div 
                       key={`gallery-${idx}`}
                       className={`
