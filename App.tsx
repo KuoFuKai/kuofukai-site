@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   Home,
@@ -5,10 +6,12 @@ import {
   Briefcase,
   Sun, 
   Moon,
+  Globe,
+  ChevronRight,
   Code2,
+  Upload,
   ArrowUp,
   ChevronLeft,
-  ChevronRight,
   ChevronDown,
   Award,
   GraduationCap,
@@ -21,22 +24,22 @@ import {
   SKILLS,
   PERSONAL_INFO
 } from './constants';
-import { TimelineItem, AcademicModule, AcademicGalleryItem, AcademicJob } from './types';
+import { NavSection, TimelineItem, AcademicModule, AcademicGalleryItem, ExperienceItem, AcademicJob } from './types';
 
 // --- Components ---
 
 // 0. Image Marquee Component
 const ImageMarquee = () => {
   // Use local background images from public/images/homepage/backgrounds/
-  // The user has provided 15 webp images named 1.webp through 15.webp
+  // The user provided 15 background images in .webp format
   const baseImages = Array.from({ length: 15 }, (_, i) => ({
-    src: `/images/homepage/backgrounds/${i + 1}.webp`, 
+    src: `/images/homepage/backgrounds/${i + 1}.webp`,
     alt: `Background ${i + 1}`,
     key: `bg-${i + 1}`
   }));
 
-  // Create a duplicated list for seamless looping (triple it to ensure it covers wide screens)
-  const images = [...baseImages, ...baseImages, ...baseImages];
+  // Create a duplicated list for seamless looping (double it to ensure it covers wide screens)
+  const images = [...baseImages, ...baseImages];
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden bg-slate-50 dark:bg-black select-none pointer-events-none transition-colors duration-500">
@@ -977,44 +980,146 @@ const AcademicLayout: React.FC<AcademicLayoutProps> = ({
   );
 };
 
-// 3. Skills Layout
-const SkillsLayout = () => {
+
+// 3. Two Column Content Layout (For Profession Details - Kept for backward compatibility)
+const SplitContentLayout = ({ 
+  title, 
+  subtitle, 
+  content, 
+  tags,
+  imageSrc = "https://picsum.photos/800/600",
+  onImageUpload,
+  tagline // New prop for company description
+}: { 
+  title: string, 
+  subtitle: string, 
+  content: React.ReactNode, 
+  tags?: string[],
+  imageSrc?: string,
+  onImageUpload?: () => void,
+  tagline?: string;
+}) => {
   return (
-    <div className="h-full w-full overflow-y-auto bg-white dark:bg-slate-900 p-8 lg:p-16 transition-colors duration-300">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl lg:text-5xl font-serif font-bold mb-4 text-slate-900 dark:text-white">Technical Arsenal</h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-12 max-w-2xl">
-          A comprehensive overview of my technical proficiency, acquired through professional experience and rigorous self-study.
-        </p>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pb-16">
-          {SKILLS.map((category, idx) => (
-             <div key={idx} className="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-100 dark:border-slate-800 hover:border-emerald-500/30 transition-colors">
-                <h3 className="text-xl font-bold text-emerald-600 dark:text-neon mb-6 uppercase tracking-wider flex items-center gap-3">
-                  <div className="w-2 h-8 bg-emerald-500 dark:bg-neon rounded-full"></div>
-                  {category.category}
-                </h3>
-                <div className="space-y-6">
-                  {category.items.map((skill, sIdx) => (
-                    <div key={sIdx} className="group">
-                       <div className="flex justify-between items-end mb-2">
-                          <span className="font-medium text-slate-700 dark:text-slate-200 group-hover:text-emerald-700 dark:group-hover:text-white transition-colors">{skill.name}</span>
-                          <span className="text-xs font-mono text-slate-400">{skill.startYear}</span>
-                       </div>
-                       {/* Proficiency Bar */}
-                       <div className="h-2 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-                          <div 
-                            className={`h-full rounded-full transition-all duration-1000 group-hover:saturate-150 ${
-                              skill.proficiency === 'Expert' ? 'w-[95%] bg-emerald-500 dark:bg-neon' : 
-                              skill.proficiency === 'Intermediate' ? 'w-[70%] bg-blue-500 dark:bg-blue-400' : 
-                              'w-[40%] bg-slate-400'
-                            }`} 
-                          />
-                       </div>
-                    </div>
-                  ))}
-                </div>
+    <div className="h-full w-full overflow-y-auto bg-white dark:bg-slate-900 text-slate-900 dark:text-white transition-colors duration-300">
+      <div className="flex flex-col lg:flex-row min-h-full">
+        {/* Left Column: Text */}
+        <div className="flex-1 p-8 lg:px-24 lg:py-16 flex flex-col justify-center">
+          <div className="max-w-none w-full">
+            <h1 className="text-4xl lg:text-5xl font-serif font-bold mb-2 text-slate-900 dark:text-white">{title}</h1>
+            
+            {/* Tagline Display */}
+            {tagline && (
+              <p className="text-sm md:text-base text-slate-500 dark:text-slate-400 font-medium mb-4 italic leading-relaxed border-l-4 border-slate-200 dark:border-slate-700 pl-3">
+                {tagline}
+              </p>
+            )}
+
+            <div className="text-xl text-accent mb-8 font-medium">{subtitle}</div>
+            
+            <div className="prose prose-lg dark:prose-invert mb-8 text-slate-600 dark:text-slate-300 leading-relaxed">
+              {content}
+            </div>
+
+            {tags && tags.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-auto">
+                {tags.map((tag, i) => (
+                  <span key={i} className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-full text-xs font-medium">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Right Column: Image Placeholder */}
+        {/* Adjusted to lg:w-1/2 (50%) with pr-24 padding */}
+        <div className="flex-1 lg:flex-none lg:w-1/2 bg-slate-100 dark:bg-black/20 p-8 lg:p-16 lg:pr-24 flex items-center justify-center relative group min-h-[300px] lg:min-h-auto">
+          <div className="relative w-full aspect-[4/3] max-w-lg rounded-2xl overflow-hidden shadow-2xl bg-slate-200 dark:bg-slate-800">
+             <img src={imageSrc} alt={title} className="w-full h-full object-cover" />
+             
+             {/* Upload Hint Overlay */}
+             <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white cursor-pointer" onClick={onImageUpload}>
+               <Upload size={48} className="mb-2" />
+               <span className="font-medium">Click to replace photo</span>
+               <span className="text-xs text-slate-300 mt-1">(Simulation Only)</span>
              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// 4. Skills Grid Layout
+const SkillsLayout = () => {
+  
+  const getProficiencyStyle = (level: string) => {
+    switch(level) {
+      case 'Expert': 
+        return 'bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-500/20 dark:text-emerald-300 dark:border-emerald-500/30';
+      case 'Intermediate':
+        return 'bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-500/20 dark:text-blue-300 dark:border-blue-500/30';
+      case 'Beginner':
+        return 'bg-slate-100 text-slate-700 border-slate-200 dark:bg-slate-700 dark:text-slate-300 dark:border-slate-600';
+      default:
+        return 'bg-slate-100 text-slate-700';
+    }
+  };
+
+  return (
+    <div className="h-full w-full overflow-y-auto bg-white dark:bg-slate-900 text-slate-900 dark:text-white p-8 lg:p-16 transition-colors duration-300">
+      <div className="max-w-6xl mx-auto">
+        
+        {/* Header & Legend */}
+        <div className="mb-12 border-b border-slate-200 dark:border-slate-800 pb-8">
+           <h1 className="text-4xl font-serif font-bold mb-4">Professional Skills</h1>
+           
+           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 text-sm text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg border border-slate-100 dark:border-slate-800">
+              <span className="font-bold uppercase tracking-wider text-slate-900 dark:text-slate-200 mr-2">Format:</span>
+              <div className="flex items-center gap-2">
+                 <span className="font-bold text-slate-700 dark:text-slate-300">Skill Name</span>
+                 <span className="text-slate-300 dark:text-slate-600">|</span>
+                 <span className="px-2 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300">Proficiency</span>
+                 <span className="text-slate-300 dark:text-slate-600">|</span>
+                 <span className="font-mono text-slate-600 dark:text-slate-400">Since Year</span>
+              </div>
+           </div>
+        </div>
+        
+        <div className="grid md:grid-cols-2 gap-8">
+          {SKILLS.map((skillGroup, idx) => (
+            <div key={idx} className="bg-slate-50 dark:bg-slate-800 rounded-xl p-8 border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-shadow">
+              <h3 className="text-xl font-bold mb-6 text-accent flex items-center gap-2">
+                <Code2 size={24} />
+                {skillGroup.category}
+              </h3>
+              
+              <div className="space-y-3">
+                {skillGroup.items.map((skill, sIdx) => (
+                  <div key={sIdx} className="flex items-center justify-between p-3 bg-white dark:bg-slate-700/50 rounded-lg border border-slate-100 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-500 transition-colors">
+                    
+                    {/* Name */}
+                    <div className="font-bold text-slate-700 dark:text-slate-200">
+                      {skill.name}
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                       {/* Proficiency Badge */}
+                       <span className={`px-2 py-1 rounded text-xs font-bold border ${getProficiencyStyle(skill.proficiency)}`}>
+                         {skill.proficiency}
+                       </span>
+                       
+                       {/* Year */}
+                       <span className="font-mono text-xs font-medium text-slate-400 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">
+                         {skill.startYear}
+                       </span>
+                    </div>
+
+                  </div>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -1022,14 +1127,48 @@ const SkillsLayout = () => {
   );
 };
 
-// 4. Main App Shell
-export default function App() {
-  const [activeSection, setActiveSection] = useState('home');
-  const [activeSubSection, setActiveSubSection] = useState<string | null>(null);
-  const [darkMode, setDarkMode] = useState(true);
-  const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
+// --- Main App Logic ---
 
-  // Initialize Dark Mode
+// Navigation Data Config
+const NAV_SECTIONS: NavSection[] = [
+  { 
+    id: 'home', 
+    label: 'Home Page', 
+    icon: Home 
+  },
+  { 
+    id: 'academic', 
+    label: 'Academic', 
+    icon: Book,
+    subItems: [
+      { id: 'master', label: "Master's (NCKU)" },
+      { id: 'university', label: "University (SHU)" },
+      { id: 'highschool', label: "High School" },
+    ]
+  },
+  { 
+    id: 'profession', 
+    label: 'Profession', 
+    icon: Briefcase,
+    subItems: [
+      { id: 'delta', label: "Delta Electronics" },
+      { id: 'synnex', label: "Synnex Technology" },
+    ]
+  },
+  {
+    id: 'skills',
+    label: 'Skills',
+    icon: Code2
+  }
+];
+
+const App = () => {
+  const [activeTab, setActiveTab] = useState<string>('home');
+  const [activeSubTab, setActiveSubTab] = useState<string | null>(null);
+  const [darkMode, setDarkMode] = useState(false);
+  const [lang, setLang] = useState<'en' | 'zh'>('en');
+
+  // Toggle Dark Mode
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
@@ -1038,185 +1177,238 @@ export default function App() {
     }
   }, [darkMode]);
 
-  // Navigation Items
-  const navItems = [
-    { id: 'home', label: 'Timeline', icon: Home },
-    { 
-      id: 'experience', 
-      label: 'Profession', 
-      icon: Briefcase,
-      subItems: EXPERIENCE.map(e => ({ id: e.id, label: e.company }))
-    },
-    { 
-      id: 'education', 
-      label: 'Academics', 
-      icon: Book,
-      subItems: EDUCATION.map(e => ({ id: e.id, label: e.school }))
-    },
-    { id: 'skills', label: 'Skills', icon: Code2 },
-  ];
-
-  // Logic to switch content
-  const renderContent = () => {
-    switch (activeSection) {
-      case 'home':
-        return <ResponsiveTimeline />;
-      case 'skills':
-        return <SkillsLayout />;
-      case 'experience': {
-        // Find active experience item or default to first
-        const item = activeSubSection 
-          ? EXPERIENCE.find(e => e.id === activeSubSection) 
-          : EXPERIENCE[0];
-        if (!item) return <ResponsiveTimeline />;
-        return (
-          <AcademicLayout 
-            key={item.id}
-            title={item.company}
-            subtitle={item.role}
-            period={item.period}
-            location={item.location}
-            tagline={item.tagline}
-            department={item.department}
-            modules={item.modules}
-            gallery={item.gallery}
-            variant="stack"
-          />
-        );
-      }
-      case 'education': {
-        const item = activeSubSection
-          ? EDUCATION.find(e => e.id === activeSubSection)
-          : EDUCATION[0];
-        if (!item) return <ResponsiveTimeline />;
-        return (
-          <AcademicLayout
-            key={item.id}
-            title={item.school}
-            subtitle={item.degree}
-            period={item.period}
-            location={item.location}
-            stats={item.stats}
-            modules={item.modules}
-            gallery={item.gallery}
-            variant="tabs"
-          />
-        );
-      }
-      default:
-        return <ResponsiveTimeline />;
+  // Handle Main Nav Click
+  const handleNavClick = (sectionId: string) => {
+    setActiveTab(sectionId);
+    // Auto-select first sub-item if exists and none selected
+    const section = NAV_SECTIONS.find(s => s.id === sectionId);
+    if (section && section.subItems && section.subItems.length > 0) {
+      setActiveSubTab(section.subItems[0].id);
+    } else {
+      setActiveSubTab(null);
     }
   };
 
-  return (
-    <div className="flex h-screen w-screen bg-slate-50 dark:bg-slate-900 overflow-hidden font-sans">
-        
-        {/* Sidebar */}
-        <nav 
-          onMouseEnter={() => setIsSidebarExpanded(true)}
-          onMouseLeave={() => setIsSidebarExpanded(false)}
-          className={`
-            fixed lg:relative z-50 h-full bg-white dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800 flex flex-col transition-all duration-300 ease-in-out
-            ${isSidebarExpanded ? 'w-64 shadow-2xl lg:shadow-none' : 'w-20'}
-          `}
-        >
-          {/* Logo */}
-          <div className="h-20 flex items-center justify-center border-b border-slate-100 dark:border-slate-900">
-             <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-emerald-700 dark:from-neon dark:to-emerald-600 rounded-lg flex items-center justify-center text-white dark:text-black font-bold text-xl font-serif shadow-lg">
-               K
-             </div>
-             <div className={`ml-3 overflow-hidden transition-all duration-300 ${isSidebarExpanded ? 'w-auto opacity-100' : 'w-0 opacity-0'}`}>
-                <span className="font-bold text-lg text-slate-800 dark:text-white font-serif whitespace-nowrap">Kevin Kuo</span>
-             </div>
-          </div>
+  // Render Content based on active state
+  const renderContent = () => {
+    if (activeTab === 'home') {
+      return <ResponsiveTimeline />;
+    }
 
-          {/* Menu Items */}
-          <div className="flex-1 py-6 px-3 space-y-2 overflow-y-auto no-scrollbar">
-             {navItems.map((item) => {
-               const isActive = activeSection === item.id;
-               const Icon = item.icon;
-               
-               return (
-                 <div key={item.id}>
-                   <button
-                     onClick={() => {
-                        setActiveSection(item.id);
-                        if (item.subItems && item.subItems.length > 0) {
-                          setActiveSubSection(item.subItems[0].id);
-                        } else {
-                          setActiveSubSection(null);
+    if (activeTab === 'skills') {
+      return <SkillsLayout />;
+    }
+
+    // Dynamic lookup for Education or Experience
+    let dataItem: any = null;
+    let type = '';
+
+    if (activeTab === 'academic') {
+      dataItem = EDUCATION.find(e => e.id === activeSubTab);
+      // If we have modules (the new structured data), use the AcademicLayout
+      if (dataItem && dataItem.modules) {
+        return (
+          <AcademicLayout 
+            key={dataItem.id} // Added key to force remount on school change
+            title={dataItem.school}
+            subtitle={dataItem.degree}
+            period={dataItem.period}
+            modules={dataItem.modules}
+            gallery={dataItem.gallery}
+            location={dataItem.location}
+            stats={dataItem.stats} // Pass stats (GPA/Rank) to layout
+            variant="tabs" // Use Tabs for Academic
+          />
+        );
+      }
+      type = 'academic';
+    } else if (activeTab === 'profession') {
+      dataItem = EXPERIENCE.find(e => e.id === activeSubTab);
+      // Profession now uses the same module structure as Academic
+      if (dataItem && (dataItem as ExperienceItem).modules) {
+        return (
+          <AcademicLayout
+            key={dataItem.id}
+            title={dataItem.company}
+            subtitle={dataItem.role}
+            period={dataItem.period}
+            modules={(dataItem as ExperienceItem).modules}
+            gallery={(dataItem as ExperienceItem).gallery}
+            location={dataItem.location}
+            tagline={(dataItem as ExperienceItem).tagline}
+            department={(dataItem as ExperienceItem).department}
+            variant="stack" // Use Stack for Profession
+            // No stats for profession typically, but could be added if needed
+          />
+        );
+      }
+      type = 'profession';
+    }
+
+    if (dataItem) {
+       // Fallback for any legacy item without modules (should be none now)
+       const content = (
+         <div className="space-y-4">
+           <p className="font-semibold text-lg">{dataItem.period} | {dataItem.location}</p>
+           {dataItem.gpa && <p className="font-bold text-accent">GPA: {dataItem.gpa}</p>}
+           
+           <p>{dataItem.description || "No description available."}</p>
+           
+           {dataItem.achievements && (
+             <div className="mt-4">
+               <h4 className="font-bold mb-2">Key Achievements</h4>
+               <ul className="list-disc pl-5 space-y-1">
+                 {dataItem.achievements.map((a: string, i: number) => <li key={i}>{a}</li>)}
+               </ul>
+             </div>
+           )}
+
+            {dataItem.details && (
+             <div className="mt-4">
+               <h4 className="font-bold mb-2">Details</h4>
+               <ul className="list-disc pl-5 space-y-1">
+                 {/* Updated to use helper for parsing bold text in details */}
+                 {dataItem.details.map((d: string, i: number) => {
+                    const parseText = (text: string) => {
+                      const parts = text.split(/(\*\*.*?\*\*)/g);
+                      return parts.map((part, index) => {
+                        if (part.startsWith('**') && part.endsWith('**')) {
+                          return <strong key={index} className="font-bold text-slate-900 dark:text-white">{part.slice(2, -2)}</strong>;
                         }
-                     }}
-                     className={`
-                       w-full flex items-center p-3 rounded-xl transition-all duration-200 group relative
-                       ${isActive 
-                         ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-neon shadow-sm' 
-                         : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 hover:text-slate-900 dark:hover:text-slate-200'
-                       }
-                     `}
-                   >
-                      <Icon size={24} strokeWidth={isActive ? 2 : 1.5} className="flex-shrink-0" />
-                      
-                      <div className={`ml-3 overflow-hidden transition-all duration-300 ${isSidebarExpanded ? 'w-auto opacity-100' : 'w-0 opacity-0'}`}>
-                         <span className="font-medium whitespace-nowrap">{item.label}</span>
-                      </div>
+                        return <span key={index}>{part}</span>;
+                      });
+                    };
+                    return <li key={i}>{parseText(d)}</li>;
+                 })}
+               </ul>
+             </div>
+           )}
+         </div>
+       );
 
-                      {/* Tooltip (only when collapsed) */}
-                      {!isSidebarExpanded && (
-                         <div className="absolute left-full ml-4 px-3 py-1 bg-slate-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50">
-                           {item.label}
-                         </div>
-                      )}
-                   </button>
-                   
-                   {/* Submenu */}
-                   {isActive && item.subItems && (
-                     <div className={`overflow-hidden transition-all duration-300 ${isSidebarExpanded ? 'max-h-64 opacity-100 mt-2' : 'max-h-0 opacity-0'}`}>
-                        <div className="ml-4 pl-4 border-l-2 border-slate-100 dark:border-slate-800 space-y-1">
-                          {item.subItems.map(sub => (
-                            <button
-                              key={sub.id}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setActiveSubSection(sub.id);
-                              }}
-                              className={`
-                                block w-full text-left text-sm py-2 px-3 rounded-lg transition-colors whitespace-nowrap
-                                ${activeSubSection === sub.id
-                                  ? 'text-emerald-600 dark:text-neon font-bold bg-emerald-50/50 dark:bg-emerald-900/10'
-                                  : 'text-slate-500 dark:text-slate-500 hover:text-slate-800 dark:hover:text-slate-300'
-                                }
-                              `}
-                            >
-                              {sub.label}
-                            </button>
-                          ))}
-                        </div>
-                     </div>
-                   )}
-                 </div>
-               );
-             })}
+       return (
+         <SplitContentLayout 
+           title={dataItem.school || dataItem.company}
+           subtitle={dataItem.degree || dataItem.role}
+           content={content}
+           tags={type === 'academic' ? ['Education', dataItem.location] : ['Work', dataItem.location]}
+           imageSrc={dataItem.image || `https://picsum.photos/seed/${dataItem.id}/800/600`}
+           onImageUpload={() => alert("Image upload simulation")}
+           tagline={(dataItem as ExperienceItem).tagline}
+         />
+       );
+    }
+
+    return <div className="p-10 text-slate-400 dark:text-slate-500 flex justify-center items-center h-full">Select an item to view details</div>;
+  };
+
+  const activeNavSection = NAV_SECTIONS.find(s => s.id === activeTab);
+  const hasSubMenu = activeNavSection?.subItems && activeNavSection.subItems.length > 0;
+
+  return (
+    <div className="flex h-screen w-screen overflow-hidden bg-slate-50 dark:bg-slate-900 font-sans transition-colors duration-500">
+      
+      {/* 1. Primary Sidebar (Green area) */}
+      <div className="w-24 md:w-64 bg-[#4ade80] dark:bg-emerald-600 flex-shrink-0 flex flex-col justify-between transition-all z-30 shadow-xl">
+        {/* Top: Branding */}
+        <div className="p-6">
+           <h1 className="text-xl md:text-2xl font-black text-slate-900 tracking-tighter hidden md:block leading-tight">
+             <span className="text-white">FU-KAI</span> KEVIN <span className="text-white">KUO</span>
+           </h1>
+           <span className="md:hidden font-black text-2xl text-slate-900">K.</span>
+        </div>
+
+        {/* Center: Navigation */}
+        <div className="flex-1 flex flex-col justify-center space-y-2 px-3">
+          {NAV_SECTIONS.map((section) => (
+            <button
+              key={section.id}
+              onClick={() => handleNavClick(section.id)}
+              className={`flex items-center gap-4 p-3 rounded-xl transition-all duration-200 group ${
+                activeTab === section.id 
+                  ? 'bg-white/20 text-slate-900 font-bold shadow-md' 
+                  : 'text-slate-800 hover:bg-white/10'
+              }`}
+            >
+              <section.icon size={24} className={activeTab === section.id ? 'stroke-[2.5px]' : ''} />
+              <span className="hidden md:block text-sm uppercase tracking-wider">{section.label}</span>
+              {activeTab === section.id && <div className="ml-auto hidden md:block w-2 h-2 bg-slate-900 rounded-full"></div>}
+            </button>
+          ))}
+        </div>
+
+        {/* Bottom: Toggles */}
+        <div className="p-6 space-y-4">
+           {/* Language (Simulated) */}
+           <button 
+             onClick={() => setLang(lang === 'en' ? 'zh' : 'en')}
+             className="w-full flex items-center justify-center md:justify-start gap-3 text-slate-800 hover:text-slate-900 transition-colors"
+           >
+             <div className="bg-slate-900/10 p-2 rounded-full">
+               <Globe size={20} />
+             </div>
+             <span className="hidden md:block font-bold">{lang === 'en' ? 'EN' : 'ZH'}</span>
+           </button>
+
+           {/* Theme Toggle (Black/White Sun) */}
+           <button 
+             onClick={() => setDarkMode(!darkMode)}
+             className="w-full flex items-center justify-center md:justify-start gap-3 group"
+           >
+             <div className={`p-2 rounded-full transition-colors border-2 ${darkMode ? 'bg-slate-900 border-white text-white' : 'bg-white border-slate-900 text-slate-900'}`}>
+               {darkMode ? <Moon size={20} fill="currentColor" /> : <Sun size={20} fill="currentColor" />}
+             </div>
+             <span className="hidden md:block font-bold text-slate-800 group-hover:text-slate-900">
+               {darkMode ? 'Dark' : 'Light'}
+             </span>
+           </button>
+        </div>
+      </div>
+
+      {/* 2. Secondary Sidebar (Now Dark Slate) */}
+      <div className={`
+        flex-shrink-0 bg-slate-800 text-white transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] overflow-hidden flex flex-col border-r border-slate-700
+        ${hasSubMenu ? 'w-48 md:w-64 opacity-100 translate-x-0' : 'w-0 opacity-0 -translate-x-10'}
+      `}>
+        {hasSubMenu && (
+          <div className="p-6 h-full flex flex-col w-48 md:w-64">
+            <h2 className="text-xl font-bold mb-8 uppercase tracking-widest opacity-80 border-b border-white/20 pb-4">
+              {activeNavSection?.label}
+            </h2>
+            <div className="space-y-2">
+              {activeNavSection?.subItems?.map(sub => (
+                <button
+                  key={sub.id}
+                  onClick={() => setActiveSubTab(sub.id)}
+                  className={`w-full text-left px-4 py-3 rounded-lg flex items-center justify-between transition-colors ${
+                    activeSubTab === sub.id
+                      ? 'bg-white text-slate-900 font-bold shadow-md'
+                      : 'hover:bg-white/10 text-slate-300 hover:text-white'
+                  }`}
+                >
+                  <span className="text-sm">{sub.label}</span>
+                  {activeSubTab === sub.id && <ChevronRight size={16} />}
+                </button>
+              ))}
+            </div>
+            
+            {/* Decorative bottom element */}
+            <div className="mt-auto opacity-10">
+               <div className="text-6xl font-black font-serif leading-none">
+                 0{NAV_SECTIONS.findIndex(s => s.id === activeTab) + 1}
+               </div>
+            </div>
           </div>
+        )}
+      </div>
 
-          {/* Footer Controls */}
-          <div className="p-4 border-t border-slate-100 dark:border-slate-900">
-             <button 
-               onClick={() => setDarkMode(!darkMode)}
-               className="w-full flex items-center justify-center p-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-neon transition-colors"
-             >
-                {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-                <div className={`ml-3 overflow-hidden transition-all duration-300 ${isSidebarExpanded ? 'w-auto opacity-100' : 'w-0 opacity-0'}`}>
-                   <span className="text-sm font-medium whitespace-nowrap">{darkMode ? 'Light Mode' : 'Dark Mode'}</span>
-                </div>
-             </button>
-          </div>
-        </nav>
+      {/* 3. Main Content Area */}
+      <div className="flex-1 relative bg-slate-50 dark:bg-slate-900 overflow-hidden transition-colors duration-500">
+        {renderContent()}
+      </div>
 
-        {/* Main Content */}
-        <main className="flex-1 h-full relative pl-20 lg:pl-0 w-full">
-           {renderContent()}
-        </main>
     </div>
   );
-}
+};
+
+export default App;
