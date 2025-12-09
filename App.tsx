@@ -446,11 +446,13 @@ const ResponsiveTimeline = () => {
                            >
                               <img src={item.image} alt={item.description} className="w-full h-full object-cover transform transition-transform duration-700 group-hover/item:scale-105" />
                               
-                              {/* Description Overlay */}
-                              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-6 pt-12 flex flex-col justify-end opacity-100 transition-opacity duration-300">
-                                 <div className="text-white font-medium text-sm md:text-base leading-snug drop-shadow-md border-l-4 border-emerald-500 dark:border-neon pl-3">
-                                   {item.description}
-                                 </div>
+                              {/* Description Overlay - Modified for better readability */}
+                              <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col justify-end opacity-100 transition-opacity duration-300">
+                                <div className="bg-black/75 backdrop-blur-sm p-3 rounded-r-md border-l-4 border-emerald-500 dark:border-neon">
+                                  <span className="text-white font-medium text-sm md:text-base leading-snug drop-shadow-md">
+                                    {item.description}
+                                  </span>
+                                </div>
                               </div>
                            </div>
                          ))}
@@ -959,10 +961,12 @@ const AcademicLayout: React.FC<AcademicLayoutProps> = ({
                     >
                         <img src={item.image} alt="Gallery Item" className="w-full h-full object-cover transform transition-transform duration-700 group-hover/item:scale-105" />
                         
-                        {/* Description Overlay */}
-                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-6 pt-12 flex flex-col justify-end opacity-100 transition-opacity duration-300">
-                          <div className="text-white font-medium text-sm md:text-base leading-snug drop-shadow-md border-l-4 border-emerald-500 dark:border-neon pl-3">
-                            {item.description}
+                        {/* Description Overlay - Modified for better readability */}
+                        <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col justify-end opacity-100 transition-opacity duration-300">
+                          <div className="bg-black/75 backdrop-blur-sm p-3 rounded-r-md border-l-4 border-emerald-500 dark:border-neon">
+                            <span className="text-white font-medium text-sm md:text-base leading-snug drop-shadow-md">
+                              {item.description}
+                            </span>
                           </div>
                         </div>
                     </div>
