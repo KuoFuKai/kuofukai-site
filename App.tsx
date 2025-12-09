@@ -821,7 +821,7 @@ const AcademicLayout: React.FC<AcademicLayoutProps> = ({
         {/* Added px-12 lg:px-24 padding to match Timeline Detail View whitespace */}
         <div className={`${isFullWidth ? 'w-full' : 'flex-1 lg:w-1/2'} px-12 py-8 lg:px-24 lg:py-16 flex flex-col relative z-10 overflow-y-auto transition-all duration-300`}>
           {/* Conditional Max Width: if full width, wider container (max-w-5xl), else remove limit to fill space (max-w-none) */}
-          <div className={`${isFullWidth ? 'max-w-5xl' : 'max-w-none'} w-full min-h-full flex flex-col transition-all duration-300`}>
+          <div className="w-full min-h-full flex flex-col transition-all duration-300">
             
             {/* Header with Horizontal Tabs */}
             <div className="mb-8 flex-shrink-0">
