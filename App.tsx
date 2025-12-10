@@ -29,10 +29,10 @@ import { NavSection, TimelineItem, AcademicModule, AcademicGalleryItem, Experien
 
 // 0. Image Marquee Component
 const ImageMarquee = () => {
-  // Use local background images from public/images/homepage/backgrounds/
+  // Use local background images from publicimages/homepage/backgrounds/
   // The user provided 15 background images in .webp format
   const baseImages = Array.from({ length: 15 }, (_, i) => ({
-    src: `/images/homepage/backgrounds/${i + 1}.webp`,
+    src: `images/homepage/backgrounds/${i + 1}.webp`,
     alt: `Background ${i + 1}`,
     key: `bg-${i + 1}`
   }));
@@ -241,7 +241,7 @@ const ResponsiveTimeline = () => {
             <div className="hidden lg:flex lg:w-1/2 justify-center items-center">
               <div className="relative w-80 h-96 md:w-96 md:h-[500px] rounded-lg overflow-hidden shadow-2xl dark:shadow-[0_0_40px_rgba(0,0,0,0.6)] border border-slate-200 dark:border-slate-700 group transition-all duration-300">
                 <img
-                  src="/images/homepage/portrait/1.webp"
+                  src="images/homepage/portrait/1.webp"
                   alt="Kevin Profile"
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out scale-100 group-hover:scale-105"
                 />
