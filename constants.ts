@@ -255,27 +255,27 @@ export const SKILLS: SkillItem[] = [
     category: "Languages & Core",
     items: [
       { name: "Java", proficiency: "Expert", startYear: "2012" },
-      { name: "SQL (MySQL/Oracle)", proficiency: "Expert", startYear: "2015" },
-      { name: "JavaScript/TypeScript", proficiency: "Expert", startYear: "2017" },
-      { name: "Python", proficiency: "Intermediate", startYear: "2022" },
-      { name: "C/C++", proficiency: "Intermediate", startYear: "2022" }
+      { name: "SQL", proficiency: "Expert", startYear: "2015" },
+      { name: "Python", proficiency: "Intermediate", startYear: "2020" },
+      { name: "C/C++", proficiency: "Beginner", startYear: "2022" },
+      { name: "JavaScript/TypeScript", proficiency: "Beginner", startYear: "2017" }
     ]
   },
   {
     category: "Frameworks & Tools",
     items: [
-      { name: "Spring Boot", proficiency: "Expert", startYear: "2017" },
-      { name: "Android SDK", proficiency: "Expert", startYear: "2015" },
-      { name: "Git / CI/CD", proficiency: "Expert", startYear: "2017" },
-      { name: "React", proficiency: "Intermediate", startYear: "2020" },
-      { name: "Docker / Kubernetes", proficiency: "Intermediate", startYear: "2021" }
+      { name: "Spring Boot", proficiency: "Expert", startYear: "2020" },
+      { name: "Git / CI / CD", proficiency: "Intermediate", startYear: "2022" },
+      { name: "Docker / Kubernetes", proficiency: "Intermediate", startYear: "2020" },
+      { name: "Android SDK", proficiency: "Intermediate", startYear: "2014" },
+      { name: "React", proficiency: "Beginner", startYear: "2025" }
     ]
   },
   {
     category: "AI & Edge Computing",
     items: [
-      { name: "LLM Integration (RAG)", proficiency: "Intermediate", startYear: "2023" },
-      { name: "NVIDIA Jetson", proficiency: "Intermediate", startYear: "2023" },
+      { name: "LLM Integration (RAG)", proficiency: "Intermediate", startYear: "2024" },
+      { name: "NVIDIA Jetson", proficiency: "Intermediate", startYear: "2024" },
       { name: "YOLO (Computer Vision)", proficiency: "Intermediate", startYear: "2023" },
       { name: "PyTorch", proficiency: "Intermediate", startYear: "2022" },
       { name: "OpenCV", proficiency: "Intermediate", startYear: "2022" }
@@ -284,21 +284,21 @@ export const SKILLS: SkillItem[] = [
   {
     category: "Design & Multimedia",
     items: [
-      { name: "Adobe Photoshop", proficiency: "Expert", startYear: "2011" },
-      { name: "Adobe Illustrator", proficiency: "Expert", startYear: "2011" },
-      { name: "Adobe Premiere", proficiency: "Intermediate", startYear: "2012" },
+      { name: "Adobe Photoshop", proficiency: "Expert", startYear: "2012" },
+      { name: "Adobe Premiere", proficiency: "Expert", startYear: "2012" },
+      { name: "Autodesk 3ds Max", proficiency: "Intermediate", startYear: "2014" },
       { name: "Autodesk Maya", proficiency: "Intermediate", startYear: "2013" },
-      { name: "3ds Max", proficiency: "Intermediate", startYear: "2012" }
+      { name: "Adobe Illustrator", proficiency: "Intermediate", startYear: "2012" }
     ]
   },
   {
     category: "Industry Knowledge",
     items: [
+      { name: "IPC-CFX Standard", proficiency: "Expert", startYear: "2022" },
       { name: "EDI/API Integration", proficiency: "Expert", startYear: "2017" },
-      { name: "Smart Manufacturing", proficiency: "Expert", startYear: "2022" },
-      { name: "IPC-CFX Standard", proficiency: "Expert", startYear: "2023" },
-      { name: "System Architecture", proficiency: "Intermediate", startYear: "2019" },
-      { name: "Agile/Scrum", proficiency: "Expert", startYear: "2018" }
+      { name: "Agile/Scrum", proficiency: "Intermediate", startYear: "2022" },
+      { name: "Smart Manufacturing", proficiency: "Intermediate", startYear: "2022" },
+      { name: "System Architecture", proficiency: "Intermediate", startYear: "2019" }
     ]
   }
 ];

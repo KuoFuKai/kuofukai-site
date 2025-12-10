@@ -1,46 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kevin - Engineering Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
-    <!-- Restoring Tailwind CDN so styles work in preview and dev modes without build step -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              serif: ['Merriweather', 'serif'],
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KuoFuKai Website</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap"
+    rel="stylesheet">
+  <!-- Restoring Tailwind CDN so styles work in preview and dev modes without build step -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Merriweather', 'serif'],
+          },
+          colors: {
+            primary: '#0f172a', // Slate 900
+            accent: '#3b82f6', // Blue 500
+            muted: '#64748b', // Slate 500
+            neon: '#84cc16', // Lime 500
+          },
+          animation: {
+            marquee: 'marquee 100s linear infinite',
+            'marquee-vertical': 'marquee-vertical 40s linear infinite',
+          },
+          keyframes: {
+            marquee: {
+              '0%': { transform: 'translateX(0)' },
+              '100%': { transform: 'translateX(-50%)' },
             },
-            colors: {
-              primary: '#0f172a', // Slate 900
-              accent: '#3b82f6', // Blue 500
-              muted: '#64748b', // Slate 500
-              neon: '#84cc16', // Lime 500
-            },
-            animation: {
-              marquee: 'marquee 100s linear infinite',
-              'marquee-vertical': 'marquee-vertical 40s linear infinite',
-            },
-            keyframes: {
-              marquee: {
-                '0%': { transform: 'translateX(0)' },
-                '100%': { transform: 'translateX(-50%)' },
-              },
-              'marquee-vertical': {
-                '0%': { transform: 'translateY(0)' },
-                '100%': { transform: 'translateY(-50%)' },
-              }
+            'marquee-vertical': {
+              '0%': { transform: 'translateY(0)' },
+              '100%': { transform: 'translateY(-50%)' },
             }
           }
         }
       }
-    </script>
-    <script type="importmap">
+    }
+  </script>
+  <script type="importmap">
     {
       "imports": {
         "react": "https://aistudiocdn.com/react@^19.2.0",
@@ -52,9 +55,11 @@
       }
     }
     </script>
-  </head>
-  <body class="bg-gray-50 text-slate-900 antialiased transition-colors duration-300">
-    <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
-  </body>
+</head>
+
+<body class="bg-gray-50 text-slate-900 antialiased transition-colors duration-300">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
 </html>
