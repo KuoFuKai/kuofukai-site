@@ -14,7 +14,8 @@ import {
   ChevronDown,
   Award,
   GraduationCap,
-  Users
+  Users,
+  ExternalLink
 } from 'lucide-react';
 import {
   TIMELINE,
@@ -694,12 +695,62 @@ const AcademicLayout: React.FC<AcademicLayoutProps> = ({
           Honors & Awards
         </h4>
         <ul className="space-y-3">
-          {items.map((item, idx) => (
-            <li key={idx} className="flex justify-between items-center p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700">
-              <span className="text-slate-700 dark:text-slate-200 font-medium">{item.title}</span>
-              <span className="text-sm font-mono text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900 px-2 py-1 rounded border border-slate-100 dark:border-slate-800 ml-4 flex-shrink-0">{item.year}</span>
-            </li>
-          ))}
+          {items.map((item, idx) => {
+            // Updated URL Parsing logic
+            const urlRegex = /(https?:\/\/[^\s\)]+)/g;
+            const match = item.title.match(urlRegex);
+            const url = match ? match[0] : null;
+
+            // Clean title for display: remove the URL and common DOI prefixes
+            let displayTitle = item.title;
+            if (url) {
+              // Removes patterns like "(DOI: https://...)" or "DOI: https://..." or just the URL
+              displayTitle = displayTitle.replace(/\(?DOI:?\s*https?:\/\/[^\s\)]+\)?/, '').trim();
+              displayTitle = displayTitle.replace(/https?:\/\/[^\s\)]+/, '').trim();
+            }
+
+            const itemContent = (
+              <>
+                <div className="flex flex-col pr-2">
+                  <span className={`font-medium leading-snug transition-colors ${url ? 'text-emerald-700 dark:text-emerald-400 group-hover:text-emerald-600 dark:group-hover:text-neon group-hover:underline decoration-dotted' : 'text-slate-700 dark:text-slate-200'}`}>
+                    {parseBold(displayTitle)}
+                  </span>
+                  {url && (
+                    <div className="flex items-center gap-1.5 mt-1 opacity-60 group-hover:opacity-100 transition-opacity">
+                      <ExternalLink size={10} className="text-emerald-500 dark:text-neon" />
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">Click to view publication</span>
+                    </div>
+                  )}
+                </div>
+                <span className="text-sm font-mono text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900 px-2 py-1 rounded border border-slate-100 dark:border-slate-800 ml-4 flex-shrink-0">
+                  {item.year}
+                </span>
+              </>
+            );
+
+            // If URL exists, wrap in an anchor tag styled as a card
+            if (url) {
+              return (
+                <li key={idx}>
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex justify-between items-center p-4 bg-emerald-50/20 dark:bg-emerald-900/5 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-emerald-500 dark:hover:border-neon hover:bg-white dark:hover:bg-slate-800 transition-all cursor-pointer shadow-sm hover:shadow-md"
+                  >
+                    {itemContent}
+                  </a>
+                </li>
+              );
+            }
+
+            // Standard list item
+            return (
+              <li key={idx} className="flex justify-between items-center p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700">
+                {itemContent}
+              </li>
+            );
+          })}
         </ul>
       </div>
     );
